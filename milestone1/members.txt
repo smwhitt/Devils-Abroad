@@ -1,0 +1,11 @@
+David Chen: Worked on E/R design, a comprehensive list of SQL code to modify the database on behalf of the user, implemented constraints that I could think of, and wrote triggers to fulfill the constraints implied by the E/R diagram and the proposed website functionality.
+
+Annie Lu: So far, I have worked on fleshing out the entity sets, relations, and attributes we will be using and designing and creating the final version of the E/R diagram. I have also worked on finalizing the tables that we are using in SQL and identifying keys in the progress report. 
+
+Alex Qiao: Wrote several SQL queries with different functionalities to test different tables. Uses aggregate and non-aggregate queries. Helped set up VM to run the example Python Flask app and begin converting into DevilsAbroad. Additionally wrote a Git introduction to help teammates understand pulls, merges, pushes, and how branches work. 
+
+Malavi Ravindran: So far, I have worked on designing and restructuring the E/R diagram as well as translating from the diagram to tables. I have also written SQL statements to define all of the tables that we are going to be working with, along with key declarations, referential integrity constraints, and checks. I have also worked on writing up the progress report more formally.
+
+Samantha Whitt: In this past sprint, I have worked on E/R design with the group, started the database with postgreSQL commands, made the readme for loading/creating databases, fixed bugs regarding triggers, SQL code, inserts, and creating tables, and finalizing the tables.
+
+Abby Zhang: Helped define tables and attributes by working on E/R diagram and translating to database schema. Designed web application interface and outlined how the user will interact with it. Created wireframe/prototype of interface using Figma. 
