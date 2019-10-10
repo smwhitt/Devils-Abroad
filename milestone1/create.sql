@@ -76,6 +76,19 @@ CREATE TRIGGER No_Phantom_Reviews
 	FOR EACH ROW
 	EXECUTE PROCEDURE TS_No_phantom();
 
+CREATE FUNCTION TS_No_fake_reviews() RETURNS TRIGGER AS $$
+BEGIN
+	IF (NEW.program_name NOT IN (SELECT program_name FROM AbroadUser WHERE u_email = NEW.u_email)) THEN
+	RAISE EXCEPTION 'Cannot be writing a review for a course in a program you have not been in';
+	END IF;
+	RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER TS_No_fake_reviews
+	BEFORE INSERT ON Review
+	FOR EACH ROW EXECUTE PROCEDURE TS_No_fake_reviews();
+
 -- INSERTS
 
 INSERT INTO Users VALUES ('ddc27@duke.edu', 'david');
@@ -105,3 +118,7 @@ INSERT INTO Review VALUES (3, 'ECSDE-3520', 'University of New South Wales', 'sm
 
 INSERT INTO Likes VALUES ('aaz10@duke.edu', 1);
 INSERT INTO Likes Values ('al343@duke.edu', 3);
+
+-- TESTING TRIGGERS
+
+INSERT INTO Review VALUES(4, '0434-L-982', 'Duke in Berlin', 'aq18@duke.edu', 'HA I did not even take this course', 1, 5, 1);
