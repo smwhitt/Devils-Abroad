@@ -18,7 +18,7 @@ PRIMARY KEY (program_name, abroad_code),
 FOREIGN KEY (program_name) REFERENCES Program(name));
 
 CREATE TABLE AbroadUser
-(u_email VARCHAR(100) NOT NULL UNIQUE,
+(u_email VARCHAR(100) NOT NULL,
 term VARCHAR(100) NOT NULL,
 year INTEGER NOT NULL,
 program_name VARCHAR(100) NOT NULL,
@@ -31,7 +31,7 @@ CREATE TABLE Review
 (id INTEGER NOT NULL PRIMARY KEY,
 abroad_code VARCHAR(100) NOT NULL,
 program_name VARCHAR(100) NOT NULL REFERENCES Program(name),
-u_email VARCHAR(100) NOT NULL REFERENCES AbroadUser(u_email),
+u_email VARCHAR(100) NOT NULL,
 content VARCHAR(1000) NOT NULL,
 rating FLOAT NOT NULL CHECK (rating >= 0 AND rating <= 5.0),
 difficulty FLOAT NOT NULL CHECK (difficulty >= 0 AND difficulty <= 5.0),
