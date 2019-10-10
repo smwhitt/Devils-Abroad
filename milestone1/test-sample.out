@@ -1,0 +1,139 @@
+--  to search for all courses in Australia:
+SELECT * 
+FROM course, program 
+WHERE course.program_name = program.name 
+AND program.country = 'Australia';
+         program_name          | abroad_course_name | abroad_code | duke_major_code |  duke_code  |             name              |  country  
+-------------------------------+--------------------+-------------+-----------------+-------------+-------------------------------+-----------
+ University of New South Wales | Aborigines         | CLSEQW3520  | CULANTH         | CULATNH 400 | University of New South Wales | Australia
+ University of New South Wales | VLSI               | ECSDE-3520  | ECE             | ECE 350     | University of New South Wales | Australia
+(2 rows)
+
+
+--  to search for all courses in England:
+
+SELECT * 
+FROM course, program 
+WHERE course.program_name = program.name 
+AND program.country = 'Spain';
+  program_name  | abroad_course_name | abroad_code | duke_major_code | duke_code |      name      | country 
+----------------+--------------------+-------------+-----------------+-----------+----------------+---------
+ Duke in Madrid | Operating Systems  | CSSLD-3301  | CS              | CS 330    | Duke in Madrid | Spain
+(1 row)
+
+
+-- Query to search for all courses in Germany:
+
+SELECT * 
+FROM course, program 
+WHERE course.program_name = program.name 
+AND program.country = 'Germany';
+  program_name  | abroad_course_name | abroad_code | duke_major_code | duke_code |      name      | country 
+----------------+--------------------+-------------+-----------------+-----------+----------------+---------
+ Duke in Berlin | Comp Genomics      | 0434-L-982  | CS              | CS 260    | Duke in Berlin | Germany
+(1 row)
+
+
+-- Query to search for all courses for University of New South Wales:
+
+SELECT * 
+FROM course
+WHERE program_name = 'University of New South Wales';
+         program_name          | abroad_course_name | abroad_code | duke_major_code |  duke_code  
+-------------------------------+--------------------+-------------+-----------------+-------------
+ University of New South Wales | Aborigines         | CLSEQW3520  | CULANTH         | CULATNH 400
+ University of New South Wales | VLSI               | ECSDE-3520  | ECE             | ECE 350
+(2 rows)
+
+
+-- Query to search for all courses for Duke in Berlin:
+
+SELECT * 
+FROM course
+WHERE program_name = 'Duke In Berlin';
+ program_name | abroad_course_name | abroad_code | duke_major_code | duke_code 
+--------------+--------------------+-------------+-----------------+-----------
+(0 rows)
+
+
+-- Query to search for all courses for Duke in Madrid:
+
+SELECT * 
+FROM course
+WHERE program_name = 'Duke In Madrid';
+ program_name | abroad_course_name | abroad_code | duke_major_code | duke_code 
+--------------+--------------------+-------------+-----------------+-----------
+(0 rows)
+
+
+-- Query to search for the average rating from all reviews based on difficulty:
+
+SELECT AVG(rating)
+FROM review
+GROUP BY difficulty;
+ avg 
+-----
+   5
+ 4.5
+   1
+(3 rows)
+
+
+-- Query to search for the average difficulty at Duke in Geneva:
+
+SELECT AVG(difficulty)
+FROM review
+WHERE program_name = 'University of New South Wales';
+ avg 
+-----
+   1
+(1 row)
+
+
+-- Query to search for the review content given a review ID of '4':
+
+SELECT review.content
+FROM review
+WHERE review.id = '2';
+          content          
+---------------------------
+ I think this class SUCKS!
+(1 row)
+
+
+-- Query to search for all reviews in Duke in Venice;
+
+SELECT review.content
+FROM review
+WHERE review.program_name = 'Duke in Berlin';
+            content             
+--------------------------------
+ I think this class is amazing!
+(1 row)
+
+
+-- Query to search for all people who have studied abroad in Russia
+
+SELECT Users.name 
+FROM AbroadUser, Users 
+WHERE program_name = 'Duke in Madrid'
+AND AbroadUser.u_email = Users.email;
+  name  
+--------
+ malavi
+(1 row)
+
+
+-- Query to search for all people who have studied abroad with emails
+
+SELECT Users.name, AbroadUser.u_email
+FROM AbroadUser, Users
+WHERE AbroadUser.u_email = Users.email;
+   name   |    u_email     
+----------+----------------
+ david    | ddc27@duke.edu
+ malavi   | mr328@duke.edu
+ samantha | smw81@duke.edu
+ alex     | aq18@duke.edu
+(4 rows)
+
