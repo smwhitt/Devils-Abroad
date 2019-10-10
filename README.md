@@ -1,6 +1,12 @@
 # Devils Abroad
 
 ## Creating and Loading Our Databases
-For our project, we will be using Sequel Pro (mySQL) to write/create our own databases. We created our own database called "devils_abroad" using the query feature of Sequel Pro by the command CREATE DATABASE devils_abroad; 
+For our project, we will be using postgreSQL (pSQL) to write/create our own databases. We created our own database called "devils_abroad" using the following code provided in class:
 
-We also plan on inserting our own information first in new tables using CREATE TABLE table_name(); and INSERT table_name(); for now as a way of populating our database. Because Duke has a table of study abroad students, their emails, and their program, we are still trying to figure out how to read that into our current database for further data. To load this database, 
+dropdb devils_abroad; createdb devils_abroad; psql devils_abroad -af create.sql
+
+
+In order to load the database, each team member needs to run that command and can visualize it using the command as seen below. For our website, we map the database to python objects by python's API called psycopg2 to better accomodate for future flexibility of the program. We additionally plan on inserting our own information not only using create.sql, but also from a future study abroad survery in the future.
+
+
+psql devils_abroad -af test-sample.sql > test-sample.out
