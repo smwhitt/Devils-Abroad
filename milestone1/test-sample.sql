@@ -1,4 +1,5 @@
 --  to search for all courses in Australia:
+
 SELECT * 
 FROM course, program 
 WHERE course.program_name = program.name 
