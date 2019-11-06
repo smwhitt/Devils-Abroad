@@ -4,10 +4,11 @@ CREATE TABLE Users
 (email VARCHAR(30) NOT NULL PRIMARY KEY,
 name VARCHAR(100) NOT NULL,
 major VARCHAR(50) NOT NULL,
- grad_year INTEGER NOT NULL );
+grad_year INTEGER);
 
 CREATE TABLE Program
-(program_name VARCHAR(100) NOT NULL PRIMARY KEY);
+(program_name VARCHAR(100) NOT NULL PRIMARY KEY,
+country VARCHAR(100) NOT NULL);
  
 CREATE TABLE Course
 (duke_code VARCHAR(100) NOT NULL,
@@ -19,7 +20,7 @@ FOREIGN KEY (program_name) REFERENCES Program(program_name));
 CREATE TABLE AbroadUser
 (u_email VARCHAR(100) NOT NULL,
 term VARCHAR(100) NOT NULL,
-year INTEGER NOT NULL,
+year INTEGER,
 program_name VARCHAR(100) NOT NULL,
 PRIMARY KEY (u_email, term, year, program_name),
 UNIQUE (u_email, term, year),
