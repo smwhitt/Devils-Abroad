@@ -19,11 +19,18 @@ def home_page():
 
 @app.route('/filter')
 def filter_reviews():
-    return render_template('home.html')
+    courses = db.session.query(models.Course).all()
+    return render_template('explore.html')
+    # note, temporary render explore. change to render filter.html
 
 @app.route('/write-review')
 def write_review():
     return render_template('home.html')
+
+@app.route('/explore')
+def explore_courses():
+    courses = db.session.query(models.Course).all()
+    return render_template('explore.html')
 
 @app.route('/drinker/<name>')
 def drinker(name):
