@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block heading %}Explore courses{% endblock %}
+{% block content %}
+
+<ul>
+    {% for course in courses %}
+    <li><a>a course</a></li>
+    {% endfor %}
+</ul>
+      <hr/>
+      <p>{{courses|length}} course{{courses|length|pluralize}}
+        found in the database.</p>
+
+{% endblock %}
