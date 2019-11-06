@@ -8,10 +8,22 @@ app.secret_key = 's3cr3t'
 app.config.from_object('config')
 db = SQLAlchemy(app, session_options={'autocommit': False})
 
+# @app.route('/')
+# def all_drinkers():
+#     drinkers = db.session.query(models.Drinker).all()
+#     return render_template('all-drinkers.html', drinkers=drinkers)
+
 @app.route('/')
-def all_drinkers():
-    drinkers = db.session.query(models.Drinker).all()
-    return render_template('all-drinkers.html', drinkers=drinkers)
+def home_page():
+    return render_template('home.html')
+
+@app.route('/filter')
+def filter_reviews():
+    return render_template('home.html')
+
+@app.route('/write')
+def write_review():
+    return render_template('home.html')
 
 @app.route('/drinker/<name>')
 def drinker(name):
