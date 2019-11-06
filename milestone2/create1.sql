@@ -20,10 +20,9 @@ FOREIGN KEY (program_name) REFERENCES Program(program_name));
 CREATE TABLE AbroadUser
 (u_email VARCHAR(100) NOT NULL,
 term VARCHAR(100) NOT NULL,
-year INTEGER,
 program_name VARCHAR(100) NOT NULL,
-PRIMARY KEY (u_email, term, year, program_name),
-UNIQUE (u_email, term, year),
+PRIMARY KEY (u_email, term, program_name),
+UNIQUE (u_email, term),
 FOREIGN KEY (u_email) REFERENCES Users(email),
 FOREIGN KEY (program_name) REFERENCES Program(program_name));
 
@@ -121,10 +120,10 @@ INSERT INTO Course VALUES('CS 300', 'Analysis of Big Data', 'Duke in Madrid');
 INSERT INTO Course VALUES('CS 250', 'Computer Architecture', 'University of New South Wales');
 INSERT INTO Course VALUES('CS 300', 'Networks', 'University of New South Wales');
 
-INSERT INTO AbroadUser VALUES ('ddc27@duke.edu', 'Spring', 2019, 'Duke in Berlin');
-INSERT INTO AbroadUser VALUES ('mr328@duke.edu', 'Fall', 2019, 'Duke in Madrid');
-INSERT INTO AbroadUser VALUES ('smw81@duke.edu', 'Spring', 2020, 'University of New South Wales');
-INSERT INTO AbroadUser VALUES ('aq18@duke.edu', 'Spring', 2020, 'University of New South Wales');
+INSERT INTO AbroadUser VALUES ('ddc27@duke.edu', 'Spring 2019', 'Duke in Berlin');
+INSERT INTO AbroadUser VALUES ('mr328@duke.edu', 'Fall 2019', 'Duke in Madrid');
+INSERT INTO AbroadUser VALUES ('smw81@duke.edu', 'Spring 2020', 'University of New South Wales');
+INSERT INTO AbroadUser VALUES ('aq18@duke.edu', 'Spring 2020', 'University of New South Wales');
 
 INSERT INTO Review VALUES (1, 'Duke in Berlin', 'CS 330', 'Design and Analysis of Algorithms' , 'ddc27@duke.edu', 'I think this class is amazing!', 4.5, 2.0);
 INSERT INTO Review VALUES (2, 'Duke in Madrid', 'CS 300', 'Networks', 'mr328@duke.edu', 'I think this class SUCKS!', 1, 5);
