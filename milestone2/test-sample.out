@@ -1,0 +1,86 @@
+-- Query to search for all courses for University of New South Wales:
+SELECT * 
+FROM Course
+WHERE program_name = 'University of New South Wales';
+ duke_code |      course_name      |         program_name          
+-----------+-----------------------+-------------------------------
+ CS 250    | Computer Architecture | University of New South Wales
+ CS 300    | Networks              | University of New South Wales
+(2 rows)
+
+-- Query to search for all courses for Duke in Berlin:
+SELECT * 
+FROM Course
+WHERE program_name = 'Duke In Berlin';
+ duke_code | course_name | program_name 
+-----------+-------------+--------------
+(0 rows)
+
+-- Query to search for all courses for Duke in Madrid:
+SELECT * 
+FROM Course
+WHERE program_name = 'Duke In Madrid';
+ duke_code | course_name | program_name 
+-----------+-------------+--------------
+(0 rows)
+
+-- Query to search for the average rating from all reviews based on difficulty:
+SELECT AVG(rating)
+FROM Review
+GROUP BY difficulty;
+ avg 
+-----
+   1
+   5
+ 4.5
+(3 rows)
+
+-- Query to search for the average difficulty at UNSW:
+SELECT AVG(difficulty)
+FROM Review
+WHERE program_name = 'University of New South Wales';
+ avg 
+-----
+   1
+(1 row)
+
+-- Query to search for the review content given a review ID of '2':
+SELECT content
+FROM Review
+WHERE review.id = '2';
+          content          
+---------------------------
+ I think this class SUCKS!
+(1 row)
+
+-- Query to search for all reviews in Duke in Berlin;
+SELECT content
+FROM Review
+WHERE review.program_name = 'Duke in Berlin';
+            content             
+--------------------------------
+ I think this class is amazing!
+(1 row)
+
+-- Query to search for all people who have studied abroad in Madrid
+SELECT name 
+FROM AbroadUser, Users 
+WHERE program_name = 'Duke in Madrid'
+AND AbroadUser.u_email = Users.email;
+  name  
+--------
+ malavi
+(1 row)
+
+-- Query to search for all people who have studied abroad (with emails)
+SELECT Users.name, AbroadUser.u_email
+FROM AbroadUser, Users
+WHERE AbroadUser.u_email = Users.email;
+   name   |    u_email     
+----------+----------------
+ david    | ddc27@duke.edu
+ malavi   | mr328@duke.edu
+ samantha | smw81@duke.edu
+ alex     | aq18@duke.edu
+(4 rows)
+
