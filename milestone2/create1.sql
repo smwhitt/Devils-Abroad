@@ -47,6 +47,20 @@ FOREIGN KEY (review_id) REFERENCES Review(id) ON DELETE CASCADE);
 
 -- TRIGGERS
 
+CREATE FUNCTION TS_Update_Users() RETURNS TRIGGER AS $$
+BEGIN
+	--IF (NEW.u_email = OLD.u_email) FROM Users THEN
+	--	UPDATE
+	--	SET 
+	RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER Update_User
+	BEFORE INSERT ON Users
+	FOR EACH ROW
+	EXCECUTE PROCEDURE TS_Update_Users();
+
 CREATE FUNCTION TS_No_edit_own_review() RETURNS TRIGGER AS $$ 
 BEGIN
 	IF (NEW.u_email <> Review.u_email) FROM Review THEN
