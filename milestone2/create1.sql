@@ -13,7 +13,7 @@ CREATE TABLE Course
 (duke_code VARCHAR(100) NOT NULL,
 course_name VARCHAR(100) NOT NULL,
 program_name VARCHAR(100) NOT NULL,
-PRIMARY KEY (program_name, duke_code, course_name ),
+PRIMARY KEY (program_name, duke_code, course_name),
 FOREIGN KEY (program_name) REFERENCES Program(program_name));
 
 CREATE TABLE AbroadUser
@@ -24,13 +24,13 @@ program_name VARCHAR(100) NOT NULL,
 PRIMARY KEY (u_email, term, year, program_name),
 UNIQUE (u_email, term, year),
 FOREIGN KEY (u_email) REFERENCES Users(email),
-FOREIGN KEY (program_name) REFERENCES Program(name));
+FOREIGN KEY (program_name) REFERENCES Program(program_name));
 
 CREATE TABLE Review
 (id INTEGER NOT NULL PRIMARY KEY,
-program_name VARCHAR(100) NOT NULL REFERENCES Program(name),
-duke_code VARCHAR(100) NOT NULL REFERENCES Course(duke_code),
-course_name VARCHAR(100) NOT NULL REFERENCES Course(course_name),
+program_name VARCHAR(100) NOT NULL REFERENCES Program(program_name),
+duke_code VARCHAR(100) NOT NULL,
+course_name VARCHAR(100) NOT NULL,
 u_email VARCHAR(100) NOT NULL,
 content VARCHAR(1000) NOT NULL,
 rating FLOAT NOT NULL CHECK (rating >= 0 AND rating <= 5.0),
@@ -95,17 +95,17 @@ INSERT INTO Users VALUES('mr328@duke.edu', 'malavi',  'Statistics', 2019);
 INSERT INTO Users VALUES('smw81@duke.edu', 'samantha', 'Electrical Computer Engineering', 2020);
 INSERT INTO Users VALUES('al343@duke.edu', 'annie', 'Computer Science', 2021);
 INSERT INTO Users VALUES('aaz10@duke.edu', 'abby', 'Computer Science', 2020);
-INSERT INTO Users VALUES('aq18@duke.edu', 'alex', 'Electrical Computer Engineering’, 2019);
+INSERT INTO Users VALUES('aq18@duke.edu', 'alex', 'Electrical Computer Engineering', 2019);
 
 INSERT INTO Program VALUES('Duke in Berlin');
 INSERT INTO Program VALUES('Duke in Madrid');
 INSERT INTO Program VALUES('University of New South Wales');
 
 
-INSERT INTO Course VALUES('Duke in Berlin', 'CS 330', 'Design and Analysis of Algorithms');
-INSERT INTO Course VALUES('Duke in Madrid', 'CS 300', 'Analysis of Big Data');
-INSERT INTO Course VALUES('University of New South Wales', 'CS 250', 'Computer Architecture');
-INSERT INTO Course VALUES('University of New South Wales', 'CS 300', 'Networks');
+INSERT INTO Course VALUES('CS 330', 'Design and Analysis of Algorithms', 'Duke in Berlin');
+INSERT INTO Course VALUES('CS 300', 'Analysis of Big Data', 'Duke in Madrid');
+INSERT INTO Course VALUES('CS 250', 'Computer Architecture', 'University of New South Wales');
+INSERT INTO Course VALUES('CS 300', 'Networks', 'University of New South Wales');
 
 INSERT INTO AbroadUser VALUES ('ddc27@duke.edu', 'Spring', 2019, 'Duke in Berlin');
 INSERT INTO AbroadUser VALUES ('mr328@duke.edu', 'Fall', 2019, 'Duke in Madrid');
@@ -121,4 +121,4 @@ INSERT INTO Likes Values ('al343@duke.edu', 3);
 
 -- TESTING TRIGGERS
 
-INSERT INTO Review VALUES (4, 'Duke in Madrid, 'CS 300', 'Networks' , 'ddc27@duke.edu', 'hahaha i didn’t even take this class!', 4.5, 2.0);
+INSERT INTO Review VALUES (4, 'Duke in Madrid', 'CS 300', 'Networks' , 'ddc27@duke.edu', 'hahaha i didn’t even take this class!', 4.5, 2.0);
