@@ -1,4 +1,4 @@
-# Devils Abroad - David
+# Devils Abroad
 
 11/05/2019: I have converted a semi-comprehensive list of 2775 people who have previously gone abroad to an Excel file (Past_Abroad_Students.xlsl) and to 3 .csv files
 which you are free to insert into our databse.
