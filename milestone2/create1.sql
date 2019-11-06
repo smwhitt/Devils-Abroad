@@ -1,13 +1,14 @@
 -- TABLES
 
 CREATE TABLE Users
-(email VARCHAR(30) NOT NULL PRIMARY KEY,
+(email VARCHAR(100) NOT NULL PRIMARY KEY,
 name VARCHAR(100) NOT NULL,
 major VARCHAR(50) NOT NULL,
- grad_year INTEGER NOT NULL );
+grad_year INTEGER);
 
 CREATE TABLE Program
-(program_name VARCHAR(100) NOT NULL PRIMARY KEY);
+(program_name VARCHAR(100) NOT NULL PRIMARY KEY,
+country VARCHAR(100) NOT NULL);
  
 CREATE TABLE Course
 (duke_code VARCHAR(100) NOT NULL,
@@ -19,10 +20,9 @@ FOREIGN KEY (program_name) REFERENCES Program(program_name));
 CREATE TABLE AbroadUser
 (u_email VARCHAR(100) NOT NULL,
 term VARCHAR(100) NOT NULL,
-year INTEGER NOT NULL,
 program_name VARCHAR(100) NOT NULL,
-PRIMARY KEY (u_email, term, year, program_name),
-UNIQUE (u_email, term, year),
+PRIMARY KEY (u_email, term, program_name),
+UNIQUE (u_email, term),
 FOREIGN KEY (u_email) REFERENCES Users(email),
 FOREIGN KEY (program_name) REFERENCES Program(program_name));
 
@@ -45,6 +45,20 @@ FOREIGN KEY (u_email) REFERENCES Users(email),
 FOREIGN KEY (review_id) REFERENCES Review(id) ON DELETE CASCADE);
 
 -- TRIGGERS
+
+CREATE FUNCTION TS_Update_Users() RETURNS TRIGGER AS $$
+BEGIN
+	--IF (NEW.u_email = OLD.u_email) FROM Users THEN
+	--	UPDATE
+	--	SET 
+	RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER Update_User
+	BEFORE INSERT ON Users
+	FOR EACH ROW
+	EXCECUTE PROCEDURE TS_Update_Users();
 
 CREATE FUNCTION TS_No_edit_own_review() RETURNS TRIGGER AS $$ 
 BEGIN
@@ -97,20 +111,19 @@ INSERT INTO Users VALUES('al343@duke.edu', 'annie', 'Computer Science', 2021);
 INSERT INTO Users VALUES('aaz10@duke.edu', 'abby', 'Computer Science', 2020);
 INSERT INTO Users VALUES('aq18@duke.edu', 'alex', 'Electrical Computer Engineering', 2019);
 
-INSERT INTO Program VALUES('Duke in Berlin');
-INSERT INTO Program VALUES('Duke in Madrid');
-INSERT INTO Program VALUES('University of New South Wales');
-
+INSERT INTO Program VALUES('Duke in Berlin', 'Germany');
+INSERT INTO Program VALUES('Duke in Madrid', 'Spain');
+INSERT INTO Program VALUES('University of New South Wales', 'Australia');
 
 INSERT INTO Course VALUES('CS 330', 'Design and Analysis of Algorithms', 'Duke in Berlin');
 INSERT INTO Course VALUES('CS 300', 'Analysis of Big Data', 'Duke in Madrid');
 INSERT INTO Course VALUES('CS 250', 'Computer Architecture', 'University of New South Wales');
 INSERT INTO Course VALUES('CS 300', 'Networks', 'University of New South Wales');
 
-INSERT INTO AbroadUser VALUES ('ddc27@duke.edu', 'Spring', 2019, 'Duke in Berlin');
-INSERT INTO AbroadUser VALUES ('mr328@duke.edu', 'Fall', 2019, 'Duke in Madrid');
-INSERT INTO AbroadUser VALUES ('smw81@duke.edu', 'Spring', 2020, 'University of New South Wales');
-INSERT INTO AbroadUser VALUES ('aq18@duke.edu', 'Spring', 2020, 'University of New South Wales');
+INSERT INTO AbroadUser VALUES ('ddc27@duke.edu', 'Spring 2019', 'Duke in Berlin');
+INSERT INTO AbroadUser VALUES ('mr328@duke.edu', 'Fall 2019', 'Duke in Madrid');
+INSERT INTO AbroadUser VALUES ('smw81@duke.edu', 'Spring 2020', 'University of New South Wales');
+INSERT INTO AbroadUser VALUES ('aq18@duke.edu', 'Spring 2020', 'University of New South Wales');
 
 INSERT INTO Review VALUES (1, 'Duke in Berlin', 'CS 330', 'Design and Analysis of Algorithms' , 'ddc27@duke.edu', 'I think this class is amazing!', 4.5, 2.0);
 INSERT INTO Review VALUES (2, 'Duke in Madrid', 'CS 300', 'Networks', 'mr328@duke.edu', 'I think this class SUCKS!', 1, 5);
