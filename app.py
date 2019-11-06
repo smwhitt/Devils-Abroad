@@ -21,7 +21,7 @@ def home_page():
 def filter_reviews():
     return render_template('home.html')
 
-@app.route('/write')
+@app.route('/write-review')
 def write_review():
     return render_template('home.html')
 
