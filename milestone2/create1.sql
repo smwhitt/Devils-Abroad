@@ -1,7 +1,7 @@
 -- TABLES
 
 CREATE TABLE Users
-(email VARCHAR(30) NOT NULL PRIMARY KEY,
+(email VARCHAR(100) NOT NULL PRIMARY KEY,
 name VARCHAR(100) NOT NULL,
 major VARCHAR(50) NOT NULL,
 grad_year INTEGER);
@@ -98,10 +98,9 @@ INSERT INTO Users VALUES('al343@duke.edu', 'annie', 'Computer Science', 2021);
 INSERT INTO Users VALUES('aaz10@duke.edu', 'abby', 'Computer Science', 2020);
 INSERT INTO Users VALUES('aq18@duke.edu', 'alex', 'Electrical Computer Engineering', 2019);
 
-INSERT INTO Program VALUES('Duke in Berlin');
-INSERT INTO Program VALUES('Duke in Madrid');
-INSERT INTO Program VALUES('University of New South Wales');
-
+INSERT INTO Program VALUES('Duke in Berlin', 'Germany');
+INSERT INTO Program VALUES('Duke in Madrid', 'Spain');
+INSERT INTO Program VALUES('University of New South Wales', 'Australia');
 
 INSERT INTO Course VALUES('CS 330', 'Design and Analysis of Algorithms', 'Duke in Berlin');
 INSERT INTO Course VALUES('CS 300', 'Analysis of Big Data', 'Duke in Madrid');
