@@ -35,6 +35,17 @@ class Review(db.Model):
     __bind_key__ = 'devils_abroad'
     __tablename__ = 'review'
     id = db.Column('id', db.Integer, primary_key=True)
+    program_name = db.Column('program_name', db.String(100),
+        db.ForeignKey(Program.program_name))
+    duke_code = db.Column('duke_code', db.String(100))
+    course_name = db.Column('course_name', db.String(100))
+    u_email = db.Column('u_email', db.String(100))
+    content = db.Column('content', db.String(1000))
+    rating = db.Column('content', db.Integer())
+    difficulty = db.Column('difficulty', db.Integer())
+# note: user email should be a foreign key
+    
+
 
 # class Likes(db.Model):
 #     __bind_key__ = 'devils_abroad'

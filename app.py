@@ -36,8 +36,10 @@ def explore_courses():
 def course_review(course_name):
     course = db.session.query(models.Course)\
         .filter(models.Course.course_name == course_name).one()
-    
-    return render_template('course-review.html', course=course)
+    reviews = db.session.query(models.Review)\
+        .filter(models.Review.course_name == course_name)
+    return render_template('course-review.html', course=course, reviews=reviews)
+# fix filtering - use keys (multiple variables)
 
 @app.route('/drinker/<name>')
 def drinker(name):
