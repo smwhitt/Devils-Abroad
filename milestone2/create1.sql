@@ -46,15 +46,6 @@ FOREIGN KEY (review_id) REFERENCES Review(id) ON DELETE CASCADE);
 
 -- TRIGGERS
 
-CREATE FUNCTION TS_Update_Users() RETURNS TRIGGER AS $$
-BEGIN
-	--IF (NEW.u_email = OLD.u_email) FROM Users THEN
-	--	UPDATE
-	--	SET 
-	RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
-
 CREATE TRIGGER Update_User
 	BEFORE INSERT ON Users
 	FOR EACH ROW
@@ -101,6 +92,17 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER TS_No_fake_reviews
 	BEFORE INSERT ON Review
 	FOR EACH ROW EXECUTE PROCEDURE TS_No_fake_reviews();
+
+-- Indexes
+
+CREATE INDEX Get_Users
+on Users (email, name);
+
+CREATE INDEX Get_Abroad_Users
+on AbroadUser (u_email, term, program_name);
+
+CREATE UNIQUE INDEX Get_Programs
+on Program (program_name);
 
 -- INSERTS
 
