@@ -32,6 +32,13 @@ def explore_courses():
     courses = db.session.query(models.Course).all()
     return render_template('explore.html', courses=courses)
 
+@app.route('/course-review/<course_name>')
+def course_review(course_name):
+    course = db.session.query(models.Course)\
+        .filter(models.Course.course_name == course_name).one()
+    
+    return render_template('course-review.html', course=course)
+
 @app.route('/drinker/<name>')
 def drinker(name):
     drinker = db.session.query(models.Drinker)\

@@ -1,10 +1,12 @@
 {% extends 'layout.html' %}
-{% block heading %}Explore courses{% endblock %}
+{% block heading %}Explore DevilsAbroad experiences{% endblock %}
 {% block content %}
 
 <ul>
     {% for course in courses %}
-    <li><a>{{course.course_name}}</a></li>
+    <li><a href="{{url_for('course_review', course_name=course.course_name)}}">
+      {{course.course_name}}
+    </a></li>
     {% endfor %}
 </ul>
       <hr/>
