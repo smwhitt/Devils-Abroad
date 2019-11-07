@@ -1,0 +1,17 @@
+David Chen:
+Since the last milestone, Alex and I have worked on populating our database with initial real data. Using previous documents about past Duke students who have elected to share their contact information for future interested students, I constructed 3 .csv files which documents 2775 unique student experiences, their programs, majors, and contact email. From the database, I can successively parse the .csv data and populate the database with real information (instructions in readme).
+
+Annie Lu: 
+Since the last milestone, I have worked on updating the create.sql file to alter create and insert statements to reflect the changes to our database. I have also worked on recreating the ER diagram to reflect changes made to the database. 
+
+Alex Qiao:
+Since the last milestone update, I’ve looked into how to transfer excel data into the database. David and I talked about different approaches towards parsing the data, and found a way to directly place rows of csv data directly into the database. Towards the end, we were able to populate the database with real data from Duke’s study abroad database files and include the pdfs’ tables of students, majors, program, and various other attributes. I also helped others set up their VMs to display the database. 
+
+Malavi Ravindran:
+Since the last milestone, Annie and I worked on updating the database tables, E/R diagram, and create.sql file to reflect simplifications that we sought to implement in our relational schema.  Specifically, within the create.sql file, we fixed the database create statements and inserts to reflect our design updates. I also updated the queries in the test file to reflect these changes. I also worked on updating our assumptions in the Milestone 2 progress report. Finally, I created a form that we posted in All Duke (as well as sent to other friends/groups) in order to obtain the information to populate our dataset. 
+
+Samantha Whitt:
+After the last milestone, Abby and I have worked on getting our web app off the ground in mapping the database to models, creating routes, and adding corresponding visual components as seen on our Figma wireframes. Currently, I am trying to create filters for the database that the user can interact with. This is proving difficult, as I am navigating how to use Flask connecting with the database and querying realtime. A success we’d had this far though is getting each of our teammates to be able to visually see the website and create a local copy of the database.
+
+Abby Zhang:
+Samantha and I have been developing the front end and back end of the flask application. We have mapped the tables in the database to classes in models.py and are in the process of creating endpoints and html pages to display the content. We have run into roadblocks trying to implement more complex queries beyond the type provided in the example flask application. We plan to ask TAs for more help in the coming weeks to improve our application. We also plan to make the UI more aesthetically pleasing.

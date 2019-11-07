@@ -1,4 +1,5 @@
 -- Query to search for all courses for University of New South Wales:
+
 SELECT * 
 FROM Course
 WHERE program_name = 'University of New South Wales';
@@ -8,7 +9,9 @@ WHERE program_name = 'University of New South Wales';
  CS 300    | Networks              | University of New South Wales
 (2 rows)
 
+
 -- Query to search for all courses for Duke in Berlin:
+
 SELECT * 
 FROM Course
 WHERE program_name = 'Duke In Berlin';
@@ -16,7 +19,9 @@ WHERE program_name = 'Duke In Berlin';
 -----------+-------------+--------------
 (0 rows)
 
+
 -- Query to search for all courses for Duke in Madrid:
+
 SELECT * 
 FROM Course
 WHERE program_name = 'Duke In Madrid';
@@ -24,7 +29,9 @@ WHERE program_name = 'Duke In Madrid';
 -----------+-------------+--------------
 (0 rows)
 
+
 -- Query to search for the average rating from all reviews based on difficulty:
+
 SELECT AVG(rating)
 FROM Review
 GROUP BY difficulty;
@@ -35,7 +42,9 @@ GROUP BY difficulty;
  4.5
 (3 rows)
 
+
 -- Query to search for the average difficulty at UNSW:
+
 SELECT AVG(difficulty)
 FROM Review
 WHERE program_name = 'University of New South Wales';
@@ -44,7 +53,9 @@ WHERE program_name = 'University of New South Wales';
    1
 (1 row)
 
+
 -- Query to search for the review content given a review ID of '2':
+
 SELECT content
 FROM Review
 WHERE review.id = '2';
@@ -53,7 +64,9 @@ WHERE review.id = '2';
  I think this class SUCKS!
 (1 row)
 
+
 -- Query to search for all reviews in Duke in Berlin;
+
 SELECT content
 FROM Review
 WHERE review.program_name = 'Duke in Berlin';
@@ -62,25 +75,2880 @@ WHERE review.program_name = 'Duke in Berlin';
  I think this class is amazing!
 (1 row)
 
+
 -- Query to search for all people who have studied abroad in Madrid
+
 SELECT name 
 FROM AbroadUser, Users 
 WHERE program_name = 'Duke in Madrid'
 AND AbroadUser.u_email = Users.email;
-  name  
---------
+             name              
+-------------------------------
  malavi
-(1 row)
+ Mariel Colon-Leyva
+ Michael Figueiras
+ Alexandra Premont
+ Ariyani Challapalli
+ Kavita Krell
+ Jiyoung Sohn
+ Anna St Charles
+ Luis Antillon
+ Samuel Osheroff
+ Vivian Luo
+ Gabriela Shaikh
+ Avital Schweitzer
+ Lauren Owens
+ Kathryn White
+ Kenan Kaptanoglu
+ Vanessa Agudelo
+ Ethan Ahuna
+ Cameron Anderson
+ Hayley Barton
+ Elliott Bolzan
+ Danielle Brown
+ Tomas Cabo-Hervada
+ Christopher Camp
+ Griffin Carter
+ James Daubert
+ Elise Fernandez
+ Jason Fischell
+ George Gallagher
+ Tyler Goldberger
+ Jacob Graber-Lipperman
+ William Graham
+ Savanna Groft
+ Katherine Herrmann
+ Traci Hirokawa
+ Benjamin Hubsch
+ Spencer Hutchinson
+ Caroline Kealoha
+ Ethan Lampert
+ Kelsey Lansdale
+ Eliza Letourneau
+ Caroline Mittl
+ Emily Nagler
+ Madison Novice
+ Ellen Pasquale
+ Sujay Rao
+ Victor Schwartz
+ Marina Smalling
+ Kayla Thompson
+ Roey Vardi
+ Naime Wiener
+ Erick Aguilar Ramos
+ Benjamin Baker
+ Gianna Giordano
+ David Jimenez-Vallejo
+ Edward Ruby
+ Alexandra Sanchez Rolon
+ Owen Smith
+ Ivan Robles
+ Mitra Kiciman
+ Santiago Orozco
+ Emily Coffey
+ Emma Fleishman
+ Guadalupe Tarango-Garcia
+ Elizabeth Edel
+ Renee Weisz
+ Leah Abrams
+ Julia Araneta
+ Joseph Beck
+ Andrew Brown
+ Sara Chandler
+ Morgan Dickerson
+ Brooke Erickson
+ Bailey Kaston
+ Kristie Kim
+ Tyler Kopp
+ Samantha Kost
+ Jacqueline Levitan
+ Corinne Mayle
+ Miranda Metz
+ Divya Nimmagadda
+ Eugene Nuzzolillo
+ Alicia Porile
+ Katherine Rodgers
+ Paloma Rodney
+ Marie Rogers
+ Matthew Shalhoub
+ Maxwell Silverstein
+ Madelyn Stoddard
+ Julia Thielhelm
+ Julia Weidman
+ Georgia Young
+ Brianna Buford
+ Charles Daniel
+ Jared Edwards
+ Grace Francese
+ Gabriela McDonald
+ John McNeil
+ Santiago Gonzalez-Bonet
+ Molly Apsel
+ Akasha Barreto
+ Sarah Bond
+ Victor Cai
+ Christina Chen
+ David Conlin
+ Katherine Connell
+ George Cook
+ Henry Don
+ Nathan Heffernan
+ Sara Held
+ Christopher Honeycutt
+ Luke Jones
+ Maya King
+ Harry Liang
+ Olivia McAuliffe
+ Audrey McManemin
+ Theresa Nardone
+ Dennis Nguyen
+ Savannah Norman
+ Victoria Pinter
+ Addyson Rowe
+ Diego Andre Salgado Bobadilla
+ Alexandra Scheuermann
+ Matthew Sclar
+ Ellen Scully
+ Charlotte Tellefsen
+ Luca Francesco Vallini
+ Liliana Voltaggio
+(128 rows)
+
 
 -- Query to search for all people who have studied abroad (with emails)
+
 SELECT Users.name, AbroadUser.u_email
 FROM AbroadUser, Users
 WHERE AbroadUser.u_email = Users.email;
-   name   |    u_email     
-----------+----------------
- david    | ddc27@duke.edu
- malavi   | mr328@duke.edu
- samantha | smw81@duke.edu
- alex     | aq18@duke.edu
-(4 rows)
+             name              |                u_email                 
+-------------------------------+----------------------------------------
+ david                         | ddc27@duke.edu
+ malavi                        | mr328@duke.edu
+ samantha                      | smw81@duke.edu
+ alex                          | aq18@duke.edu
+ Melany Puente                 | melany.puente@duke.edu
+ Jane Lupica                   | jane.lupica@duke.edu
+ Beatrice Thomas               | bea.thomas@duke.edu
+ Jana Woerner                  | jana.woerner@duke.edu
+ Reuben Moses                  | reuben.moses@duke.edu
+ Brian Grasso                  | brian.grasso@duke.edu
+ Reena Debray                  | reena.debray@duke.edu
+ Ji Youn Park                  | ji.youn.park@duke.edu
+ Tahnee Thantrong              | tahnee.thantrong@duke.edu
+ Xiao Nan Xing                 | xiao.nan.xing@duke.edu
+ Katrina Zhu                   | katrina.zhu@duke.edu
+ Ana Araujo                    | ana.v.araujo@duke.edu
+ Weiyi Ding                    | weiyi.ding@duke.edu
+ Thandolwethu Dlamini          | thandolwethu.dlamini@duke.edu
+ Delia Li                      | delia.li@duke.edu
+ Rishabh Kumar                 | rishabh.kumar@duke.edu
+ Samuel Pickerill              | samuel.pickerill@duke.edu
+ Paschalia Nsato               | paschalia.nsato@duke.edu
+ Jasmine Tan                   | jasmine.tan@duke.edu
+ Zachary Ao                    | zachary.ao@duke.edu
+ Adrienne Hewitt               | adrienne.hewitt@duke.edu
+ Harini Sridhar                | harini.sridhar@duke.edu
+ Mariel Colon-Leyva            | mariel.colon.leyva@duke.edu
+ Michael Figueiras             | michael.figueiras@duke.edu
+ Alexandra Premont             | alexandra.premont@duke.edu
+ Chase Fretwell                | chase.fretwell@duke.edu
+ Jennifer Hofmann              | jennifer.hofmann@duke.edu
+ Harsh Sharma                  | harsh.sharma@duke.edu
+ Sean Klasson                  | sean.klasson@duke.edu
+ Chen Lou                      | leo.lou@duke.edu
+ John Lu                       | john.lu@duke.edu
+ Madeline Nelson               | madeline.nelson@duke.edu
+ Leo Pagano                    | leo.pagano@duke.edu
+ Matthew Wu                    | matthew.wu@duke.edu
+ Jason Allen                   | jason.allen@duke.edu
+ Cassidy Bolt                  | cassidy.bolt@duke.edu
+ Analese Bridges               | analese.bridges@duke.edu
+ Ziqi Deng                     | ziqi.deng@duke.edu
+ Matthew Greenwald             | matthew.greenwald@duke.edu
+ Meron Hagos                   | meron.hagos@duke.edu
+ Anna Huck                     | anna.huck@duke.edu
+ Andrew Jordan                 | andrew.jordan@duke.edu
+ Alec Lintz                    | alec.lintz@duke.edu
+ Alina Pak                     | alina.pak@duke.edu
+ Rachel Rubin                  | rachel.rubin@duke.edu
+ Alana Silberstein             | alana.silberstein@duke.edu
+ Rhajaa Wright                 | rhajaa.wright@duke.edu
+ Nicholas Young                | nicholas.a.young@duke.edu
+ Mathama Malakha Bility        | mathama.bility@duke.edu
+ Tristan Bouan                 | tristan.bouan@duke.edu
+ Peyton Dilweg                 | peyton.dilweg@duke.edu
+ Alexandra Felix               | alexandra.felix@duke.edu
+ Melanie Hogue                 | melanie.hogue@duke.edu
+ Taylor Jones                  | taylor.m.jones@duke.edu
+ George Lucas                  | george.lucas@duke.edu
+ Carly Mirabile                | carly.mirabile@duke.edu
+ Cara O'Malley                 | cara.o.malley@duke.edu
+ Chandler Phillips             | chandler.phillips@duke.edu
+ Hunter Stark                  | hunter.stark@duke.edu
+ Jackson Steger                | jackson.steger@duke.edu
+ Istvan Urban                  | istvan.urban@duke.edu
+ Jennifer Zhou                 | jennifer.zhou@duke.edu
+ Carolyn Chen                  | carolyn.chen@duke.edu
+ Davis George                  | davis.george@duke.edu
+ Yiqin Jiang                   | yiqin.jiang@duke.edu
+ Timothy Kim                   | kim.tim@duke.edu
+ Saishreyas Kolavennu          | saishreyas.kolavennu@duke.edu
+ Alec Li                       | alec.li@duke.edu
+ Song Yeen Maxine Ow           | song.yeen.maxine.ow@duke.edu
+ Mitchell Parekh               | mitchell.parekh@duke.edu
+ Julia Song                    | julia.a.song@duke.edu
+ Srinivas Sunil                | srinivas.sunil@duke.edu
+ Alexandra Tan                 | alexandra.tan@duke.edu
+ Carolyn Tang                  | carolyn.tang@duke.edu
+ Jiayi Tian                    | jiayi.tian@duke.edu
+ Victoria Wong                 | victoria.wong@duke.edu
+ Arthur Kwan Hung Wu           | arthur.kwan.hung.wu@duke.edu
+ Erica Blair                   | erica.blair@duke.edu
+ Lara Breitkreutz              | lara.breitkreutz@duke.edu
+ Emily Brockman                | emily.brockman@duke.edu
+ Ashley Ericson                | ashley.ericson@duke.edu
+ Tong Fu                       | tong.fu@duke.edu
+ Benjamin Grant                | benjamin.j.grant@duke.edu
+ Hana Hajda                    | hana.hajda@duke.edu
+ Bethany Hewett                | bethany.hewett@duke.edu
+ Courtney Hill                 | courtney.hill@duke.edu
+ Julia Kemper                  | julia.kemper@duke.edu
+ Ashley Marko                  | ashley.marko@duke.edu
+ Melina Nolas                  | melina.nolas@duke.edu
+ Jonah Rodgers                 | jonah.rodgers@duke.edu
+ Bobby Schneider               | bobby.schneider@duke.edu
+ Trevyn Toone                  | trevyn.toone@duke.edu
+ Emily Waples                  | emily.waples@duke.edu
+ Kelby Welsh                   | kelby.welsh@duke.edu
+ Ahmed Almansoori              | ahmed.almansoori@duke.edu
+ Francois Chabaneix            | francois.chabaneix@duke.edu
+ Nicolette Hevizi              | nicolette.hevizi@duke.edu
+ Ziyun Huang                   | ziyun.huang@duke.edu
+ Sarah McMahon                 | sarah.mcmahon@duke.edu
+ Judith Sanchez Soriano        | judith.sanchez.soriano@duke.edu
+ Isabel Senior                 | isabel.senior@duke.edu
+ Mary Weggeland                | mary.weggeland@duke.edu
+ Charles Berman                | charlie.berman@duke.edu
+ Ian Burgess                   | ian.burgess@duke.edu
+ Angela Chen                   | angela.chen@duke.edu
+ Nicolas Cort                  | nicolas.cort@duke.edu
+ Maya Duff                     | maya.duff@duke.edu
+ Christopher Gray              | christopher.gray@duke.edu
+ Brooks Hakimian               | brooks.hakimian@duke.edu
+ Hazel Horvath                 | hazel.horvath@duke.edu
+ Yuuta Kendall                 | yuuta.kendall@duke.edu
+ Nona Kiknadze                 | nona.kiknadze@duke.edu
+ Dahyeon Kim                   | dahyeon.kim@duke.edu
+ Luke Longo                    | luke.longo@duke.edu
+ Jennifer Marsh                | jenn.marsh@duke.edu
+ Dana Park                     | dana.park@duke.edu
+ Sarah Sung                    | sarah.sung@duke.edu
+ Zoe Tang                      | zoe.tang@duke.edu
+ Andrew Tsai                   | andrew.tsai@duke.edu
+ Amy Wikle                     | amy.wikle@duke.edu
+ Patree Witoonchart            | well.wit@duke.edu
+ Pingyi Zhu                    | pingyi.zhu@duke.edu
+ Sofia Calvo                   | sofia.calvo@duke.edu
+ Ariyani Challapalli           | ariyani.challapalli@duke.edu
+ Idalis French                 | idalis.french@duke.edu
+ Kavita Krell                  | kavita.krell@duke.edu
+ Carter Lovvorn                | carter.lovvorn@duke.edu
+ Trevor McBroom                | trevor.mcbroom@duke.edu
+ Andrew Padilla                | andrew.padilla@duke.edu
+ Nicholas Santangelo           | nicholas.santangelo@duke.edu
+ Jiyoung Sohn                  | jiyoung.sohn@duke.edu
+ Anna St Charles               | anna.st.charles@duke.edu
+ Ahmed Ahmed-Fouad             | ahmed.ahmed.fouad@duke.edu
+ Luis Antillon                 | luis.antillon@duke.edu
+ Daniel Kai Sheng Boey         | daniel.kai.sheng.boey@duke.edu
+ Ioanna Bourla                 | ioanna.bourla@duke.edu
+ Kerry Castor                  | kerry.castor@duke.edu
+ Tala Fakhoury                 | tala.fakhoury@duke.edu
+ Gregory Goldman               | gregory.goldman@duke.edu
+ Olivia Gwynn                  | olivia.gwynn@duke.edu
+ Matthew Harris                | matthew.harris1@duke.edu
+ Cole Hattler                  | cole.hattler@duke.edu
+ Era Kurtaliaj                 | era.kurtaliaj@duke.edu
+ Samuel Liu                    | samuel.liu@duke.edu
+ Tyler Meathe                  | tyler.meathe@duke.edu
+ Samuel Osheroff               | samuel.osheroff@duke.edu
+ Christina Pipkin              | christina.pipkin@duke.edu
+ Hailey Prevett                | hailey.prevett@duke.edu
+ Nathan Rasch                  | nathan.rasch@duke.edu
+ Juan Velasquez                | juan.velasquez@duke.edu
+ Serene Cheng                  | serene.cheng@duke.edu
+ George de Castro              | george.decastro@duke.edu
+ Jacob Levine                  | jacob.r.levine@duke.edu
+ Neera Mohammed                | neera.mohammed@duke.edu
+ Meghan Pearson                | meghan.pearson@duke.edu
+ Zoe Abedon                    | zoe.abedon@duke.edu
+ Ioana Camui                   | ioana.camui@duke.edu
+ Allison Chang                 | allison.chang@duke.edu
+ Mary Coyne                    | mary.coyne@duke.edu
+ Dina Daas                     | dina.daas@duke.edu
+ Rose Graves                   | rose.graves@duke.edu
+ Nora Hafez                    | nora.hafez@duke.edu
+ Phoebe Kiburi                 | phoebe.kiburi@duke.edu
+ Christine Kotara              | christine.kotara@duke.edu
+ Jack Myhre                    | jack.myhre@duke.edu
+ Matthew O'Boyle               | oboyle.matthew@duke.edu
+ Katie Taylor                  | katie.taylor@duke.edu
+ Revogatus Tesha               | revogatus.tesha@duke.edu
+ Brielle Tobin                 | brielle.tobin@duke.edu
+ Jadesola Akinwuntan           | jadesola.akinwuntan@duke.edu
+ Micaela Brewington            | micaela.brewington@duke.edu
+ Talia Buenrostro              | talia.buenrostro@duke.edu
+ Juliana Carvalho              | juliana.carvalho@duke.edu
+ Robert Cline                  | robert.cline@duke.edu
+ Sofia Corona                  | sofia.corona@duke.edu
+ Mykayela Ellis                | mykayela.ellis@duke.edu
+ Sandra Kendall                | sandra.kendall@duke.edu
+ Nicole Kiprilov               | nicole.kiprilov@duke.edu
+ Anysia Lee                    | anysia.lee@duke.edu
+ Danielle Mayorga-Young        | danielle.mayorga.young@duke.edu
+ Daniela Saucedo               | daniela.saucedo@duke.edu
+ Taylor Albus                  | taylor.albus@duke.edu
+ Maegan Burns                  | maegan.burns@duke.edu
+ Melisa Castillo               | melisa.castillo@duke.edu
+ Lily el Naccash               | lily.el.naccash@duke.edu
+ Adjoa Ewool                   | adjoa.ewool@duke.edu
+ Ryan Ferner                   | ryan.ferner@duke.edu
+ Samuel Frederick              | samuel.frederick@duke.edu
+ Billy Gist                    | billy.gist@duke.edu
+ Jamie Glueck                  | jamie.glueck@duke.edu
+ Anna Jenkins                  | anna.jenkins@duke.edu
+ Yufeng Jiang                  | yufeng.jiang@duke.edu
+ Sami Kirkpatrick              | sami.kirkpatrick@duke.edu
+ Katja Kochvar                 | katja.kochvar@duke.edu
+ Michelle Larsen               | michelle.larsen@duke.edu
+ Benjamin Lawrence             | benjamin.lawrence@duke.edu
+ Erin McDermott                | erin.mcdermott@duke.edu
+ Shiyuan Mei                   | shiyuan.mei@duke.edu
+ Sarah Needham                 | sarah.needham@duke.edu
+ Katharina Neske               | katharina.neske@duke.edu
+ Sydney Roberts                | sydney.roberts@duke.edu
+ Sibora Seranaj                | sibora.seranaj@duke.edu
+ Lance Tran                    | lance.tran@duke.edu
+ Dongfang Wang                 | dongfang.wang@duke.edu
+ Shayna Wolery                 | shayna.wolery@duke.edu
+ Bonita Wyatt                  | bonita.wyatt@duke.edu
+ Jin Myung Yoon                | jinmyung.yoon@duke.edu
+ Mackenzie Zepeda              | mackenzie.zepeda@duke.edu
+ Surafel Adere                 | surafel.adere@duke.edu
+ Roy Auh                       | roy.auh@duke.edu
+ Emma Burns                    | emma.burns@duke.edu
+ McKenna Carter                | mckenna.carter@duke.edu
+ Destini Clark                 | destini.clark@duke.edu
+ Patrick Cummings-Taylor       | patrick.cummings.taylor@duke.edu
+ Elizabeth Fitzpatrick         | elizabeth.b.fitzpatrick@duke.edu
+ Amanda Gross                  | amanda.gross@duke.edu
+ Sydney Hochberg               | sydney.hochberg@duke.edu
+ Weiran Huang                  | weiran.huang@duke.edu
+ Manda Hufstedler              | manda.hufstedler@duke.edu
+ Connor Johnson                | connor.johnson@duke.edu
+ Alijah Jonah                  | alijah.jonah@duke.edu
+ Lauren Jones                  | lauren.jones@duke.edu
+ Newton Kwan                   | newton.kwan@duke.edu
+ Vivian Luo                    | vivian.luo@duke.edu
+ Katherine McDonald            | katherine.mcdonald@duke.edu
+ Angela Moon                   | angela.moon@duke.edu
+ Brennen Neeley                | brennen.neeley@duke.edu
+ Njideka Nwosu                 | njideka.nwosu@duke.edu
+ Katherine Owensby             | katherine.owensby@duke.edu
+ Khaila Ramey-Collier          | khaila.ramey.collier@duke.edu
+ Amanda Wigler                 | amanda.wigler@duke.edu
+ Tiffany de Guzman             | tiffany.de.guzman@duke.edu
+ Margaret Haas                 | margaret.haas@duke.edu
+ Mallory Hahn                  | mallory.hahn@duke.edu
+ Ashley Manigo                 | ashley.manigo@duke.edu
+ Olivia McKinney               | olivia.mckinney@duke.edu
+ Adriana Santomero             | adriana.santomero@duke.edu
+ Chelsea Schlacks              | chelsea.schlacks@duke.edu
+ Crawford Sloan                | crawford.sloan@duke.edu
+ Jasmine Tomlinson             | jasmine.tomlinson@duke.edu
+ Julia Turner                  | julia.turner@duke.edu
+ Tara Vigil                    | tara.vigil@duke.edu
+ Emilia Chojkiewicz            | emilia.chojkiewicz@duke.edu
+ Owen Fitzgerald               | owen.fitzgerald@duke.edu
+ Yodit Gebretsadik             | yodit.gebretsadik@duke.edu
+ Kathryn Howley                | kathryn.howley@duke.edu
+ Trinity Johns                 | trinity.johns@duke.edu
+ Pongbhud Kankirawatana        | pongbhud.kankirawatana@duke.edu
+ Jonah Knapp                   | jonah.knapp@duke.edu
+ David Kohler                  | david.kohler1@duke.edu
+ Kieu Tien Angela Pham         | kieu.tien.angela.pham@duke.edu
+ Gabriela Shaikh               | gabriela.shaikh@duke.edu
+ Haley Sink                    | haley.sink@duke.edu
+ Rayan Tofique                 | rayan.tofique@duke.edu
+ Emily Walker                  | emily.catherine.walker@duke.edu
+ Abena Ansah-Yeboah            | abena.ansah.yeboah@duke.edu
+ Alyssa Arwood                 | alyssa.arwood@duke.edu
+ Paulina Asturias              | paulina.asturias@duke.edu
+ Eryn Lampkin                  | eryn.lampkin@duke.edu
+ Zachery Montgomery            | zachery.montgomery@duke.edu
+ Rebecca Norman                | rebecca.norman@duke.edu
+ Jose Ortega                   | jose.ortega@duke.edu
+ Anna Reilly                   | anna.m.reilly@duke.edu
+ Cynder Rodriguez              | cynder.rodriguez@duke.edu
+ Matthew Treiber               | matthew.treiber@duke.edu
+ Latifa Aboeid                 | latifa.aboeid@duke.edu
+ Maryam Asenuga                | maryam.asenuga@duke.edu
+ Elizabeth Eshleman            | elizabeth.eshleman@duke.edu
+ Daniela Flamini               | daniela.flamini@duke.edu
+ Natalie Larson                | natalie.r.larson@duke.edu
+ Bryan Rusch                   | bryan.rusch@duke.edu
+ Faris Sbahi                   | faris.sbahi@duke.edu
+ Priya Stepp                   | priya.stepp@duke.edu
+ Nadia Thompson                | nadia.thompson@duke.edu
+ Sofiya Volobuyeva             | sofiya.volobuyeva@duke.edu
+ Elle Winfield                 | elle.winfield@duke.edu
+ Andrew Bates                  | andrew.d.bates@duke.edu
+ Jill Jones                    | jill.k.jones@duke.edu
+ Anthony Schneider             | anthony.p.schneider@duke.edu
+ Cristian Tolento              | cristian.tolento@duke.edu
+ Rebekah Wellons               | rebekah.wellons@duke.edu
+ Dorothy Adu-Amankwah          | dorothy.adu.amankwah@duke.edu
+ Treniyyah Anderson            | treniyyah.anderson@duke.edu
+ Rachel Baber                  | rachel.baber@duke.edu
+ Melanie Bakovic               | melanie.bakovic@duke.edu
+ Ryan Fitzgerald               | ryan.fitzgerald@duke.edu
+ Drew Gerber                   | drew.gerber@duke.edu
+ Danuh Kim                     | danuh.kim@duke.edu
+ Scott Liu                     | scott.liu@duke.edu
+ Holly LoTurco                 | holly.loturco@duke.edu
+ Kiera Lunn                    | kiera.lunn@duke.edu
+ Raahina Malik                 | raahina.malik@duke.edu
+ Oluwadamilola Oke             | oluwadamilola.oke@duke.edu
+ Ajile Owens                   | ajile.owens@duke.edu
+ Alexandra Paulenich           | alexandra.paulenich@duke.edu
+ Holly Quivera                 | holly.quivera@duke.edu
+ Avital Schweitzer             | avital.schweitzer@duke.edu
+ Michael Shu                   | michael.j.shu@duke.edu
+ Qsanet Tekie                  | qsanet.tekie@duke.edu
+ Edom Tilahun                  | edom.tilahun@duke.edu
+ Niisoja Torto                 | niisoja.torto@duke.edu
+ Amelia Windemuth              | amelia.windemuth@duke.edu
+ Michelle Wong                 | michelle.wong1@duke.edu
+ Elizabeth Yonko               | elizabeth.yonko@duke.edu
+ Cassandra Appiah-Ofori        | cassandra.appiah.ofori@duke.edu
+ Ivrea Cannon                  | ivrea.cannon@duke.edu
+ Robert Carlson                | bo.carlson@duke.edu
+ Cassia Caruth                 | cassia.caruth@duke.edu
+ Kayla Corredera-Wells         | kayla.corredera.wells@duke.edu
+ Sara Goering                  | sara.goering@duke.edu
+ Eunkyeol Han                  | eunkyeol.han@duke.edu
+ Kendrik Icenhour              | kendrik.icenhour@duke.edu
+ Emre Kiziltug                 | emre.kiziltug@duke.edu
+ Katherine Koprowski           | katherine.koprowski@duke.edu
+ Casey Kuka                    | casey.kuka@duke.edu
+ Seung Hyun Lee                | seung.hyun.lee@duke.edu
+ Jordan Lowrey                 | jordan.lowrey@duke.edu
+ Kezia Matson                  | kezia.matson@duke.edu
+ Moreen Njoroge                | moreen.njoroge@duke.edu
+ Rayleigh Palmer               | rayleigh.palmer@duke.edu
+ Miles Park                    | miles.park@duke.edu
+ Bilva Sanaba                  | bilva.sanaba@duke.edu
+ Morgan Smith                  | morgan.a.smith@duke.edu
+ Shagun Vashisth               | shagun.vashisth@duke.edu
+ Kira Wang                     | kira.wang@duke.edu
+ Ariana Allen                  | ariana.allen@duke.edu
+ Sarah Blau                    | sarah.n.blau@duke.edu
+ John Desan                    | john.desan@duke.edu
+ Rebecca DiLuzio               | rebecca.diluzio@duke.edu
+ Bianca D'Souza                | bianca.d.souza@duke.edu
+ Cristina Garcia Ayala         | cristina.garcia.ayala@duke.edu
+ Caitlin Grant                 | caitlin.grant@duke.edu
+ Sean Holt                     | sean.holt@duke.edu
+ Emily Liu                     | emily.f.liu@duke.edu
+ Kara Madey                    | kara.madey@duke.edu
+ Pinelopi Margeti              | pinelopi.margeti@duke.edu
+ Nia Moore                     | nia.moore@duke.edu
+ Rhys Morgan                   | rhys.morgan@duke.edu
+ Christine O'Connell           | christine.o.connell@duke.edu
+ Jennifer Ricano               | jennifer.ricano@duke.edu
+ Anthony Rodriguez             | anthony.rodriguez@duke.edu
+ Madeleine Cochrane            | madeleine.cochrane@duke.edu
+ Elisabeth Collins             | elisabeth.collins@duke.edu
+ Sara Cotsakis                 | sara.cotsakis@duke.edu
+ Linai Dacon                   | linai.dacon@duke.edu
+ Ryan DuTot                    | ryan.dutot@duke.edu
+ Jaime Gordon                  | jaime.gordon@duke.edu
+ Jacob Hoberg                  | jake.hoberg@duke.edu
+ Aaditya Jain                  | aaditya.jain@duke.edu
+ Joshua Jen                    | joshua.jen@duke.edu
+ Philip Kariuki                | philip.kariuki@duke.edu
+ Kyle Landis                   | kyle.landis@duke.edu
+ Amna Naseem                   | amna.naseem@duke.edu
+ Oluwaseun Okimi               | oluwaseun.okimi@duke.edu
+ Lauren Owens                  | lauren.owens@duke.edu
+ Tyjair Sadler                 | tyjair.sadler@duke.edu
+ Summer Smith                  | summer.smith@duke.edu
+ Tahnee Thantrong              | tahnee.thantrong@duke.edu
+ Matthew Tran                  | matthew.tran@duke.edu
+ Pansy Tseng                   | pansy.tseng@duke.edu
+ Victoria Williams             | victoria.williams@duke.edu
+ Dustin Zhu                    | dustin.zhu@duke.edu
+ Rohan Agarwal                 | rohan.agarwal@duke.edu
+ Brendan Aronhime              | brendan.aronhime@duke.edu
+ Michael Ballou                | michael.ballou@duke.edu
+ Andrew Chun                   | andrew.chun@duke.edu
+ Rachel Cohen                  | rachel.e.cohen@duke.edu
+ William Cone Le Beaumont      | william.cone.le.beaumont@duke.edu
+ Victoria Cormack              | victoria.cormack@duke.edu
+ Jacob Epstein                 | jacob.epstein@duke.edu
+ Justin Garfinkle              | justin.garfinkle@duke.edu
+ Kuber Madhok                  | kuber.madhok@duke.edu
+ Anthony Ohayon                | anthony.ohayon@duke.edu
+ Brittany Amano                | brittany.amano@duke.edu
+ Suman Bajgain                 | suman.bajgain@duke.edu
+ Avery Boltwood                | avery.boltwood@duke.edu
+ Ian Buchanan                  | ian.buchanan@duke.edu
+ Tran Bao Ngoc Bui             | tran.bao.ngoc.bui@duke.edu
+ Alexandru Damian              | alexandru.damian@duke.edu
+ Anne Davis                    | anne.b.davis@duke.edu
+ Ziqi Deng                     | ziqi.deng@duke.edu
+ Neil Dhar                     | neil.dhar@duke.edu
+ Azim Dharani                  | azim.dharani@duke.edu
+ Pascual Di Tella              | pascual.di.tella@duke.edu
+ Amy Fan                       | amy.fan@duke.edu
+ Emily Fechner                 | emily.fechner@duke.edu
+ David Frisch                  | david.frisch@duke.edu
+ Jing Kun Goh                  | jing.kun.goh@duke.edu
+ John Gundersen                | john.gundersen@duke.edu
+ Megison Hancock               | megison.hancock@duke.edu
+ Nickolas Hibshman             | nickolas.hibshman@duke.edu
+ Timothy Kowalczyk             | timothy.kowalczyk@duke.edu
+ Logan Laguna-Kirkpatrick      | logan.laguna.kirkpatrick@duke.edu
+ Katherine Li                  | katherine.li1@duke.edu
+ Sachit Menon                  | sachit.menon@duke.edu
+ Meriwether Morris             | meriwether.morris@duke.edu
+ Valerie Muensterman           | valerie.muensterman@duke.edu
+ Thanh Nguyen                  | thanh.nguyen@duke.edu
+ Luke Potter                   | luke.potter@duke.edu
+ Nikhil Ravi                   | nikhil.v.ravi@duke.edu
+ Saumya Sao                    | saumya.sao@duke.edu
+ Quinn Scanlan                 | quinn.scanlan@duke.edu
+ Anu Sharma                    | anu.sharma@duke.edu
+ Maegan Stanley                | maegan.stanley@duke.edu
+ Sara Varsames                 | sara.varsames@duke.edu
+ Catherine Ward                | catherine.a.ward@duke.edu
+ Caroline Waring               | caroline.waring@duke.edu
+ Yue Wu                        | cisy.wu@duke.edu
+ Carter Zenke                  | carter.zenke@duke.edu
+ Samuel Zhu                    | samuel.zhu@duke.edu
+ Mycroft Zimmerman             | mycroft.zimmerman@duke.edu
+ Donovan Bendana               | donovan.bendana@duke.edu
+ Kendall Clay                  | kendall.clay@duke.edu
+ Lydia Hendrick                | lydia.hendrick@duke.edu
+ Naveen Hrishikesh             | naveen.hrishikesh@duke.edu
+ Tiwatope Ibidapo              | tiwatope.ibidapo@duke.edu
+ Jason Kim                     | jason.h.kim@duke.edu
+ Alexander Lowell              | alexander.lowell@duke.edu
+ Cynthia Metzger               | cynthia.metzger@duke.edu
+ Maria Moreno                  | maria.moreno@duke.edu
+ Blaire Rikard                 | blaire.rikard@duke.edu
+ Karley Whelan                 | karley.whelan@duke.edu
+ Kathryn White                 | kate.white@duke.edu
+ Henock Asaye                  | henock.asaye@duke.edu
+ Jaxson Floberg                | jaxson.floberg@duke.edu
+ Teig Hennessy                 | teig.hennessy@duke.edu
+ Kenan Kaptanoglu              | kenan.kaptanoglu@duke.edu
+ Shaina Lubliner               | shaina.lubliner@duke.edu
+ Anngelyque Stevenson          | anngelyque.stevenson@duke.edu
+ Bianca Umeakuana              | bianca.umeakuana@duke.edu
+ Andie Marie Adkins            | andie.adkins@duke.edu
+ Robert Bahner                 | robert.bahner@duke.edu
+ Elizabeth Lim                 | elizabeth.lim@duke.edu
+ Alex Salas                    | alex.salas@duke.edu
+ Rachel Baker                  | rachel.m.baker@duke.edu
+ Mathama Malakha Bility        | mathama.bility@duke.edu
+ Gina Cai                      | gina.cai@duke.edu
+ Evan Cater                    | evan.cater@duke.edu
+ Karla Colley                  | karla.colley@duke.edu
+ Morgan Fears                  | morgan.fears@duke.edu
+ Allison Grote                 | allison.grote@duke.edu
+ Michael Gulcicek              | michael.gulcicek@duke.edu
+ William Hardee                | william.hardee@duke.edu
+ Rachel Jeffries               | rachel.jeffries@duke.edu
+ Zoey Kang                     | zoey.kang@duke.edu
+ Catie Miller                  | catie.miller@duke.edu
+ Sabriyya Pate                 | sabriyya.pate@duke.edu
+ Rachel Settle                 | rachel.settle@duke.edu
+ Stephen So                    | stephen.m.so@duke.edu
+ Aubrea Stoltz                 | aubrea.stoltz@duke.edu
+ Helen Yang                    | helen.yang2@duke.edu
+ Sarah Yang                    | sarah.yang@duke.edu
+ Francesca Davie               | francesca.davie@duke.edu
+ Oliver Durling                | oliver.durling@duke.edu
+ Lee Evans                     | lee.evans@duke.edu
+ Ariana Gallegos               | ariana.gallegos@duke.edu
+ Mollybeth Hendrix             | mollybeth.hendrix@duke.edu
+ Ismail Iberkak                | ismail.iberkak@duke.edu
+ Parker Levi                   | parker.levi@duke.edu
+ Simen Omholt-Jensen           | simen.omholt.jensen@duke.edu
+ Madden Osei                   | madden.osei@duke.edu
+ Adiva Shah                    | adiva.shah@duke.edu
+ Rachel Shapiro                | rachel.shapiro@duke.edu
+ Maximilian Sondland           | maximilian.sondland@duke.edu
+ Alethea Toh                   | alethea.toh@duke.edu
+ Gaurav Uppal                  | gaurav.uppal@duke.edu
+ Claire Wiebe                  | claire.wiebe@duke.edu
+ Brittany Williams             | brittany.c.williams@duke.edu
+ Elizabeth Byrnes-Mandelbaum   | elizabeth.byrnes.mandelbaum@duke.edu
+ Juan Jimenez Lizardi          | juan.jimenez.lizardi@duke.edu
+ Caroline Bay                  | caroline.bay@duke.edu
+ Nicole Rapfogel               | nicole.rapfogel@duke.edu
+ Kathryn Watkins               | kathryn.watkins@duke.edu
+ Veohnti Afokpa                | veohnti.afokpa@duke.edu
+ David Henderson               | david.henderson@duke.edu
+ Melina Keighron               | melina.keighron@duke.edu
+ Howard Li                     | howard.li@duke.edu
+ Alexa Alcalay                 | alexa.alcalay@duke.edu
+ Daniel Bass-Blue              | daniel.bass.blue@duke.edu
+ David Betancourt              | david.betancourt@duke.edu
+ Emilia Chojkiewicz            | emilia.chojkiewicz@duke.edu
+ Peter Ciporin                 | peter.ciporin@duke.edu
+ Renish Contractor             | renish.contractor@duke.edu
+ Rohit Das                     | rohit.das@duke.edu
+ Paige Detwiler                | paige.detwiler@duke.edu
+ Patrick Donley                | patrick.donley@duke.edu
+ Liesl Eibschutz               | liesl.eibschutz@duke.edu
+ Jacob Eisenstein              | jacob.eisenstein@duke.edu
+ David Faulkenberry            | david.faulkenberry@duke.edu
+ Morgan Ferrans                | morgan.ferrans@duke.edu
+ John Fitzpatrick              | jack.fitzpatrick@duke.edu
+ Daniel Green                  | daniel.j.green@duke.edu
+ Elizabeth Griffin             | elizabeth.r.griffin@duke.edu
+ Jane Hendrickson              | jane.hendrickson@duke.edu
+ Danielle Holt                 | danielle.holt@duke.edu
+ Todd Iodice                   | todd.iodice@duke.edu
+ Isabela Leon                  | isabela.leon@duke.edu
+ Carly Levi                    | carly.levi@duke.edu
+ Barret Manfre                 | barret.manfre@duke.edu
+ Elena Mannion                 | elena.mannion@duke.edu
+ Leora Mazumdar                | leora.mazumdar@duke.edu
+ Emily Mi                      | emily.mi@duke.edu
+ Oren Mizrahi                  | oren.mizrahi@duke.edu
+ Andres Nazario                | andres.nazario@duke.edu
+ Riley Nisbet                  | riley.nisbet@duke.edu
+ Emma Palmer                   | emma.palmer@duke.edu
+ Anthony Paul                  | anthony.paul@duke.edu
+ Charles Pearlman              | charles.pearlman@duke.edu
+ Dylan Posner                  | dylan.posner@duke.edu
+ Samuel Reiff                  | samuel.reiff@duke.edu
+ Eric Reit                     | eric.reit@duke.edu
+ Erik Riis                     | erik.riis@duke.edu
+ Faith Rodriguez               | faith.rodriguez@duke.edu
+ James Stevens                 | james.e.stevens@duke.edu
+ Janelle Taylor                | janelle.taylor@duke.edu
+ Gabriel Valladares            | gabriel.valladares@duke.edu
+ Thomas Van Bibber             | thomas.van.bibber@duke.edu
+ Cassandra Williams            | cassandra.williams@duke.edu
+ Elizabeth Williams            | annie.williams2@duke.edu
+ Darya Andreichenko            | darya.andreichenko@duke.edu
+ Melanie Bakovic               | melanie.bakovic@duke.edu
+ Daniel Bernt                  | daniel.bernt@duke.edu
+ Nina Bidikov                  | nina.bidikov@duke.edu
+ Isabel Billig                 | isabel.billig@duke.edu
+ Allison Binkley               | allison.binkley@duke.edu
+ William Blank                 | william.blank@duke.edu
+ Ryan Bloom                    | ryan.bloom@duke.edu
+ Payton Bock                   | payton.bock@duke.edu
+ Bradley Cary                  | bradley.cary@duke.edu
+ Eva Catillon                  | eva.catillon@duke.edu
+ Yucong Chi                    | cathy.chi@duke.edu
+ Rebecca Cohen                 | rebecca.cohen@duke.edu
+ Paul Dickinson                | paul.dickinson@duke.edu
+ Amanda Gross                  | amanda.gross@duke.edu
+ George Hockett                | george.hockett@duke.edu
+ Samuel James                  | samuel.james@duke.edu
+ Thomas Landry                 | thomas.landry@duke.edu
+ Patenne Mathews               | patenne.mathews@duke.edu
+ Nicole Molino                 | nicole.molino@duke.edu
+ Olivia Nillissen              | olivia.nillissen@duke.edu
+ Paulina Paras                 | paulina.paras@duke.edu
+ Hunter Prange                 | hunter.prange@duke.edu
+ Kelly Ryder                   | kelly.ryder@duke.edu
+ Jennifer Schnadig             | jennifer.schnadig@duke.edu
+ Rachel Settle                 | rachel.settle@duke.edu
+ Christopher Sides             | christopher.sides@duke.edu
+ William Sisson                | william.sisson@duke.edu
+ Nicolas Wainwright            | nic.wainwright@duke.edu
+ Alexandra Walker              | alexandra.walker@duke.edu
+ Anna Waters                   | anna.waters@duke.edu
+ Shom Tiwari                   | shom.tiwari@duke.edu
+ Trevyn Toone                  | trevyn.toone@duke.edu
+ Hannah Ferry                  | hannah.ferry@duke.edu
+ Raymond Pryor                 | raymond.pryor@duke.edu
+ Talise Redmond                | talise.redmond@duke.edu
+ Edom Tilahun                  | edom.tilahun@duke.edu
+ Paula Ajumobi                 | paula.ajumobi@duke.edu
+ Hannah Collins                | hannah.collins@duke.edu
+ Sara Evall                    | sara.evall@duke.edu
+ Katherine Nelson              | katherine.b.nelson@duke.edu
+ Joshua Smith                  | joshua.h.smith@duke.edu
+ Won Young Choi                | won.young.choi@duke.edu
+ Christian Martindale          | christian.martindale@duke.edu
+ Vikram Seethepalli            | vikram.seethepalli@duke.edu
+ Myla Swallow                  | myla.swallow@duke.edu
+ Robert Christensen            | robert.l.christensen@duke.edu
+ Oliver Durling                | oliver.durling@duke.edu
+ Harold Elworthy               | harold.elworthy@duke.edu
+ Erik Hanson                   | erik.hanson@duke.edu
+ Francis L'Esperance           | francis.lesperance@duke.edu
+ Tae Markey                    | tae.markey@duke.edu
+ Taylor Miller                 | taylor.miller1@duke.edu
+ Edward Riker                  | edward.riker@duke.edu
+ Ethan Susser                  | ethan.susser@duke.edu
+ Lance Tran                    | lance.tran@duke.edu
+ Matthew Tran                  | matthew.tran@duke.edu
+ Marshall Strickland           | marshall.strickland@duke.edu
+ Genevieve Valladao            | genevieve.valladao@duke.edu
+ Lauren Hale                   | lauren.hale@duke.edu
+ Jade Tso                      | jade.tso@duke.edu
+ Katharyn Loweth               | katharyn.loweth@duke.edu
+ Julia Nicholas                | julia.nicholas@duke.edu
+ Emily Ahlers                  | emily.ahlers@duke.edu
+ Marc Albertsen                | marc.albertsen@duke.edu
+ Rachel Baker                  | rachel.m.baker@duke.edu
+ Erica Blair                   | erica.blair@duke.edu
+ Brigitte Blanco               | brigitte.blanco@duke.edu
+ Olivia Bolwell                | olivia.bolwell@duke.edu
+ Bari Britvan                  | bari.britvan@duke.edu
+ Jason Brovich                 | jason.brovich@duke.edu
+ Kanav Chhabra                 | kanav.chhabra@duke.edu
+ Delaney Dalldorf              | delaney.dalldorf@duke.edu
+ Riya Dange                    | riya.dange@duke.edu
+ Mariana Feingold              | mariana.feingold@duke.edu
+ Alison Frank                  | alison.frank@duke.edu
+ Jacob Glasser                 | jacob.glasser@duke.edu
+ Steven Hassey                 | steven.hassey@duke.edu
+ Melissa Houghton              | melissa.houghton@duke.edu
+ Matthew Kaplan                | matthew.kaplan@duke.edu
+ Clare Kehoe                   | clare.kehoe@duke.edu
+ Monica Lee                    | monica.lee2@duke.edu
+ Alexandria Lichtl             | alexandria.lichtl@duke.edu
+ Amanda Mackler                | amanda.mackler@duke.edu
+ Carrie McKim                  | carrie.mckim@duke.edu
+ Sarah McMahon                 | sarah.mcmahon@duke.edu
+ Francesca Mercer              | francesca.mercer@duke.edu
+ Kathryn Mueller               | kathryn.mueller@duke.edu
+ Isaac Nicchitta               | isaac.nicchitta@duke.edu
+ Kyle Ockerman                 | kyle.ockerman@duke.edu
+ Margo Orlen                   | margo.orlen@duke.edu
+ Sarah Perrin                  | sarah.perrin@duke.edu
+ Jacob Salomon                 | jacob.salomon@duke.edu
+ Rachel Shapiro                | rachel.shapiro@duke.edu
+ Jesse Shatsky                 | jesse.shatsky@duke.edu
+ Leah Soloff                   | leah.soloff@duke.edu
+ Emilia Soulios                | emilia.soulios@duke.edu
+ Willa Stevenson               | willa.stevenson@duke.edu
+ Timothy Stiles                | tim.stiles@duke.edu
+ Reena Sudan                   | reena.sudan@duke.edu
+ Pamela Surran                 | pamela.surran@duke.edu
+ Bridget Wallace               | bridget.wallace@duke.edu
+ Victoria Wang                 | victoria.wang@duke.edu
+ Vivian Wang                   | vivian.z.wang@duke.edu
+ Amy Wikle                     | amy.wikle@duke.edu
+ Iris Yang                     | iris.yang@duke.edu
+ Rafae Alam                    | rafae.alam@duke.edu
+ Andrew Bates                  | andrew.b.bates@duke.edu
+ Francois Chabaneix            | francois.chabaneix@duke.edu
+ Minqian Chen                  | minqian.chen@duke.edu
+ Sydney Colopy                 | sydney.colopy@duke.edu
+ Emma Crossman                 | emma.crossman@duke.edu
+ Samuel Ditesheim              | samuel.ditesheim@duke.edu
+ Marina Frattaroli             | marina.frattaroli@duke.edu
+ Celia Garrett                 | celia.garrett@duke.edu
+ Michael Gulcicek              | michael.gulcicek@duke.edu
+ Madeline Halpert              | madeline.halpert@duke.edu
+ Emile Riachi                  | emile.riachi@duke.edu
+ Amanda Sear                   | amanda.sear@duke.edu
+ Kelsey Shelofsky              | kelsey.shelofsky@duke.edu
+ Tahnee Thantrong              | tahnee.thantrong@duke.edu
+ Victoria Trimm                | victoria.trimm@duke.edu
+ Julie Uchitel                 | julie.uchitel@duke.edu
+ Alec Wall                     | alec.wall@duke.edu
+ Julia Wohl                    | julia.wohl@duke.edu
+ Yue Zhou                      | yue.zhou@duke.edu
+ Zui Dighe                     | zui.dighe@duke.edu
+ Kelsey Li                     | kelsey.li@duke.edu
+ Serena Liu                    | serena.liu@duke.edu
+ Jasmine Lu                    | jasmine.lu@duke.edu
+ Zoe McGrady                   | zoe.mcgrady@duke.edu
+ Ankit Rastogi                 | ankit.rastogi@duke.edu
+ Advait Reddy                  | advait.reddy@duke.edu
+ Erin Simons                   | erin.simons@duke.edu
+ Kathryn Vera                  | kathryn.vera@duke.edu
+ Olivia Bowles                 | olivia.bowles@duke.edu
+ Anna Egas                     | anna.egas@duke.edu
+ John Bassett                  | john.bassett@duke.edu
+ Devin Nieusma                 | devin.nieusma@duke.edu
+ John Crenshaw                 | john.crenshaw@duke.edu
+ William Francis               | william.francis@duke.edu
+ Carly Fredericks              | carly.fredericks@duke.edu
+ Christine Kuesel              | christine.kuesel@duke.edu
+ Alexandria Murphy             | alexandria.murphy@duke.edu
+ Mark Sampson                  | mark.sampson@duke.edu
+ Matthew Sanders               | matthew.a.sanders@duke.edu
+ Reed Smith                    | reed.smith@duke.edu
+ Jessica Williams              | jessica.c.williams@duke.edu
+ Dina Xie                      | dina.xie@duke.edu
+ George Elliott                | george.elliott@duke.edu
+ Danielle Mitchell             | danielle.mitchell@duke.edu
+ Ajile Owens                   | ajile.owens@duke.edu
+ Emma Schindler                | emma.schindler@duke.edu
+ Gary Wang                     | gary.wang@duke.edu
+ Katherine Morawa              | katherine.morawa@duke.edu
+ William Cone Le Beaumont      | william.cone.le.beaumont@duke.edu
+ Grace Donahoe                 | grace.donahoe@duke.edu
+ Elizabeth Ratliff             | elizabeth.ratliff@duke.edu
+ Kelly Cheng                   | kelly.cheng@duke.edu
+ Jack Gavigan                  | jack.gavigan@duke.edu
+ Roy Auh                       | roy.auh@duke.edu
+ Priyanka Purohit              | priyanka.purohit@duke.edu
+ Joshua Kopen                  | joshua.kopen@duke.edu
+ Shelby Turner                 | shelby.turner@duke.edu
+ Isabel Aptman                 | isabel.aptman@duke.edu
+ Yash Bajaj                    | yash.bajaj@duke.edu
+ Alexandra Davis               | alexandra.m.davis@duke.edu
+ Bonnie Lerman                 | bonnie.lerman@duke.edu
+ Josephine McManemin           | josephine.mcmanemin@duke.edu
+ Phoebe O'Hara                 | phoebe.o.hara@duke.edu
+ Sydney Waldman                | sydney.waldman@duke.edu
+ John Argentino                | john.argentino@duke.edu
+ Frances Beroset               | frances.beroset@duke.edu
+ Maegan Stanley                | maegan.stanley@duke.edu
+ Athina Vrosgou                | athina.vrosgou@duke.edu
+ Seo Young Yoon                | seo.young.yoon@duke.edu
+ Katherine Haley               | katherine.k.haley@duke.edu
+ Sophie Bell                   | sophie.a.bell@duke.edu
+ Stephen Everest               | stephen.everest@duke.edu
+ Isabel Giacomazzi             | isabel.giacomazzi@duke.edu
+ Isabel Gutenplan              | isabel.gutenplan@duke.edu
+ Katherine McKinney            | katherine.mckinney2@duke.edu
+ Robert Rappleye               | robert.rappleye@duke.edu
+ Courtney Schwartz             | courtney.schwartz@duke.edu
+ Andrew Workman                | andrew.workman@duke.edu
+ Brooke Canty                  | brooke.canty@duke.edu
+ Michael Barone                | michael.r.barone@duke.edu
+ Ryan Bergamini                | ryan.bergamini@duke.edu
+ Joshua Gabay                  | joshua.gabay@duke.edu
+ Madelaine Hilal               | madelaine.hilal@duke.edu
+ Cloe Hymowitz                 | cloe.hymowitz@duke.edu
+ Abby Kay                      | abby.kay@duke.edu
+ John Luby                     | john.luby@duke.edu
+ Jacob Melnick                 | jacob.melnick@duke.edu
+ Gabrielle Paul                | gabrielle.paul@duke.edu
+ Charles Rooney                | charles.rooney@duke.edu
+ Jamie Swotes                  | jamie.swotes@duke.edu
+ William Trimble               | william.trimble@duke.edu
+ Maia Walker                   | maia.walker@duke.edu
+ Caroline Wang                 | caroline.y.wang@duke.edu
+ Pinelopi Margeti              | pinelopi.margeti@duke.edu
+ Maria Victoria Howell-Arza    | maria.victoria.howell.arza@duke.edu
+ Haley Hedrick                 | haley.hedrick@duke.edu
+ Anne Perrone                  | anne.perrone@duke.edu
+ Adrian Rivas                  | adrian.rivas@duke.edu
+ Cecelia Mizelle               | cecelia.mizelle@duke.edu
+ Elaine Cox                    | elaine.cox@duke.edu
+ Ryan Mann                     | ryan.mann@duke.edu
+ Jack Myhre                    | jack.myhre@duke.edu
+ Aedan Hannon                  | aedan.hannon@duke.edu
+ Ethan Miller                  | ethanl.miller@duke.edu
+ Benjamin Saalfeld             | benjamin.saalfeld@duke.edu
+ Maxwell Goldstein             | maxwell.goldstein@duke.edu
+ Virginia Reid                 | virginia.reid@duke.edu
+ Daniel Allred                 | daniel.allred@duke.edu
+ Gabriela Brumagin             | gabriela.brumagin@duke.edu
+ Grahame Evans                 | grahame.evans@duke.edu
+ Julia Knorr                   | julia.knorr@duke.edu
+ Aurora Krom                   | aurora.krom@duke.edu
+ Anson MacKinney               | anson.mackinney@duke.edu
+ Javahar Mariwala              | javahar.mariwala@duke.edu
+ Blake Sells                   | blake.sells@duke.edu
+ Chelsea Southworth            | chelsea.southworth@duke.edu
+ Jake Voorhees                 | jake.voorhees@duke.edu
+ Stella Wang                   | stella.e.wang@duke.edu
+ Courtney Werner               | courtney.werner@duke.edu
+ Simon White                   | simon.white@duke.edu
+ Surafel Adere                 | surafel.adere@duke.edu
+ Adaiya Granberry              | adaiya.granberry@duke.edu
+ Catherine Farmer              | catherine.b.farmer@duke.edu
+ Vanessa Agudelo               | vanessa.agudelo@duke.edu
+ Ethan Ahuna                   | ethan.ahuna@duke.edu
+ Cameron Anderson              | cameron.anderson@duke.edu
+ Hayley Barton                 | hayley.barton@duke.edu
+ Elliott Bolzan                | elliott.bolzan@duke.edu
+ Danielle Brown                | danielle.brown@duke.edu
+ Tomas Cabo-Hervada            | tomas.cabo.hervada@duke.edu
+ Christopher Camp              | christopher.camp@duke.edu
+ Griffin Carter                | griffin.carter@duke.edu
+ James Daubert                 | james.p.daubert@duke.edu
+ Elise Fernandez               | elise.fernandez@duke.edu
+ Jason Fischell                | jason.fischell@duke.edu
+ George Gallagher              | george.gallagher@duke.edu
+ Tyler Goldberger              | tyler.goldberger@duke.edu
+ Jacob Graber-Lipperman        | jacob.graber.lipperman@duke.edu
+ William Graham                | william.graham@duke.edu
+ Savanna Groft                 | savanna.groft@duke.edu
+ Katherine Herrmann            | katherine.herrmann@duke.edu
+ Traci Hirokawa                | traci.hirokawa@duke.edu
+ Benjamin Hubsch               | benjamin.hubsch@duke.edu
+ Spencer Hutchinson            | spencer.hutchinson@duke.edu
+ Caroline Kealoha              | caroline.kealoha@duke.edu
+ Ethan Lampert                 | ethan.lampert@duke.edu
+ Kelsey Lansdale               | kelsey.lansdale@duke.edu
+ Eliza Letourneau              | eliza.letourneau@duke.edu
+ Vivian Luo                    | vivian.luo@duke.edu
+ Caroline Mittl                | caroline.mittl@duke.edu
+ Emily Nagler                  | emily.nagler@duke.edu
+ Madison Novice                | madison.novice@duke.edu
+ Ellen Pasquale                | ellen.pasquale@duke.edu
+ Sujay Rao                     | sujay.rao@duke.edu
+ Victor Schwartz               | victor.schwartz@duke.edu
+ Marina Smalling               | marina.smalling@duke.edu
+ Kayla Thompson                | kayla.thompson@duke.edu
+ Roey Vardi                    | roey.vardi@duke.edu
+ Naime Wiener                  | naime.wiener@duke.edu
+ Anya Bali                     | anya.bali@duke.edu
+ Elizabeth Corrao              | elizabeth.corrao@duke.edu
+ Ethan Heerwagen               | ethan.heerwagen@duke.edu
+ Anne Janick                   | anne.janick@duke.edu
+ Julia Kemper                  | julia.kemper@duke.edu
+ Theodore Marchildon           | theodore.marchildon@duke.edu
+ Mackenzie Marques             | mackenzie.marques@duke.edu
+ Hunter McNamara               | hunter.mcnamara@duke.edu
+ Laura Noteware                | laura.noteware@duke.edu
+ Dylan Peters                  | dylan.peters@duke.edu
+ Noa Saint-Marc                | noa.saint.marc@duke.edu
+ Jonah Santiago                | jonah.santiago@duke.edu
+ Sara Shmueli                  | sara.shmueli@duke.edu
+ Thomas Vincent                | thomas.vincent@duke.edu
+ Drew Webster                  | drew.webster@duke.edu
+ Aayush Damani                 | aayush.damani@duke.edu
+ Jillian Kohn                  | jillian.kohn@duke.edu
+ Melissa Gerdts                | melissa.gerdts@duke.edu
+ Caleigh Smith                 | caleigh.smith@duke.edu
+ Armin Ameri                   | armin.ameri@duke.edu
+ Isabel Avery                  | isabel.avery@duke.edu
+ Virginia Black                | virginia.black@duke.edu
+ Jennifer Semler               | jennifer.semler@duke.edu
+ Salo Abraham Bandel           | salo.abraham@duke.edu
+ William Alford-Getchell       | william.alford.getchell@duke.edu
+ Lauren DaSilva                | lauren.dasilva@duke.edu
+ Jonathan Levine               | jon.levine@duke.edu
+ Shannon Malloy                | shannon.malloy@duke.edu
+ Ojas Patel                    | ojas.patel@duke.edu
+ Solomon Yirga                 | solomon.yirga@duke.edu
+ Caroline Maretz               | caroline.maretz@duke.edu
+ Davin Bialow                  | davin.bialow@duke.edu
+ Melanie Hogue                 | melanie.hogue@duke.edu
+ Isabella Jones                | isabella.jones@duke.edu
+ Kyle Landis                   | kyle.landis@duke.edu
+ Daniel Levine                 | daniel.levine@duke.edu
+ Jeffery Liu                   | jeffery.liu@duke.edu
+ Andrew Schneider              | andrew.b.schneider@duke.edu
+ Jordan Siff                   | jordan.siff@duke.edu
+ Analese Bridges               | analese.bridges@duke.edu
+ John Dearing                  | john.dearing@duke.edu
+ Henry Kistler                 | henry.kistler@duke.edu
+ Madison Laton                 | madison.laton@duke.edu
+ Alexander Martin              | alexander.n.martin@duke.edu
+ Paulos Muruts                 | paulos.muruts@duke.edu
+ Nicholas Portuondo            | nicholas.portuondo@duke.edu
+ Levi Rhoades                  | levi.rhoades@duke.edu
+ Rebekah Wellons               | rebekah.wellons@duke.edu
+ Kristianna Elbert             | kristianna.elbert@duke.edu
+ Ethan Goldish                 | ethan.goldish@duke.edu
+ Gaines Langford               | gaines.langford@duke.edu
+ Daniella Nevid                | daniella.nevid@duke.edu
+ Aubrea Stoltz                 | aubrea.stoltz@duke.edu
+ Reilly Johnson                | reilly.johnson@duke.edu
+ Jim Guan                      | jim.guan@duke.edu
+ Dylan Penny                   | dylan.penny@duke.edu
+ Alexander Tanzman             | alexander.tanzman@duke.edu
+ John Madden                   | john.j.madden@duke.edu
+ James Rees                    | james.o.rees@duke.edu
+ Austin Verissimo              | austin.verissimo@duke.edu
+ Claire Wiebe                  | claire.wiebe@duke.edu
+ Taylor Wilson                 | taylor.wilson@duke.edu
+ Katherine Bishara             | katherine.bishara@duke.edu
+ Emily Paul                    | emily.paul@duke.edu
+ Leah Rosen                    | leah.rosen@duke.edu
+ Claire Stout                  | claire.stout@duke.edu
+ Nicolas Wilmer                | nicolas.wilmer@duke.edu
+ Mia King                      | mia.king@duke.edu
+ Shelby Powers                 | shelby.powers@duke.edu
+ Michael Ballou                | michael.ballou@duke.edu
+ Kyle Berlind                  | kyle.berlind@duke.edu
+ Jared Cordover                | jared.cordover@duke.edu
+ Alexander Goodman             | alexander.goodman@duke.edu
+ Justin Grady                  | justin.grady@duke.edu
+ Philippe Heitzmann            | philippe.heitzmann@duke.edu
+ Carolina Isaza                | carolina.isaza@duke.edu
+ Sujata Kishnani               | sujata.kishnani@duke.edu
+ Justin LoTurco                | justin.loturco@duke.edu
+ Carly Miner                   | carly.miner@duke.edu
+ Zulekha Moton                 | rubah.moton@duke.edu
+ Claire North                  | claire.north@duke.edu
+ Lanre Oshin                   | lanre.oshin@duke.edu
+ Alexis Salcedo                | alexis.salcedo@duke.edu
+ Molly Sullivan                | molly.sullivan@duke.edu
+ Keegan Trofatter              | keegan.trofatter@duke.edu
+ Katheryn Zhao                 | katheryn.zhao@duke.edu
+ Richard Elias Asfour          | richard.elias.asfour@duke.edu
+ Sandra Batakana               | sandra.batakana@duke.edu
+ Henry Bell                    | henry.bell@duke.edu
+ Bradley Comisar               | bradley.comisar@duke.edu
+ Jacob Diamantis               | jacob.diamantis@duke.edu
+ Andrew Eurdolian              | andrew.eurdolian@duke.edu
+ Catherine Grasse              | catherine.grasse@duke.edu
+ Nicholas Ho                   | nicholas.z.ho@duke.edu
+ Ethan Kwok                    | ethan.kwok@duke.edu
+ Katherine LeCroy              | katherine.lecroy@duke.edu
+ Charlie Liang                 | charlie.liang@duke.edu
+ Roberta Lie                   | elena.lie@duke.edu
+ Noah Martin                   | noah.martin@duke.edu
+ Muhammad Murtaza              | muhammad.murtaza.mubin@duke.edu
+ Hayley Pearson                | hayley.pearson@duke.edu
+ Aleah Peffer                  | aleah.peffer@duke.edu
+ Alexander Rego                | alexander.rego@duke.edu
+ Mariam Sulakian               | mariam.sulakian@duke.edu
+ Belal Taher                   | belal.taher@duke.edu
+ Elizabeth Wittmann            | elizabeth.wittmann@duke.edu
+ Parker Yagman                 | parker.yagman@duke.edu
+ Jean Yenbamroong              | jean.yenbamroong@duke.edu
+ Ofir Golan                    | ofir.golan@duke.edu
+ Garrett Jones                 | garrett.s.jones@duke.edu
+ Jacob Mullett                 | jacob.mullett@duke.edu
+ Brooklyn Bass                 | brooklyn.bass@duke.edu
+ Sini Chen                     | sini.chen@duke.edu
+ Mathilda Christensson         | mathilda.christensson@duke.edu
+ Patrick Cummings-Taylor       | patrick.cummings.taylor@duke.edu
+ Mika Deshmukh                 | mika.deshmukh@duke.edu
+ Onastasia Ebright             | onastasia.ebright@duke.edu
+ Lia Golden                    | lia.golden@duke.edu
+ Lauren Jones                  | lauren.jones@duke.edu
+ Julie Min                     | julie.min@duke.edu
+ Amanda Pruthi                 | amanda.pruthi@duke.edu
+ Rachel Severein               | rachel.severein@duke.edu
+ Kristine Stanners             | kristine.stanners@duke.edu
+ Alexandra Uribe               | alexandra.uribe@duke.edu
+ Charles Berman                | charlie.berman@duke.edu
+ Benjamin Welton               | benjamin.welton@duke.edu
+ Kate Branch                   | kate.branch@duke.edu
+ Jasmine Syed                  | jasmine.syed@duke.edu
+ Rachel Cohn                   | rachel.m.cohn@duke.edu
+ Claire Wang                   | claire.wang@duke.edu
+ Kyle Gornick                  | kyle.gornick@duke.edu
+ Dahyeon Kim                   | dahyeon.kim@duke.edu
+ Mingyang Zhang                | mingyang.zhang@duke.edu
+ Laura Naslund                 | laura.naslund@duke.edu
+ Pauline Grieb                 | pauline.grieb@duke.edu
+ Michael Horenstein            | michael.horenstein@duke.edu
+ Katherine Molinet             | katherine.molinet@duke.edu
+ Nathan Keene                  | nathan.keene@duke.edu
+ Thanh Nguyen                  | thanh.nguyen@duke.edu
+ Maxwell Gardner               | maxwell.gardner@duke.edu
+ Jacob Sumner                  | jacob.sumner@duke.edu
+ Audrey Wang                   | audrey.r.wang@duke.edu
+ Preston Huang                 | preston.huang@duke.edu
+ Lia Golden                    | lia.golden@duke.edu
+ Evangeline Marecki            | evangeline.marecki@duke.edu
+ Sarah Needham                 | sarah.needham@duke.edu
+ Julia Li                      | julia.s.li@duke.edu
+ Tiwatope Ibidapo              | tiwatope.ibidapo@duke.edu
+ Ella Head                     | ella.head@duke.edu
+ Maegha Lanka                  | maegha.lanka@duke.edu
+ Ruolin Miao                   | ruolin.miao@duke.edu
+ Semhal Araya                  | semhal.araya@duke.edu
+ Erick Aguilar Ramos           | erick.aguilar@duke.edu
+ Benjamin Baker                | benjamin.r.baker@duke.edu
+ Gianna Giordano               | gianna.giordano@duke.edu
+ David Jimenez-Vallejo         | david.jimenez.vallejo@duke.edu
+ Edward Ruby                   | edward.ruby@duke.edu
+ Alexandra Sanchez Rolon       | alexandra.sanchez.rolon@duke.edu
+ Owen Smith                    | owen.smith2@duke.edu
+ Elizabeth Bonnell             | elizabeth.bonnell@duke.edu
+ Monika Dharia                 | monika.dharia@duke.edu
+ Priya Nakkiran                | priya.nakkiran@duke.edu
+ Emily Davis                   | emily.c.davis@duke.edu
+ Molly Chen                    | molly.chen@duke.edu
+ Fangge Deng                   | fangge.deng@duke.edu
+ Austin Verissimo              | austin.verissimo@duke.edu
+ Christopher Booth             | christopher.booth@duke.edu
+ Crawford Sloan                | crawford.sloan@duke.edu
+ Christine Kinyua              | christine.kinyua@duke.edu
+ Vanessa Agudelo               | vanessa.agudelo@duke.edu
+ Annabel Casteel               | annabel.casteel@duke.edu
+ Elizabeth Eshleman            | elizabeth.eshleman@duke.edu
+ Mary Aline Fertin             | mary.aline.fertin@duke.edu
+ Alexandra Fisher              | alexandra.d.fisher@duke.edu
+ Nia Moore                     | nia.moore@duke.edu
+ Young Park                    | young.park@duke.edu
+ Haven Parker                  | haven.parker@duke.edu
+ Luke Potter                   | luke.potter@duke.edu
+ Mariya Stoertz                | mariya.stoertz@duke.edu
+ Yue Wu                        | cisy.wu@duke.edu
+ Selin Yalcin                  | selin.yalcin@duke.edu
+ Aydin Anwar                   | aydin.anwar@duke.edu
+ Grant Besner                  | grant.besner@duke.edu
+ Elizabeth Butcher             | elizabeth.butcher@duke.edu
+ Lizzet Clifton                | lizzet.clifton@duke.edu
+ Morgan Fears                  | morgan.fears@duke.edu
+ Zoey Kang                     | zoey.kang@duke.edu
+ Rachel Severein               | rachel.severein@duke.edu
+ Zhongyu Wang                  | zhongyu.wang@duke.edu
+ Felicia Chen                  | felicia.chen@duke.edu
+ Jake Gerard                   | jake.gerard@duke.edu
+ Reeya Gupta                   | reeya.gupta@duke.edu
+ Nickolas Hibshman             | nickolas.hibshman@duke.edu
+ Man-Lin Hsiao                 | man.lin.hsiao@duke.edu
+ Joshua Jen                    | joshua.jen@duke.edu
+ Chiwan Kim                    | chiwan.kim@duke.edu
+ Hal Lin                       | hal.lin@duke.edu
+ Kevin Ma                      | kevin.ma@duke.edu
+ Jacob Ronkin                  | jacob.ronkin@duke.edu
+ Dilan Trivedi                 | dilan.trivedi@duke.edu
+ Pansy Tseng                   | pansy.tseng@duke.edu
+ Beini Wang                    | beini.wang@duke.edu
+ Weiwei Wang                   | weiwei.wang@duke.edu
+ Kelly Zhang                   | k.zhang@duke.edu
+ Qiufeng Zhang                 | qiufeng.zhang@duke.edu
+ Oluwadamilola Oke             | oluwadamilola.oke@duke.edu
+ Jasmine Tomlinson             | jasmine.tomlinson@duke.edu
+ Syed Ahmad                    | syed.ahmad@duke.edu
+ Ahmad Amireh                  | ahmad.amireh@duke.edu
+ Catherine Cho                 | catherine.cho@duke.edu
+ Alexandra Chukwuma            | alexandra.chukwuma@duke.edu
+ Gabrielle Cooper              | gabrielle.cooper@duke.edu
+ Yen Dinh                      | yen.dinh@duke.edu
+ Imari Genias                  | imari.genias@duke.edu
+ Joyce Gu                      | joyce.gu@duke.edu
+ Olivia Jarrett                | olivia.jarrett@duke.edu
+ Yiwen Jiang                   | yiwen.jiang@duke.edu
+ Tia Kelley                    | tia.kelley@duke.edu
+ Azalia Maul                   | azalia.maul@duke.edu
+ Emily Olszewski               | emily.olszewski@duke.edu
+ Karly Pearson                 | karly.pearson@duke.edu
+ Pavel Pivarshev               | pavel.pivarshev@duke.edu
+ Riccardo Romersi              | riccardo.romersi@duke.edu
+ Rebecca Schmitt               | rebecca.schmitt@duke.edu
+ William White                 | will.white@duke.edu
+ Catherine Martin              | c.martin@duke.edu
+ Veronica Niamba               | veronica.niamba@duke.edu
+ Maria Pita                    | maria.pita@duke.edu
+ Simran Singh                  | simran.singh@duke.edu
+ Milagros de Souza             | milagros.de.souza@duke.edu
+ Zhou Fang                     | daisy.fang@duke.edu
+ Alexander Goff                | alexander.goff@duke.edu
+ Chelsea Hamlet                | chelsea.hamlet@duke.edu
+ Adam Katz                     | adam.r.katz@duke.edu
+ Briana Kleiner                | briana.kleiner@duke.edu
+ Yilu Lu                       | yilu.lu@duke.edu
+ Quentin McKenzie              | quentin.mckenzie@duke.edu
+ Sofia Molina                  | sofia.molina@duke.edu
+ James Toscano                 | james.toscano@duke.edu
+ Eric Biehn                    | eric.biehn@duke.edu
+ Ian Burgess                   | ian.burgess@duke.edu
+ Richard Chen                  | richard.chen3@duke.edu
+ Nicolas Cort                  | nicolas.cort@duke.edu
+ Sonia Fillipow                | sonia.fillipow@duke.edu
+ Charles Graham                | charles.b.graham@duke.edu
+ Brennan Halkidis              | brennan.halkidis@duke.edu
+ Nini Lam                      | nini.lam@duke.edu
+ Noah Lanier                   | noah.lanier@duke.edu
+ Donghun Lee                   | donghun.lee@duke.edu
+ Jennifer Li                   | jen.li@duke.edu
+ Aditya Mantri                 | aditya.mantri@duke.edu
+ Michael Morgan                | michael.j.morgan@duke.edu
+ Ha Nguyen                     | ha.nguyen@duke.edu
+ Jaymin Patel                  | jaymin.patel2@duke.edu
+ Yuki Peters                   | yuki.peters@duke.edu
+ Francesca Philips             | francesca.philips@duke.edu
+ Jenny Shen                    | jenny.shen@duke.edu
+ William Swofford              | william.swofford@duke.edu
+ Tinpei Tung                   | tinpei.tung@duke.edu
+ Paul Wang                     | paul.z.wang@duke.edu
+ Cassia Caruth                 | cassia.caruth@duke.edu
+ Caroline Doherty              | caroline.doherty@duke.edu
+ Hannah Folks                  | hannah.folks@duke.edu
+ Chloe Grill                   | chloe.grill@duke.edu
+ Casey Kuka                    | casey.kuka@duke.edu
+ Kiera Little                  | kiera.little@duke.edu
+ Jacqueline Perez              | jacqueline.perez@duke.edu
+ Anna Petterson                | anna.petterson@duke.edu
+ Logan Pucci                   | logan.pucci@duke.edu
+ Ivan Robles                   | ivan.robles@duke.edu
+ Mariana Alvarez Machado       | mariana.alvarez@duke.edu
+ John Bateman                  | john.bateman@duke.edu
+ Daniela Bocanegra             | daniela.bocanegra@duke.edu
+ James Boyd                    | james.m.boyd@duke.edu
+ Erin Brown                    | erin.e.brown@duke.edu
+ Daniel Castro                 | daniel.castro@duke.edu
+ Trevor Fowler                 | trevor.fowler@duke.edu
+ Alejandro Gaona               | alejandro.gaona@duke.edu
+ Megan Gendregske              | megan.gendregske@duke.edu
+ Emery Geyer                   | emery.geyer@duke.edu
+ Khian Wei Goh                 | khian.wei.goh@duke.edu
+ Emilia Grzesiak               | emilia.grzesiak@duke.edu
+ DeShanna Johnson              | deshanna.johnson@duke.edu
+ Aliza Kajani                  | aliza.kajani@duke.edu
+ Evan LaCombe                  | evan.lacombe@duke.edu
+ Abinaya Lakshmanan            | abinaya.lakshmanan@duke.edu
+ Venezia Leone                 | venezia.leone@duke.edu
+ Megan Libke                   | megan.libke@duke.edu
+ Diane Lin                     | diane.lin@duke.edu
+ Polin Liu                     | polin.liu@duke.edu
+ Hsing-Hao Louh                | hsing.hao.louh@duke.edu
+ Austin Odell                  | austin.odell@duke.edu
+ Nathan Parikh                 | nathan.parikh@duke.edu
+ Quinton Simmonds              | quinton.simmonds@duke.edu
+ Justin Zwiebel                | justin.zwiebel@duke.edu
+ Kristel Black                 | kristel.black@duke.edu
+ Hannah Branch                 | hannah.branch@duke.edu
+ Emily Button                  | emily.button@duke.edu
+ Jasmine Leahy                 | jasmine.leahy@duke.edu
+ Nia Moore                     | nia.moore@duke.edu
+ Alexandra Sanchez Rolon       | alexandra.sanchez.rolon@duke.edu
+ Yaa Amponsah Amissah-Aidoo    | yaa.amponsah.amissah.aidoo@duke.edu
+ Sungeun An                    | sungeun.an@duke.edu
+ Elizabeth Dotson              | elizabeth.dotson@duke.edu
+ Anna Fink                     | anna.fink@duke.edu
+ Mitchell Fleszar-Friedman     | mitchell.fleszar.friedman@duke.edu
+ Antonio Garcia                | antonio.garcia@duke.edu
+ Alan Hurtado                  | alan.hurtado@duke.edu
+ Avery Indermaur               | avery.indermaur@duke.edu
+ Sophia Laettner               | sophia.laettner@duke.edu
+ Benjamin Nativi               | benjamin.nativi@duke.edu
+ Brian Njoroge                 | brian.njoroge@duke.edu
+ Braelyn Parkman               | braelyn.parkman@duke.edu
+ Samantha Steger               | samantha.steger@duke.edu
+ Christine Ashimwe             | christine.ashimwe@duke.edu
+ Gabrielle Bunnell             | gabrielle.bunnell@duke.edu
+ Grace Carlson                 | grace.carlson@duke.edu
+ Jordan Hepburn                | jordan.hepburn@duke.edu
+ Ebehiremhen Izokun            | ebehiremhen.izokun@duke.edu
+ Jennifer Uzcategui            | jennifer.uzcategui@duke.edu
+ Eli Weed                      | eli.weed@duke.edu
+ Natnael Adere                 | natnael.adere@duke.edu
+ Michael Anthony Bivona        | michael.anthony.bivona@duke.edu
+ Bailey Bogle                  | bailey.bogle@duke.edu
+ Qiyuan Cheng                  | qiyuan.cheng@duke.edu
+ Ken Chu                       | ken.n.chu@duke.edu
+ Stephanie Crater              | stephanie.crater@duke.edu
+ Aidan Fitzsimons              | aidan.fitzsimons@duke.edu
+ Ella Head                     | ella.head@duke.edu
+ Jeremy Henkel                 | jeremy.henkel@duke.edu
+ Mohaimenul Islam              | mohaimenul.islam@duke.edu
+ Reed Kenny                    | reed.kenny@duke.edu
+ Mitra Kiciman                 | mitra.kiciman@duke.edu
+ Elizabeth Krogman             | elizabeth.krogman@duke.edu
+ Cooper Lair                   | cooper.lair@duke.edu
+ Phyllis Leong                 | phyllis.leong@duke.edu
+ Meredith Manson               | meredith.manson@duke.edu
+ Sydney McKinney               | sydney.mckinney@duke.edu
+ Garrett Neff                  | garrett.neff@duke.edu
+ Emma Olivo                    | emma.olivo@duke.edu
+ Santiago Orozco               | santiago.orozco@duke.edu
+ Samuel Pease                  | samuel.pease@duke.edu
+ Karla Sanchez Guzman          | karla.sanchez.guzman@duke.edu
+ Anna Steltenkamp              | anna.steltenkamp@duke.edu
+ Jessica Sullivan              | jessica.sullivan@duke.edu
+ Douglas Talbert               | douglas.talbert@duke.edu
+ Cassandra Turk                | cassandra.turk@duke.edu
+ Aaron VanSteinberg            | aaron.vansteinberg@duke.edu
+ Rita Wang                     | rita.wang@duke.edu
+ Robin Yeh                     | robin.yeh@duke.edu
+ Rafae Alam                    | rafae.alam@duke.edu
+ Autumn Barnes                 | autumn.barnes@duke.edu
+ Claire Gibbs                  | claire.gibbs@duke.edu
+ Lydia Goff                    | lydia.goff@duke.edu
+ Sarah Kane                    | sarah.kane@duke.edu
+ Catherine Martinez            | catherine.martinez1@duke.edu
+ Omar Raymundo                 | omar.raymundo@duke.edu
+ Mabelle Zhang                 | mabelle.zhang@duke.edu
+ Danielle Holt                 | danielle.holt@duke.edu
+ Tatayana Richardson           | tatayana.richardson@duke.edu
+ Jabril Wilson                 | jabril.wilson@duke.edu
+ Sangjie Zhaxi                 | sangjiezhaxi.xxx@duke.edu
+ Emily Coffey                  | emily.coffey@duke.edu
+ Elizabeth Eshleman            | elizabeth.eshleman@duke.edu
+ Leticia Flores                | leticia.flores@duke.edu
+ Barbara Henderson             | jasmine.henderson@duke.edu
+ Marina Kennedy                | marina.kennedy@duke.edu
+ David Kohler                  | david.kohler1@duke.edu
+ Curtis Lee                    | curtis.d.lee@duke.edu
+ Angie Lei Linares             | angie.lei.linares@duke.edu
+ Younis Mahmoud                | younis.mahmoud@duke.edu
+ Kiamya Philson                | kiamya.philson@duke.edu
+ Sean Rafique                  | sean.rafique@duke.edu
+ Beatrice Rose                 | beatrice.rose@duke.edu
+ Muhammad Sannan Saleh         | muhammad.sannan.saleh@duke.edu
+ Ethan Shen                    | ethan.shen@duke.edu
+ Jonqwerius Stanley            | jonqwerius.stanley@duke.edu
+ Mishek Thapa                  | thapa.mishek@duke.edu
+ Kyle Zingler                  | kyle.zingler@duke.edu
+ Ryan Bronstein                | ryan.bronstein@duke.edu
+ Emily Falcon                  | emily.c.falcon@duke.edu
+ Carmela Guaglianone           | carmela.guaglianone@duke.edu
+ Kimberly Hernandez            | kimberly.hernandez1@duke.edu
+ Liam Idrovo                   | liam.idrovo@duke.edu
+ Brina Melton                  | brina.melton@duke.edu
+ Jacob Roth                    | jacob.roth@duke.edu
+ Ethan Sansosti                | ethan.sansosti@duke.edu
+ Kristen Siegel                | kristen.siegel@duke.edu
+ Diana Sierra Correa           | diana.sierra@duke.edu
+ Christopher Teufel            | christopher.teufel@duke.edu
+ Jianyou Wang                  | jianyou.wang@duke.edu
+ Ahmed Ahmed-Fouad             | ahmed.ahmed.fouad@duke.edu
+ Alexandra Bateman             | alexandra.bateman@duke.edu
+ Melisa Castillo               | melisa.castillo@duke.edu
+ Nicholas Courtney             | nicholas.courtney@duke.edu
+ Hannah Godefa                 | hannah.godefa@duke.edu
+ Morgan Hundley                | morgan.hundley@duke.edu
+ Cassandra Ingram              | cassandra.ingram@duke.edu
+ Ayanna Kimble                 | ayanna.kimble@duke.edu
+ Zachary Markovich             | zachary.markovich@duke.edu
+ Sophia Mascarena              | sophia.mascarena@duke.edu
+ Amina Mohamed                 | amina.mohamed@duke.edu
+ Brittney Peacock              | brittney.peacock@duke.edu
+ Elizabeth Sam                 | elizabeth.sam@duke.edu
+ Natalie Benderly              | natalie.benderly@duke.edu
+ Alyson Diaz                   | alyson.diaz@duke.edu
+ Nhu Do                        | nhu.do@duke.edu
+ Madeline Hess                 | madeline.hess@duke.edu
+ Jaesung Kim                   | jaesung.kim@duke.edu
+ Yu Jun Kim                    | yu.jun.kim@duke.edu
+ Sofia Labrecque-Nieves        | sofia.labrecque@duke.edu
+ Kianna Lawrence               | kianna.lawrence@duke.edu
+ Sujal Manohar                 | sujal.manohar@duke.edu
+ Farzeen Najam                 | farzeen.najam@duke.edu
+ Marla Pinckney                | marla.pinckney@duke.edu
+ Ashleigh Smith                | ashleigh.smith@duke.edu
+ Bianca Umeakuana              | bianca.umeakuana@duke.edu
+ Jennifer Young                | jennifer.a.young@duke.edu
+ Ahmed Birik                   | ahmed.birik@duke.edu
+ Bailey Carkenord              | bailey.carkenord@duke.edu
+ Alexander Frumkin             | alexander.frumkin@duke.edu
+ Anna Klingensmith             | anna.klingensmith@duke.edu
+ Molly Mansfield               | molly.mansfield@duke.edu
+ Maria Renteria                | maria.renteria@duke.edu
+ Harry Sanderson               | harry.sanderson@duke.edu
+ Kayla Smith                   | kayla.o.smith@duke.edu
+ Alisa Bedrov                  | alisa.bedrov@duke.edu
+ Peter Candelora               | peter.candelora@duke.edu
+ Kaitlyn Howie                 | kaitlyn.howie@duke.edu
+ Anna Kasradze                 | anna.kasradze@duke.edu
+ Megan Zhao                    | megan.zhao@duke.edu
+ Trevor Anderson               | trevor.anderson@duke.edu
+ Abena Antobre                 | abena.antobre@duke.edu
+ Teresa Contreras-O'Reilly     | teresa.contreras.o.reilly@duke.edu
+ Monica Desjardins             | monica.desjardins@duke.edu
+ Armoni Foster                 | armoni.foster@duke.edu
+ Sage Garcia                   | sage.garcia@duke.edu
+ Elena Gray                    | elena.gray@duke.edu
+ Milan Hamilton                | milan.hamilton@duke.edu
+ Ian Handler                   | ian.handler@duke.edu
+ Haley Hutchinson              | haley.hutchinson@duke.edu
+ Chelsea Jubitana              | chelsea.jubitana@duke.edu
+ Jason Kim                     | jason.h.kim@duke.edu
+ Joseph Lee                    | joe.lee1@duke.edu
+ Yasmin Maktal                 | yasmin.maktal@duke.edu
+ Paul Snyder                   | paul.snyder@duke.edu
+ Victoria Sorhegui             | victoria.sorhegui@duke.edu
+ Guy-yinn Tchwanto             | guy.yinn.tchwanto@duke.edu
+ Ashley Wilson                 | ashley.j.wilson@duke.edu
+ Adam Beskind                  | adam.beskind@duke.edu
+ Ryan Dant                     | ryan.dant@duke.edu
+ Emma Fleishman                | emma.fleishman@duke.edu
+ Lavonne Hoang                 | lavonne.hoang@duke.edu
+ Caitlyn Martinez              | caitlyn.martinez@duke.edu
+ Morgan McKinney               | morgan.mckinney@duke.edu
+ Sonali Mehta                  | sonali.mehta@duke.edu
+ Rackeb Mered                  | rackeb.mered@duke.edu
+ Samantha Morales              | samantha.morales@duke.edu
+ Merle Nye                     | merle.nye@duke.edu
+ Victoria Priester             | victoria.priester@duke.edu
+ Michael Saporito              | michael.saporito@duke.edu
+ Sean Tate                     | sean.tate@duke.edu
+ Eleanor Strand                | eleanor.strand@duke.edu
+ Guadalupe Tarango-Garcia      | guadalupe.tarango.garcia@duke.edu
+ Helen Audrey Williams         | helen.audrey.williams@duke.edu
+ Mackenzie Zepeda              | mackenzie.zepeda@duke.edu
+ Kyleigh Andries               | kyleigh.andries@duke.edu
+ Alexandra Chan                | alexandra.chan@duke.edu
+ Ahmad Chaudhry                | ahmad.chaudhry@duke.edu
+ Margaret Child                | margaret.child@duke.edu
+ Destini Clark                 | destini.clark@duke.edu
+ Edward Coles                  | edward.coles@duke.edu
+ Elizabeth Edel                | elizabeth.edel@duke.edu
+ Mary Aline Fertin             | mary.aline.fertin@duke.edu
+ Ann Gehan                     | ann.gehan@duke.edu
+ Lucas Gonzalez Pagliere       | lucas.gonzalez.pagliere@duke.edu
+ Sarah Hubner                  | sarah.hubner@duke.edu
+ Cade McCurdy                  | cade.mccurdy@duke.edu
+ Nima Mohammadi                | nima.mohammadi@duke.edu
+ Andrew Orme                   | andrew.orme@duke.edu
+ Alexandra Ridini              | alexandra.ridini@duke.edu
+ Yusef Sabra                   | yusef.sabra@duke.edu
+ Nicolas Sanchez               | nicolas.t.sanchez@duke.edu
+ Katherine Sondland            | katherine.sondland@duke.edu
+ Shane Wilson                  | shane.wilson@duke.edu
+ Meredyth Albright             | meredyth.albright@duke.edu
+ Michaela Anderson             | michaela.anderson@duke.edu
+ Darya Andreichenko            | darya.andreichenko@duke.edu
+ Henock Asaye                  | henock.asaye@duke.edu
+ Avery Boltwood                | avery.boltwood@duke.edu
+ Elizabeth Bueti               | elizabeth.bueti@duke.edu
+ Timothy Clayton               | tim.clayton@duke.edu
+ Michelle Haralson             | michelle.haralson@duke.edu
+ Holly Holder                  | holly.holder@duke.edu
+ Rebekah Lester                | rebekah.l.lester@duke.edu
+ Michelle Staggers             | michelle.staggers@duke.edu
+ Alexus Wells                  | alexus.wells@duke.edu
+ Anderson Carroll              | anderson.carroll@duke.edu
+ Andrew Cuffe                  | andrew.cuffe@duke.edu
+ Emma DeRose                   | emma.derose@duke.edu
+ Ronald Dombroski              | ronald.dombroski@duke.edu
+ Ceren Ebrem                   | ceren.ebrem@duke.edu
+ Joseph Edwards                | joseph.edwards@duke.edu
+ Kevin Huang                   | kevin.m.huang@duke.edu
+ Frederick Hudoff              | frederick.hudoff@duke.edu
+ Ahmed Hussain                 | ahmed.hussain@duke.edu
+ Karam Katariya                | karam.katariya@duke.edu
+ Roberto Miselem               | roberto.miselem@duke.edu
+ David Rothblatt               | david.rothblatt@duke.edu
+ Alexander Sanfilippo          | alexander.sanfilippo@duke.edu
+ Abigail Sparrow               | abigail.sparrow@duke.edu
+ Arjun Arora                   | arjun.arora@duke.edu
+ Christine Bergamini           | christine.bergamini@duke.edu
+ Margarete Calmar              | margarete.calmar@duke.edu
+ Daniel Cordray                | daniel.cordray@duke.edu
+ Emily Dean                    | emily.dean@duke.edu
+ Alexander Dodenhoff           | alexander.dodenhoff@duke.edu
+ Ce'Ondra Ellison              | ce.ondra.ellison@duke.edu
+ Nora Hafez                    | nora.hafez@duke.edu
+ Qasim Hameed                  | qasim.hameed@duke.edu
+ Nikhil Kaul                   | nikhil.kaul@duke.edu
+ Kate Meicong Ke               | meicong.ke@duke.edu
+ Megan Lemcke                  | megan.lemcke@duke.edu
+ Charles Lindsay               | charles.lindsay@duke.edu
+ Conrad Liu                    | conrad.liu@duke.edu
+ Natalia Mesa                  | natalia.mesa@duke.edu
+ Shanrick Mullings             | shanrick.mullings@duke.edu
+ Katherine Owensby             | katherine.owensby@duke.edu
+ Akshar Pandia                 | akshar.pandia@duke.edu
+ Taylor Plett                  | taylor.plett@duke.edu
+ Hira Shah                     | hira.shah@duke.edu
+ Adam Snowden                  | adam.snowden@duke.edu
+ Hunter Snowden                | hunter.snowden@duke.edu
+ Kiernan Spencer               | kiernan.spencer@duke.edu
+ Tyler Taffuri                 | tyler.taffuri@duke.edu
+ Nebeyu Tibebu                 | nebeyu.tibebu@duke.edu
+ Zhongyu Wang                  | zhongyu.wang@duke.edu
+ Alejandro White               | alejandro.white@duke.edu
+ Emily Woodrow                 | emily.woodrow@duke.edu
+ Barbara Xiong                 | barbara.xiong@duke.edu
+ Brennan Zook                  | brennan.zook@duke.edu
+ Yuexuan Chen                  | yuexuan.chen@duke.edu
+ Griffin Kennard               | griffin.kennard@duke.edu
+ Valedie Oray                  | valedie.oray@duke.edu
+ Ana Ramirez                   | ana.ramirez@duke.edu
+ Samantha Votzke               | samantha.votzke@duke.edu
+ Maya Wilson Brown             | maya.wilson.brown@duke.edu
+ Winston Foreman               | winston.foreman@duke.edu
+ Spencer Ganus                 | spencer.ganus@duke.edu
+ Tianxue Mei                   | tianxue.mei@duke.edu
+ Eric Mungai                   | eric.mungai@duke.edu
+ Hannah Yehudah                | hannah.yehudah@duke.edu
+ Jin Myung Yoon                | jinmyung.yoon@duke.edu
+ Lan Zhuang                    | lan.zhuang@duke.edu
+ William Barriere              | william.barriere@duke.edu
+ Sheldon Boboff                | sheldon.boboff@duke.edu
+ Ethan Czerniecki              | ethan.czerniecki@duke.edu
+ Antoine Esber                 | antoine.esber@duke.edu
+ Luis Fornes                   | luis.fornes@duke.edu
+ Karl Harrison                 | karl.harrison@duke.edu
+ Nicholas Landis               | nicholas.landis@duke.edu
+ Brendan Quinlan               | brendan.quinlan@duke.edu
+ Greyson Spector               | greyson.spector@duke.edu
+ Thomas Sullivan               | tom.sullivan@duke.edu
+ Yuanshi Tian                  | yuanshi.tian@duke.edu
+ Matthew Treiber               | matthew.treiber@duke.edu
+ Zoe Abedon                    | zoe.abedon@duke.edu
+ Brianna Adkins                | brianna.adkins@duke.edu
+ William Atkinson              | william.atkinson@duke.edu
+ Lily Chaw                     | lily.chaw@duke.edu
+ Jenna Clayborn                | jenna.clayborn@duke.edu
+ Aaron DePass                  | aaron.depass@duke.edu
+ Lily el Naccash               | lily.el.naccash@duke.edu
+ Lee Evans                     | lee.evans@duke.edu
+ Sharon Kinsella               | sharon.kinsella@duke.edu
+ Yanfei Li                     | yanfei.li@duke.edu
+ Chloe McGlynn                 | chloe.mcglynn@duke.edu
+ Holly Ren                     | holly.ren@duke.edu
+ Lenae Ryan                    | lenae.ryan@duke.edu
+ Valeria Silombria             | valeria.silombria@duke.edu
+ Catherine Tsang               | catherine.tsang@duke.edu
+ Jared Wong                    | jared.wong@duke.edu
+ Flurina Boslough              | flurina.boslough@duke.edu
+ Saloni Bulchandani            | saloni.bulchandani@duke.edu
+ Cristina Dalton               | cristina.dalton@duke.edu
+ Camaren Dayton                | camaren.dayton@duke.edu
+ Zhi Jia Hong                  | zhi.jia.hong@duke.edu
+ Bryant Huang                  | bryant.huang@duke.edu
+ Sung Hoon Kang                | sung.hoon.kang@duke.edu
+ Daniel Landa                  | daniel.landa@duke.edu
+ Robert Love                   | hugh.love@duke.edu
+ Jonah Lowey                   | jonah.lowey@duke.edu
+ Angel Mcharo                  | angel.mcharo@duke.edu
+ Jordan Mittleman              | jordan.mittleman@duke.edu
+ Jacob Morris                  | jacob.morris@duke.edu
+ Ehime Ohue                    | ehime.ohue@duke.edu
+ Jay Pande                     | jay.pande@duke.edu
+ Christopher Roy               | christopher.roy@duke.edu
+ Elizabeth Smyth               | elizabeth.smyth@duke.edu
+ Pansy Tseng                   | pansy.tseng@duke.edu
+ Renee Weisz                   | renee.weisz@duke.edu
+ John Wood                     | jack.wood@duke.edu
+ Liya Wu                       | liya.wu@duke.edu
+ Sophia Zambri                 | sophia.zambri@duke.edu
+ Robert Carlson                | bo.carlson@duke.edu
+ Lee Evans                     | lee.evans@duke.edu
+ Imani Hicks                   | imani.hicks@duke.edu
+ Ehime Ohue                    | ehime.ohue@duke.edu
+ Kevin Solomon                 | kevin.solomon@duke.edu
+ Alexandra Chan                | alexandra.chan@duke.edu
+ Jamie Harris                  | jamie.b.harris@duke.edu
+ Rohan Agarwal                 | rohan.agarwal@duke.edu
+ Samantha Archer               | samantha.archer@duke.edu
+ Dimitrios Bailas              | dimitrios.bailas@duke.edu
+ Jessica Beering               | jessica.beering@duke.edu
+ Colin Brustad                 | colin.brustad@duke.edu
+ Molly Carmody                 | molly.carmody@duke.edu
+ Adam Doll                     | adam.doll@duke.edu
+ Matthew Drake                 | matt.drake@duke.edu
+ Ethan Eichelman               | ethan.eichelman@duke.edu
+ Ryan Fader                    | ryan.fader@duke.edu
+ Jolie Feldman                 | jolie.feldman@duke.edu
+ Camden Ford                   | camden.ford@duke.edu
+ Jamie Glueck                  | jamie.glueck@duke.edu
+ Alessandria Greco             | alessandria.greco@duke.edu
+ Lucy Greenwald                | lucy.greenwald@duke.edu
+ David Hamilton                | ross.hamilton@duke.edu
+ William Hamilton              | will.hamilton@duke.edu
+ Nicolette Hevizi              | nicolette.hevizi@duke.edu
+ Olivia Hicks                  | olivia.hicks@duke.edu
+ Brian Jordan                  | brian.jordan@duke.edu
+ Carolyn MacLeod               | carolyn.macleod@duke.edu
+ Amanda Madden                 | amanda.madden@duke.edu
+ Amanda McCawley               | amanda.mccawley@duke.edu
+ Jared McCloskey               | jared.mccloskey@duke.edu
+ Sophia Miller                 | sophia.miller@duke.edu
+ Benjamin Morse                | benjamin.morse@duke.edu
+ Kyle Newman                   | kyle.newman@duke.edu
+ Michael Ong                   | michael.ong@duke.edu
+ Aurora Ross                   | aurora.ross@duke.edu
+ Anna Slezak                   | anna.slezak@duke.edu
+ Elizabeth Smyth               | elizabeth.smyth@duke.edu
+ Maximilian Sondland           | maximilian.sondland@duke.edu
+ Ethan Stansbury               | ethan.stansbury@duke.edu
+ Miles Todzo                   | miles.todzo@duke.edu
+ Carl Tribull                  | carl.tribull@duke.edu
+ Julia Turner                  | julia.turner@duke.edu
+ Catherine Yu                  | catherine.yu@duke.edu
+ Sara Zimmerman                | sara.zimmerman@duke.edu
+ Marisa Aleguas                | marisa.aleguas@duke.edu
+ Kayla Derman                  | kayla.derman@duke.edu
+ Linden Ebeling                | linden.ebeling@duke.edu
+ Melanie Farfel                | melanie.farfel@duke.edu
+ Alexandra Fink                | alexandra.fink@duke.edu
+ Taylor Fistel                 | taylor.fistel@duke.edu
+ Luis Fornes                   | luis.fornes@duke.edu
+ Elizabeth Krogman             | elizabeth.krogman@duke.edu
+ Casey Kuka                    | casey.kuka@duke.edu
+ Eryn Lampkin                  | eryn.lampkin@duke.edu
+ Taylor Lipsich                | taylor.lipsich@duke.edu
+ Olivia Mangira                | olivia.mangira@duke.edu
+ Cameron Rosen                 | cameron.rosen@duke.edu
+ MacKenzi Simpson              | mackenzi.simpson@duke.edu
+ Jonathan Stern                | jonathan.a.stern@duke.edu
+ Christopher Teufel            | christopher.teufel@duke.edu
+ Benjamin Thier                | benjamin.thier@duke.edu
+ Nadia Thompson                | nadia.thompson@duke.edu
+ Lucas Tishler                 | lucas.tishler@duke.edu
+ Willem van den Hoek           | willem.van.den.hoek@duke.edu
+ Thomas Wanty                  | thomas.wanty@duke.edu
+ Andrew Wilcox                 | andrew.wilcox@duke.edu
+ Brad Woodie                   | brad.woodie@duke.edu
+ Kelby Welsh                   | kelby.welsh@duke.edu
+ Kedest Mathewos               | kedest.mathewos@duke.edu
+ Brooke Porter                 | brooke.porter@duke.edu
+ Grace Egan                    | grace.egan@duke.edu
+ Olivia Morales                | olivia.morales@duke.edu
+ Maryam Asenuga                | maryam.asenuga@duke.edu
+ Georgia Lala                  | georgia.lala@duke.edu
+ Natalie Larson                | natalie.r.larson@duke.edu
+ Sonali Mehta                  | sonali.mehta@duke.edu
+ Charles Berman                | charlie.berman@duke.edu
+ Nicolas Cort                  | nicolas.cort@duke.edu
+ Jennifer Marsh                | jenn.marsh@duke.edu
+ Patrick Bowers                | patrick.bowers@duke.edu
+ Caroline Brockett             | caroline.brockett@duke.edu
+ Victoria Eavis                | victoria.eavis@duke.edu
+ Delmar Kaiser                 | delmar.kaiser@duke.edu
+ Michael Levin                 | michael.levin@duke.edu
+ Francesca Philips             | francesca.philips@duke.edu
+ Zuzu Tang                     | zuzu.tang@duke.edu
+ Sadia Ayaz                    | sadia.ayaz@duke.edu
+ Evangelia Alexopoulos         | evangelia.alexopoulos@duke.edu
+ Zeynep Arslan                 | zeynep.arslan@duke.edu
+ Nicholas Berray               | nicholas.berray@duke.edu
+ Jessica Bock                  | jessica.e.bock@duke.edu
+ Rachel Donaldson              | rachel.donaldson@duke.edu
+ Katherine Freedy              | katherine.freedy@duke.edu
+ Daniel Gardner                | daniel.j.gardner@duke.edu
+ Tiffany Ghadimi               | tiffany.ghadimi@duke.edu
+ Fallon Grayson                | fallon.grayson@duke.edu
+ Alexander Hilsenrath          | alexander.hilsenrath@duke.edu
+ Michelle Larsen               | michelle.larsen@duke.edu
+ Ally Livingston               | ally.livingston@duke.edu
+ Holly LoTurco                 | holly.loturco@duke.edu
+ Hayden Manseau                | hayden.manseau@duke.edu
+ Chloe McGlynn                 | chloe.mcglynn@duke.edu
+ Emily Meng                    | emily.meng@duke.edu
+ Meriwether Morris             | meriwether.morris@duke.edu
+ Abigail Nimetz                | abigail.nimetz@duke.edu
+ Sakiko Nishida                | sakiko.nishida@duke.edu
+ Sena Park                     | sena.park@duke.edu
+ Riley Pfaff                   | riley.pfaff@duke.edu
+ Joshua Podl                   | joshua.podl@duke.edu
+ Anna Reilly                   | anna.m.reilly@duke.edu
+ Marti Rosenberger             | marti.rosenberger@duke.edu
+ Simon Shore                   | simon.shore@duke.edu
+ Anna Slingerland              | anna.slingerland@duke.edu
+ Ali Sloan                     | ali.sloan@duke.edu
+ Caroline Sprague              | caroline.sprague@duke.edu
+ Matthew Treiber               | matthew.treiber@duke.edu
+ Tinpei Tung                   | tinpei.tung@duke.edu
+ Dilanaz Unal                  | dilanaz.unal@duke.edu
+ Jin Myung Yoon                | jinmyung.yoon@duke.edu
+ Junette Yu                    | junette.yu@duke.edu
+ Ian Handler                   | ian.handler@duke.edu
+ Donovan Bendana               | donovan.bendana@duke.edu
+ Ioana Camui                   | ioana.camui@duke.edu
+ Noelle Cassier                | noelle.cassier@duke.edu
+ Sara Cotsakis                 | sara.cotsakis@duke.edu
+ Dina Daas                     | dina.daas@duke.edu
+ Maria Espinosa Arguello       | maria.espinosa.arguello@duke.edu
+ John Gundersen                | john.gundersen@duke.edu
+ Teig Hennessy                 | teig.hennessy@duke.edu
+ Maya Iskandarani              | maya.iskandarani@duke.edu
+ Amanda Kahn                   | amanda.kahn@duke.edu
+ Sandra Kendall                | sandra.kendall@duke.edu
+ Anne Kornack                  | anne.kornack@duke.edu
+ Anna Kreiling                 | anna.kreiling@duke.edu
+ Anna Kustar                   | anna.kustar@duke.edu
+ Sophia Laettner               | sophia.laettner@duke.edu
+ Stephanie Mayle               | stephanie.mayle@duke.edu
+ Hannah Palczuk                | hannah.palczuk@duke.edu
+ Akanksha Ray                  | akanksha.ray@duke.edu
+ Isabel Senior                 | isabel.senior@duke.edu
+ Sara Sklenka                  | sara.sklenka@duke.edu
+ Owen Zighelboim               | owen.zighelboim@duke.edu
+ Sarah Bland                   | sarah.c.bland@duke.edu
+ Cole Hattler                  | cole.hattler@duke.edu
+ Saige Sunier                  | saige.sunier@duke.edu
+ Katherine Tighe               | katherine.tighe@duke.edu
+ Agoston Walter                | agoston.walter@duke.edu
+ Madeline Wilkinson            | madeline.wilkinson@duke.edu
+ Savannah Baum                 | savannah.baum@duke.edu
+ Rose Graves                   | rose.graves@duke.edu
+ Hannah Horowitz               | hannah.horowitz@duke.edu
+ Anne Miller                   | anne.miller@duke.edu
+ Gillian Samios                | gillian.samios@duke.edu
+ Taylor Albus                  | taylor.albus@duke.edu
+ Harrison Branner              | harrison.branner@duke.edu
+ Max Cherman                   | max.cherman@duke.edu
+ Jack Donahue                  | jack.donahue@duke.edu
+ Megan Dorogi                  | megan.dorogi@duke.edu
+ Christopher Grant             | chris.grant@duke.edu
+ Megison Hancock               | megison.hancock@duke.edu
+ Sean Holt                     | sean.holt@duke.edu
+ Kate Meicong Ke               | meicong.ke@duke.edu
+ Jenny Lee                     | jenny.lee@duke.edu
+ Jeremy Liang                  | jeremy.liang@duke.edu
+ Jessica Needleman             | jessica.needleman@duke.edu
+ Daniel North                  | daniel.north@duke.edu
+ James Nye                     | james.nye@duke.edu
+ Scott Pledger                 | scott.pledger@duke.edu
+ Jenna Thompson                | jenna.thompson225@duke.edu
+ Jason Wang                    | jason.wang1@duke.edu
+ Anne Davis                    | anne.b.davis@duke.edu
+ Ryan Bronstein                | ryan.bronstein@duke.edu
+ Jesse Doppelt                 | jesse.doppelt@duke.edu
+ Kenneth Green                 | kenneth.green@duke.edu
+ Tarika Iyer                   | tarika.iyer@duke.edu
+ Mitchell Siegel               | mitchell.siegel@duke.edu
+ Amanda Cabot                  | amanda.cabot@duke.edu
+ Andrew Arnold                 | andrew.s.arnold@duke.edu
+ Robert Burns                  | robert.burns@duke.edu
+ Catherine Cassedy             | catherine.cassedy@duke.edu
+ Antoine Esber                 | antoine.esber@duke.edu
+ Madeline Flamm                | madeline.flamm@duke.edu
+ Jacob Kohn                    | jacob.kohn@duke.edu
+ Brendan Quinlan               | brendan.quinlan@duke.edu
+ Carolyn Rossman               | carolyn.rossman@duke.edu
+ Rachel Sit                    | rachel.sit@duke.edu
+ Madeline Valladao             | madeline.valladao@duke.edu
+ Nicole Yuen                   | nicole.yuen@duke.edu
+ Morghan Cyr                   | morghan.cyr@duke.edu
+ Mia Borger                    | mia.borger@duke.edu
+ Treniyyah Anderson            | treniyyah.anderson@duke.edu
+ Taylor Braswell               | taylor.braswell@duke.edu
+ Nicolas Coleman               | nicolas.coleman@duke.edu
+ Nelia Ekeji                   | nelia.ekeji@duke.edu
+ Kevin Garofolo                | kevin.garofolo@duke.edu
+ Lama Hantash                  | lama.hantash@duke.edu
+ Aanan Henderson               | aanan.henderson@duke.edu
+ Takiyah Johnson               | takiyah.johnson@duke.edu
+ Katelyn Luck                  | katelyn.luck@duke.edu
+ Tatiana Riordan               | tatiana.riordan@duke.edu
+ Gretchen Wright               | gretchen.e.wright@duke.edu
+ Cameron Beach                 | cameron.beach@duke.edu
+ Christopher Gendell           | christopher.gendell@duke.edu
+ Stephanie Jaffe               | stephanie.jaffe@duke.edu
+ Allison Leiva                 | allison.leiva@duke.edu
+ Seth McGann                   | seth.mcgann@duke.edu
+ Vanessa Medrano               | vanessa.medrano@duke.edu
+ Ryan Netter                   | ryan.netter@duke.edu
+ Zachary Silverman Guffey      | zachary.silverman.guffey@duke.edu
+ Olivia TumSuden               | olivia.tumsuden@duke.edu
+ Gillian Card                  | gillian.card@duke.edu
+ McKenna Carter                | mckenna.carter@duke.edu
+ Henry Cobbs                   | henry.cobbs@duke.edu
+ Molly Dvorkin                 | molly.dvorkin@duke.edu
+ Abigail Farley                | abigail.farley@duke.edu
+ Chloe Golfinos                | chloe.golfinos@duke.edu
+ Julian Herron                 | julian.herron@duke.edu
+ Isabel Hutchins               | isabel.hutchins@duke.edu
+ Nell Jones                    | nell.jones@duke.edu
+ Caitlin Luby                  | caitlin.luby@duke.edu
+ Michael MacDermott            | michael.macdermott@duke.edu
+ Karsten Monteverde            | karsten.monteverde@duke.edu
+ Rebecca Ross                  | rebecca.b.ross@duke.edu
+ Harry Sanderson               | harry.sanderson@duke.edu
+ Ryan Savell                   | ryan.savell@duke.edu
+ John Skinner                  | jack.skinner@duke.edu
+ Matthew Ward                  | matthew.ward@duke.edu
+ Mikaela Wellner               | mikaela.wellner@duke.edu
+ Lucia Zerbino                 | lucia.zerbino@duke.edu
+ Brittany Amano                | brittany.amano@duke.edu
+ Madison Cullinan              | madison.cullinan@duke.edu
+ Natasha Rothenbucher          | natasha.rothenbucher@duke.edu
+ Paulina Guerra Schleske       | paulina.guerra.schleske@duke.edu
+ Steven Gaston                 | steven.gaston@duke.edu
+ Evan Cater                    | evan.cater@duke.edu
+ Danielle Lodge                | danielle.lodge@duke.edu
+ Caroline Breaux               | caroline.breaux@duke.edu
+ Kendyl Bree                   | kendyl.bree@duke.edu
+ Connor Ghazaleh               | connor.ghazaleh@duke.edu
+ John Madej                    | john.madej@duke.edu
+ Kyung-Min Roh                 | kyung.min.roh@duke.edu
+ Eric Werbel                   | eric.werbel@duke.edu
+ Sara Feraca                   | sara.feraca@duke.edu
+ Cameron Foltz                 | cameron.foltz@duke.edu
+ Alexander Shang               | alexander.shang@duke.edu
+ Andrew VanWingerden           | andrew.vanwingerden@duke.edu
+ Alexander Weck                | alexander.weck@duke.edu
+ Maria Naclerio                | maria.naclerio@duke.edu
+ Elise Sweezy                  | elise.sweezy@duke.edu
+ Julia Wang                    | julia.wang@duke.edu
+ Guy-yinn Tchwanto             | guy.yinn.tchwanto@duke.edu
+ Lauren Hadley                 | lauren.hadley@duke.edu
+ Alycia Parker                 | alycia.parker@duke.edu
+ Jacob Young                   | jacob.young@duke.edu
+ Elizabeth Bueti               | elizabeth.bueti@duke.edu
+ Scott Carlson                 | scott.carlson@duke.edu
+ Alexis Clifford               | alexis.clifford@duke.edu
+ Noelle Garbaccio              | noelle.garbaccio@duke.edu
+ Erin Williams                 | erin.williams@duke.edu
+ Leah Abrams                   | leah.abrams@duke.edu
+ Luis Antillon                 | luis.antillon@duke.edu
+ Julia Araneta                 | julia.araneta@duke.edu
+ Joseph Beck                   | joseph.beck@duke.edu
+ Andrew Brown                  | andrew.b.brown@duke.edu
+ Ariyani Challapalli           | ariyani.challapalli@duke.edu
+ Sara Chandler                 | sara.chandler@duke.edu
+ Emily Coffey                  | emily.coffey@duke.edu
+ Morgan Dickerson              | morgan.dickerson@duke.edu
+ Elizabeth Edel                | elizabeth.edel@duke.edu
+ Brooke Erickson               | brooke.erickson@duke.edu
+ Kenan Kaptanoglu              | kenan.kaptanoglu@duke.edu
+ Bailey Kaston                 | bailey.kaston@duke.edu
+ Kristie Kim                   | kristie.kim@duke.edu
+ Tyler Kopp                    | tyler.kopp@duke.edu
+ Samantha Kost                 | samantha.kost@duke.edu
+ Kavita Krell                  | kavita.krell@duke.edu
+ Jacqueline Levitan            | jacqueline.levitan@duke.edu
+ Corinne Mayle                 | corinne.mayle@duke.edu
+ Miranda Metz                  | miranda.metz@duke.edu
+ Divya Nimmagadda              | divya.nimmagadda@duke.edu
+ Eugene Nuzzolillo             | eugene.nuzzolillo@duke.edu
+ Samuel Osheroff               | samuel.osheroff@duke.edu
+ Lauren Owens                  | lauren.owens@duke.edu
+ Alicia Porile                 | alicia.porile@duke.edu
+ Ivan Robles                   | ivan.robles@duke.edu
+ Katherine Rodgers             | katherine.rodgers@duke.edu
+ Paloma Rodney                 | paloma.rodney@duke.edu
+ Marie Rogers                  | marie.rogers@duke.edu
+ Avital Schweitzer             | avital.schweitzer@duke.edu
+ Gabriela Shaikh               | gabriela.shaikh@duke.edu
+ Matthew Shalhoub              | matthew.shalhoub@duke.edu
+ Maxwell Silverstein           | maxwell.silverstein@duke.edu
+ Jiyoung Sohn                  | jiyoung.sohn@duke.edu
+ Anna St Charles               | anna.st.charles@duke.edu
+ Madelyn Stoddard              | madelyn.stoddard@duke.edu
+ Julia Thielhelm               | julia.thielhelm@duke.edu
+ Julia Weidman                 | julia.weidman@duke.edu
+ Kathryn White                 | kate.white@duke.edu
+ Georgia Young                 | georgia.young@duke.edu
+ Elizabeth Bartzokis           | elizabeth.bartzokis@duke.edu
+ Owen Cook                     | owen.cook@duke.edu
+ Eric Davis                    | eric.davis@duke.edu
+ Rhiannon Horton               | rhiannon.horton@duke.edu
+ Maya Manciagli                | maya.manciagli@duke.edu
+ Aimee McVey                   | aimee.mcvey@duke.edu
+ Charles Moore                 | charlie.moore@duke.edu
+ Christopher Orrico            | christopher.orrico@duke.edu
+ Tamasha Pathirathna           | tamasha.pathirathna@duke.edu
+ Harrison Schulz               | harrison.schulz@duke.edu
+ Jacqueline Soja               | jacqueline.soja@duke.edu
+ Krista Stark                  | krista.stark@duke.edu
+ Siddhant Kasbekar             | siddhant.kasbekar@duke.edu
+ Brian Weil                    | brian.t.weil@duke.edu
+ Ann Hobson                    | ann.hobson@duke.edu
+ Olivia Nagpal                 | olivia.nagpal@duke.edu
+ Talia Oberfeld                | talia.oberfeld@duke.edu
+ Giavanna Jadick               | giavanna.jadick@duke.edu
+ Sophia Schaedle               | sophia.schaedle@duke.edu
+ Mackenzie Zepeda              | mackenzie.zepeda@duke.edu
+ Madeleine Cochrane            | madeleine.cochrane@duke.edu
+ Madeleine Braksick            | madeleine.braksick@duke.edu
+ Rose Coats                    | rose.coats@duke.edu
+ Jamie Cohen                   | jamie.cohen@duke.edu
+ Hazel Horvath                 | hazel.horvath@duke.edu
+ Pongbhud Kankirawatana        | pongbhud.kankirawatana@duke.edu
+ Thuy-Vi Nguyen                | thuy.vi.nguyen@duke.edu
+ Rachel Serebrenik             | rachel.serebrenik@duke.edu
+ Josie Tarin                   | josie.tarin@duke.edu
+ Amanda Wigler                 | amanda.wigler@duke.edu
+ Jacob Granick                 | jacob.granick@duke.edu
+ Lindsey Kinsella              | lindsey.kinsella@duke.edu
+ Nicholas Peoples              | nicholas.a.peoples@duke.edu
+ Clark Goff                    | clark.goff@duke.edu
+ Andrew Lin                    | andrew.g.lin@duke.edu
+ Joel Mire                     | joel.mire@duke.edu
+ Kristen Siegel                | kristen.siegel@duke.edu
+ Eric Biehn                    | eric.biehn@duke.edu
+ Cameron King                  | cameron.king@duke.edu
+ Morgan Smith                  | morgan.a.smith@duke.edu
+ Sara Goering                  | sara.goering@duke.edu
+ Brina Melton                  | brina.melton@duke.edu
+ Olivia Pennoyer               | olivia.pennoyer@duke.edu
+ Hannah Chen                   | hannah.chen@duke.edu
+ Madeline Davet                | madeline.davet@duke.edu
+ Brandon Dawson                | brandon.dawson@duke.edu
+ Lucy Dong                     | lucy.dong@duke.edu
+ Nora Hafez                    | nora.hafez@duke.edu
+ Cameron Herrera               | cameron.herrera@duke.edu
+ Shaina Lubliner               | shaina.lubliner@duke.edu
+ Peter Polonsky                | peter.polonsky@duke.edu
+ Lenae Ryan                    | lenae.ryan@duke.edu
+ Autumn Tompkin                | autumn.tompkin@duke.edu
+ Nanki Singh                   | nanki.singh@duke.edu
+ Emma Rose Calhoun             | emma.rose.calhoun@duke.edu
+ Lydia Paxton                  | lydia.paxton@duke.edu
+ Niyah Shaheed                 | niyah.shaheed@duke.edu
+ Nicole Barbieri               | nicole.barbieri@duke.edu
+ Ellenor Brown                 | ellenor.brown@duke.edu
+ Riley Cohen                   | riley.cohen@duke.edu
+ Jing Wen Kwok                 | jing.wen.kwok@duke.edu
+ Phyllis Leong                 | phyllis.leong@duke.edu
+ Jacob Morris                  | jacob.morris@duke.edu
+ Richard Mortenson             | richard.mortenson@duke.edu
+ Jahaan Mukhi                  | jahaan.mukhi@duke.edu
+ Matthew Murphy                | kyle.murphy@duke.edu
+ Haleigh Niziak                | haleigh.niziak@duke.edu
+ Selin Ocal                    | selin.ocal@duke.edu
+ Dylan Riley                   | dylan.riley@duke.edu
+ Chelsea Schlacks              | chelsea.schlacks@duke.edu
+ Daniel Spottiswood            | daniel.spottiswood@duke.edu
+ Joshua Jen                    | joshua.jen@duke.edu
+ Jared Wong                    | jared.wong@duke.edu
+ Grace Feng                    | grace.feng@duke.edu
+ Natalie Yu Chin Wen           | natalie.yu.chin.wen@duke.edu
+ Bryce Starr                   | bryce.starr@duke.edu
+ Benjamin Auriemma             | benjamin.auriemma@duke.edu
+ Dylan Beder                   | dylan.beder@duke.edu
+ Carolyn Blumberg              | carolyn.blumberg@duke.edu
+ Marissa Buchholz              | marissa.buchholz@duke.edu
+ Zachary Dietsche              | zachary.dietsche@duke.edu
+ Joseph Edwards                | joseph.edwards@duke.edu
+ James Flynn                   | james.d.flynn@duke.edu
+ Vignesh Gopalan               | vignesh.gopalan@duke.edu
+ Nazli Gungor                  | nazli.gungor@duke.edu
+ Chloe Gura                    | chloe.gura@duke.edu
+ Keegan Hasson                 | keegan.hasson@duke.edu
+ Benjamin Hodgson              | benjamin.hodgson@duke.edu
+ Joseph Hsiung                 | joseph.hsiung@duke.edu
+ Amelia Klitenic               | amelia.klitenic@duke.edu
+ Parker Levi                   | parker.levi@duke.edu
+ Dhanush Madabusi              | dhanush.madabusi@duke.edu
+ Nicola Morris                 | nicola.morris@duke.edu
+ Nicolas Sanchez               | nicolas.t.sanchez@duke.edu
+ Alexander Sanfilippo          | alexander.sanfilippo@duke.edu
+ Rachel Simpson                | rachel.m.simpson@duke.edu
+ Diego Valenzuela              | diego.valenzuela@duke.edu
+ Elizabeth Butcher             | elizabeth.butcher@duke.edu
+ Allison Dear                  | allison.dear@duke.edu
+ Jing Kun Goh                  | jing.kun.goh@duke.edu
+ Nicole Goon                   | nicole.goon@duke.edu
+ Patrick Hong                  | patrick.hong@duke.edu
+ Jacob Johnson                 | jacob.m.johnson@duke.edu
+ Abigail Judge                 | abby.judge@duke.edu
+ Jamie Karl                    | jamie.karl@duke.edu
+ Calum Keeley                  | calum.keeley@duke.edu
+ Craig Keim                    | craig.keim@duke.edu
+ Sami Kirkpatrick              | sami.kirkpatrick@duke.edu
+ Mitchell Murphy               | mitchell.j.murphy@duke.edu
+ Kayla Nguyen                  | kayla.nguyen@duke.edu
+ Sitara Pal                    | sitara.pal@duke.edu
+ Francis Sansosti              | quinten.sansosti@duke.edu
+ Everett Stanley               | everett.stanley@duke.edu
+ Wen Kang Wei                  | bill.wei@duke.edu
+ Alexander Yu                  | alexander.yu@duke.edu
+ Neel Bakshi                   | neel.bakshi@duke.edu
+ Miles Burnette                | miles.burnette@duke.edu
+ Emma Burns                    | emma.burns@duke.edu
+ Martin Cala                   | martin.cala@duke.edu
+ Francesca Calderon            | francesca.calderon@duke.edu
+ Ariadna Chuaqui               | ariadna.chuaqui@duke.edu
+ Anna Cunningham               | anna.cunningham@duke.edu
+ Sarah Faller                  | sarah.e.faller@duke.edu
+ Guillermo Hevia               | guillermo.hevia@duke.edu
+ Megan Lemcke                  | megan.lemcke@duke.edu
+ Akshay Mehta                  | akshay.mehta@duke.edu
+ Rebecca Norman                | rebecca.norman@duke.edu
+ Emma Schmaltz                 | emma.schmaltz@duke.edu
+ Gaurav Uppal                  | gaurav.uppal@duke.edu
+ Adam Beskind                  | adam.beskind@duke.edu
+ Sarah Briggs                  | sarah.briggs@duke.edu
+ Jessica Chen                  | jessica.chen@duke.edu
+ Chinonyelum Egbuna            | chinonyelum.egbuna@duke.edu
+ Samuel Elliott                | samuel.elliott@duke.edu
+ Elizabeth Grantland           | elizabeth.grantland@duke.edu
+ Rachel Hsu                    | rachel.hsu@duke.edu
+ Kala Juett                    | kala.juett@duke.edu
+ Dan Lilienthal                | dan.lilienthal@duke.edu
+ Naomi Lilly                   | naomi.lilly@duke.edu
+ Milena Ozernova               | milena.ozernova@duke.edu
+ Ashleigh Smith                | ashleigh.smith@duke.edu
+ Nina Wilder                   | nina.wilder@duke.edu
+ Josie Tarin                   | josie.tarin@duke.edu
+ Tiffany Jiang                 | tiffany.jiang@duke.edu
+ Molly Mansfield               | molly.mansfield@duke.edu
+ Dorothy Smith                 | grace.smith@duke.edu
+ Regan Baum                    | regan.baum@duke.edu
+ Amir Perk                     | amir.perk@duke.edu
+ Autumn Tompkin                | autumn.tompkin@duke.edu
+ Dustin Zhu                    | dustin.zhu@duke.edu
+ Yuuta Kendall                 | yuuta.kendall@duke.edu
+ Margaret Overton              | margaret.overton@duke.edu
+ Cassia Caruth                 | cassia.caruth@duke.edu
+ Jia Chen Shi                  | jia.chen.shi@duke.edu
+ Chengrui Fu                   | chengrui.fu@duke.edu
+ Aaditya Jain                  | aaditya.jain@duke.edu
+ Phyllis Leong                 | phyllis.leong@duke.edu
+ Kevin Ma                      | kevin.ma@duke.edu
+ Beini Yin                     | beini.yin@duke.edu
+ Bailey Carkenord              | bailey.carkenord@duke.edu
+ Yutao Gong                    | yutao.gong@duke.edu
+ Matthew Keep                  | matthew.keep@duke.edu
+ Qingning Zhang                | qingning.zhang@duke.edu
+ Angela Zhou                   | angela.zhou1@duke.edu
+ Pranav Ganapathy              | pranav.ganapathy@duke.edu
+ Sophia Laettner               | sophia.laettner@duke.edu
+ Isaac Andersen                | isaac.andersen@duke.edu
+ Kate Meicong Ke               | meicong.ke@duke.edu
+ Katja Kochvar                 | katja.kochvar@duke.edu
+ Maria Moreno                  | maria.moreno@duke.edu
+ Victoria Wu                   | victoria.wu@duke.edu
+ Christopher Grant             | chris.grant@duke.edu
+ Stephanie Crater              | stephanie.crater@duke.edu
+ Liam Idrovo                   | liam.idrovo@duke.edu
+ Pengcheng Liang               | pengcheng.liang@duke.edu
+ Sarah Lim                     | sarah.lim@duke.edu
+ Nevzat Sevim                  | nevzat.sevim@duke.edu
+ Bridget Sypniewski            | bridget.sypniewski@duke.edu
+ Liuyi Zhu                     | liuyi.zhu@duke.edu
+ Catherine Cassedy             | catherine.cassedy@duke.edu
+ Noah Stevens                  | noah.stevens@duke.edu
+ Alec Waxman                   | alec.waxman@duke.edu
+ Jason Beck                    | jason.beck@duke.edu
+ Cristina Garcia Ayala         | cristina.garcia.ayala@duke.edu
+ May Varakonmeethakul          | may.varakonmeethakul@duke.edu
+ Lan Zhuang                    | lan.zhuang@duke.edu
+ Katherine Owensby             | katherine.owensby@duke.edu
+ Mingyang Zhang                | mingyang.zhang@duke.edu
+ Jennifer Han                  | jennifer.han@duke.edu
+ Helena Wu                     | helena.wu@duke.edu
+ Kenneth Lau                   | kenneth.lau@duke.edu
+ Christina Pipkin              | christina.pipkin@duke.edu
+ YuJung Choi                   | sarah.choi@duke.edu
+ Ashley Hare                   | ashley.hare@duke.edu
+ Shaurya Aggarwal              | shaurya.aggarwal@duke.edu
+ Brianna Buford                | brianna.buford@duke.edu
+ Charles Daniel                | charlie.daniel@duke.edu
+ Jared Edwards                 | jared.edwards@duke.edu
+ Grace Francese                | grace.francese@duke.edu
+ Gabriela McDonald             | gabriela.mcdonald@duke.edu
+ John McNeil                   | john.a.mcneil@duke.edu
+ Amarachi Achonu               | amarachi.achonu@duke.edu
+ Esther Brown                  | esther.brown@duke.edu
+ Raahina Malik                 | raahina.malik@duke.edu
+ Ethan Udell                   | ethan.udell@duke.edu
+ Beini Wang                    | beini.wang@duke.edu
+ Bryce Starr                   | bryce.starr@duke.edu
+ Caroline Armstrong            | caroline.armstrong@duke.edu
+ Weiwei Wang                   | weiwei.wang@duke.edu
+ Hal Lin                       | hal.lin@duke.edu
+ Margaret Wang                 | margaret.wang@duke.edu
+ Yifan Wang                    | yifan.wang1@duke.edu
+ Sarah Ali                     | sarah.ali@duke.edu
+ Brittany Amano                | brittany.amano@duke.edu
+ Camille Ampey                 | camille.ampey@duke.edu
+ Sungeun An                    | sungeun.an@duke.edu
+ Teresa Contreras-O'Reilly     | teresa.contreras.o.reilly@duke.edu
+ Mary Coyne                    | mary.coyne@duke.edu
+ Hui Ling Er                   | hui.ling.er@duke.edu
+ Alexandra Gara                | alexandra.gara@duke.edu
+ Mahlon Jones                  | mahlon.jones@duke.edu
+ Callie Keen                   | callie.keen@duke.edu
+ Sandra Kendall                | sandra.kendall@duke.edu
+ Anna Klingensmith             | anna.klingensmith@duke.edu
+ Julianna Rennie               | julianna.rennie@duke.edu
+ Lee Rodio                     | lee.rodio@duke.edu
+ Geoffrey Schoonmaker          | geoffrey.schoonmaker@duke.edu
+ Arjun Arora                   | arjun.arora@duke.edu
+ Michael Chandler              | michael.chandler@duke.edu
+ Xin Chen                      | alice.chen1@duke.edu
+ Helen Healey                  | helen.healey@duke.edu
+ Ryan Hill                     | ryan.d.hill@duke.edu
+ Naomi Lilly                   | naomi.lilly@duke.edu
+ Alfred Mordecai               | alfred.mordecai@duke.edu
+ Lela Owens                    | lela.owens@duke.edu
+ Yunhao Qing                   | yunhao.qing@duke.edu
+ Omolola Sanusi                | omolola.sanusi@duke.edu
+ Pansy Tseng                   | pansy.tseng@duke.edu
+ Bianca Umeakuana              | bianca.umeakuana@duke.edu
+ Shuang Yu                     | shuang.yu@duke.edu
+ Tiancheng Chang               | tiancheng.chang@duke.edu
+ Jiaye Han                     | jiaye.han@duke.edu
+ Rachel Helman                 | rachel.helman@duke.edu
+ Rachel Hua                    | rachel.hua@duke.edu
+ Yuetian Jiang                 | yuetian.jiang@duke.edu
+ Maksym Kosachevskyy           | maksym.kosachevskyy@duke.edu
+ Juncheng Liao                 | juncheng.liao@duke.edu
+ Sizo Ncube                    | sizo.ncube@duke.edu
+ Yi Jia Wang                   | yi.jia.wang@duke.edu
+ Vivian Yuan                   | vivian.yuan@duke.edu
+ Daniel Gendler                | daniel.gendler@duke.edu
+ Shahrik Punja                 | shahrik.punja@duke.edu
+ Ellen Wang                    | ellen.wang@duke.edu
+ Yanze Wang                    | yanze.wang@duke.edu
+ Amauche Uzoigwe               | amauche.uzoigwe@duke.edu
+ Gabrielle Wiggins             | gabrielle.wiggins@duke.edu
+ Alex Bajana                   | alex.bajana@duke.edu
+ Aryil Bechtel                 | aryil.bechtel@duke.edu
+ Stacy Chen                    | stacy.chen589@duke.edu
+ Erin Crumpler                 | erin.crumpler@duke.edu
+ Lillian Dukes                 | lillian.dukes@duke.edu
+ Andrea Escobar                | andrea.escobar@duke.edu
+ Allison Florian               | allison.florian@duke.edu
+ Emma Glenn                    | emma.glenn@duke.edu
+ Sophie Hanson                 | sophie.hanson@duke.edu
+ Spencer Kaplan                | spencer.kaplan@duke.edu
+ Jack Malsin                   | jack.malsin@duke.edu
+ Elizabeth Nist                | elizabeth.nist@duke.edu
+ Caroline Petrow-Cohen         | caroline.petrowcohen@duke.edu
+ Alma Rodriguez                | alma.rodriguez@duke.edu
+ Tymofii Sokolskyi             | tymofii.sokolskyi@duke.edu
+ Daniel Uzochukwu              | daniel.uzochukwu@duke.edu
+ Thuy-Vi Nguyen                | thuy.vi.nguyen@duke.edu
+ Nicoly Santos                 | nicoly.santos@duke.edu
+ Ana Trejo                     | ana.trejo@duke.edu
+ Jiaye Wang                    | jiaye.wang@duke.edu
+ Eleanor George                | eleanor.george@duke.edu
+ Kaelyn Griffiths              | kaelyn.griffiths@duke.edu
+ Brandon Lindsey               | brandon.l.lindsey@duke.edu
+ Preston McDonald              | preston.mcdonald@duke.edu
+ Dang Nguyen                   | dang.nguyen@duke.edu
+ Vanessa Real Williams         | vanessa.real.williams@duke.edu
+ Seth Allen                    | seth.allen@duke.edu
+ Gabrielle Allmendinger        | gabrielle.allmendinger@duke.edu
+ Nora Benmamoun                | nora.benmamoun@duke.edu
+ Natalie Chen                  | natalie.chen@duke.edu
+ Trent Gamel                   | trent.gamel@duke.edu
+ Angela Guan                   | angela.guan@duke.edu
+ Xinru Li                      | xinru.li@duke.edu
+ Alexander Lu                  | alexander.lu@duke.edu
+ Griffin Malm                  | griffin.malm@duke.edu
+ Sanna Symer                   | sanna.symer@duke.edu
+ Justin Zhao                   | justin.w.zhao@duke.edu
+ Vivien Zhou                   | vivien.zhou@duke.edu
+ Jun Lin Zhu                   | jun.lin.zhu@duke.edu
+ Caroline Coplin               | caroline.coplin@duke.edu
+ Debora Cordero Martine        | debora.cordero.martinez@duke.edu
+ Cassandra Galeano             | cassandra.galeano@duke.edu
+ Andre Lindsay                 | andre.lindsay@duke.edu
+ Ayana Paul                    | ayana.paul@duke.edu
+ Alix Rosenberg                | alix.rosenberg@duke.edu
+ De'Ja Wood                    | de.ja.wood@duke.edu
+ Ayooluwa Balogun              | ayooluwa.balogun@duke.edu
+ Fernanda Corona Rizo          | fernanda.corona.rizo@duke.edu
+ Mckenzie Garcia               | mckenzie.garcia@duke.edu
+ Caleb Getahun                 | caleb.getahun@duke.edu
+ Jack Horton                   | jack.horton@duke.edu
+ Jared Junkin                  | jared.junkin@duke.edu
+ Jackson Kennedy               | jackson.kennedy@duke.edu
+ Adam Krekorian                | adam.krekorian@duke.edu
+ Walker Lee                    | walker.lee@duke.edu
+ Juhyoung Lee                  | juhyoung.lee@duke.edu
+ Moses Makangila               | moses.makangila@duke.edu
+ Michael McWilliams            | michael.mcwilliams@duke.edu
+ Cameron Murr                  | cameron.murr@duke.edu
+ Kemunto Okindo                | kemunto.okindo@duke.edu
+ Juliet O'Riordan              | juliet.o.riordan@duke.edu
+ Benjamin Randoing             | benjamin.randoing@duke.edu
+ Jonathan Sandoval             | jonathan.c.sandoval@duke.edu
+ Nicholas Schiciano            | nicholas.schiciano@duke.edu
+ Jordyn Scott                  | jordyn.scott@duke.edu
+ Danielle von Briesen          | danielle.von.briesen@duke.edu
+ Eric Young                    | eric.c.young@duke.edu
+ Mihir Bellamkonda             | mihir.bellamkonda@duke.edu
+ Lucas Carter                  | lucas.b.carter@duke.edu
+ Daniel DeVault                | daniel.devault@duke.edu
+ Doherty Guirand               | doherty.guirand@duke.edu
+ Lyndsay Hastings              | lyndsay.hastings@duke.edu
+ Sho Hatakeyama                | sho.hatakeyama@duke.edu
+ Elise Malone                  | elise.malone@duke.edu
+ Aidan McAllister              | aidan.mcallister@duke.edu
+ Payton Schwantz               | payton.schwantz@duke.edu
+ Mary Wood                     | mary.helen.wood@duke.edu
+ Katie Xu                      | katie.xu@duke.edu
+ Madeleine Yancy               | madeleine.yancy@duke.edu
+ Charity Agasaro               | charity.agasaro@duke.edu
+ Lissette Araya                | lissette.araya@duke.edu
+ Elizabeth Dotson              | elizabeth.dotson@duke.edu
+ Elizabeth Farmer              | elizabeth.m.farmer@duke.edu
+ Anna Fink                     | anna.fink@duke.edu
+ Antonio Garcia                | antonio.garcia@duke.edu
+ Joan Kpodzro                  | joan.kpodzro@duke.edu
+ Leslie Leal Palacios          | leslie.leal.palacios@duke.edu
+ Marie-Line Lochard            | marie.line.lochard@duke.edu
+ Andrew Malek                  | andrew.malek@duke.edu
+ Noah McKee                    | noah.mckee@duke.edu
+ Wenyi Ouyang                  | wenyi.ouyang@duke.edu
+ Juan Rodriguez                | juan.a.rodriguez@duke.edu
+ Lara Breitkreutz              | lara.breitkreutz@duke.edu
+ Despoina Chouliara            | despoina.chouliara@duke.edu
+ Darien Herndon                | darien.herndon@duke.edu
+ Riley Hiers                   | riley.hiers@duke.edu
+ Tiana Horace                  | tiana.horace@duke.edu
+ Wyatt Jernigan                | wyatt.jernigan@duke.edu
+ Sahar Kaleem                  | sahar.kaleem@duke.edu
+ Claudia Koeppen               | claudia.koeppen@duke.edu
+ Olivia Lee                    | olivia.f.lee@duke.edu
+ Amber Lemmons                 | amber.lemmons@duke.edu
+ Cydney Livingston             | cydney.livingston@duke.edu
+ Evan Mapes                    | evan.mapes@duke.edu
+ Ernest Muchene                | ernest.muchene@duke.edu
+ Camden Nelson                 | camden.nelson@duke.edu
+ Priya Parkash                 | priya.parkash@duke.edu
+ Liam Pulsifer                 | liam.pulsifer@duke.edu
+ Bigyan Regmi                  | bigyan.regmi@duke.edu
+ Sophia Rhoads                 | sophia.rhoads@duke.edu
+ Annie Roberts                 | annie.roberts@duke.edu
+ Emma Shore                    | emma.shore@duke.edu
+ Kate Straneva                 | kate.straneva@duke.edu
+ Bilge Tatar                   | bilge.tatar@duke.edu
+ Daniel Crair                  | daniel.crair@duke.edu
+ Marian Gilroy                 | marian.gilroy@duke.edu
+ Rayhan Jhanji                 | rayhan.jhanji@duke.edu
+ Hannah Kaplon                 | hannah.kaplon@duke.edu
+ Julien Lewis                  | julien.lewis@duke.edu
+ Sandra Luksic                 | sandra.luksic@duke.edu
+ Qaiser Mahmood                | qaiser.mahmood@duke.edu
+ Hamza Mohamoud                | hamza.mohamoud@duke.edu
+ Destiny Mulero                | destiny.mulero@duke.edu
+ Veronica Niamba               | veronica.niamba@duke.edu
+ Kiernan Spencer               | kiernan.spencer@duke.edu
+ Annabel Casteel               | annabel.casteel@duke.edu
+ Yuexuan Chen                  | yuexuan.chen@duke.edu
+ Ladasia Fore                  | ladasia.fore@duke.edu
+ Angel Heredia                 | angel.heredia@duke.edu
+ Annika Hsu                    | annika.hsu@duke.edu
+ Hawo Ibrahim                  | hawo.ibrahim@duke.edu
+ Spencer LaFata                | spencer.lafata@duke.edu
+ Caitlin Lamb                  | caitlin.lamb@duke.edu
+ Erin McDermott                | erin.mcdermott@duke.edu
+ Hope Morales                  | hope.morales@duke.edu
+ Powers Norrell                | powers.norrell@duke.edu
+ Christiana Oshotse            | christiana.oshotse@duke.edu
+ Karly Pearson                 | karly.pearson@duke.edu
+ Maria Pita                    | maria.pita@duke.edu
+ Elizabeth Sam                 | elizabeth.sam@duke.edu
+ Teagan Smith                  | teagan.smith@duke.edu
+ Cassandra Stecker             | cassandra.stecker@duke.edu
+ Aren Tucker                   | aren.tucker@duke.edu
+ Tobi West                     | tobi.west@duke.edu
+ Sangjie Zhaxi                 | sangjiezhaxi.xxx@duke.edu
+ Adam Zimmer                   | adam.zimmer@duke.edu
+ Theresa Boade                 | theresa.boade@duke.edu
+ Kaitlyn Boncaro               | kaitlyn.boncaro@duke.edu
+ Robert Lyons                  | sawyer.lyons@duke.edu
+ Isaiah Mason                  | isaiah.mason@duke.edu
+ Dylan Newbro                  | dylan.newbro@duke.edu
+ Olivia Odell                  | olivia.odell@duke.edu
+ Maria Papadopoulos            | maria.papadopoulos@duke.edu
+ Julia Paz                     | julia.paz@duke.edu
+ Seth Pruitt                   | seth.pruitt@duke.edu
+ Aidan Reilly                  | aidan.reilly@duke.edu
+ Stratton Thomas               | stratton.thomas@duke.edu
+ Zhuri Bryant                  | zhuri.bryant@duke.edu
+ Arielle Hutchinson            | arielle.hutchinson@duke.edu
+ Mohammad Khatami              | mohammad.khatami@duke.edu
+ Raia Lockerman                | raia.lockerman@duke.edu
+ Mikayla Lyons                 | mikayla.lyons@duke.edu
+ Sergio Macias-Vazquez         | sergio.maciasvazquez@duke.edu
+ Matthew Majsak                | matthew.majsak@duke.edu
+ Dina Qiryaqoz                 | dina.qiryaqoz@duke.edu
+ Grayson Real                  | grayson.real@duke.edu
+ Jackson Cooksey               | jackson.cooksey@duke.edu
+ Hannah Folks                  | hannah.folks@duke.edu
+ Caroline Maloney              | caroline.maloney@duke.edu
+ Nicholas Saba                 | nicholas.saba@duke.edu
+ Hanna Stern                   | hanna.stern@duke.edu
+ Jasalyn Bennekin              | jasalyn.bennekin@duke.edu
+ Nicole Bonna                  | nicole.bonna@duke.edu
+ Bailey Davis                  | bailey.davis@duke.edu
+ Thalia Halloran               | thalia.halloran@duke.edu
+ Harrison Labban               | harrison.labban@duke.edu
+ Liat Levin                    | liat.levin@duke.edu
+ Devinne Moses                 | devinne.moses@duke.edu
+ Celine Murugi                 | celine.murugi@duke.edu
+ JonMark Pintas                | jonmark.pintas@duke.edu
+ Samantha Su                   | samantha.su@duke.edu
+ Jessica Wang                  | jessica.wang1@duke.edu
+ William Bradley               | william.bradley@duke.edu
+ Aidan Floyd                   | aidan.floyd@duke.edu
+ Diwas Gautam                  | diwas.gautam@duke.edu
+ Catherine Howard              | catherine.howard@duke.edu
+ Bridgette Keane               | bridgette.keane@duke.edu
+ Colin Kelly                   | colin.b.kelly@duke.edu
+ Bozhidara Kovacheva           | bozhidara.kovacheva@duke.edu
+ Peter LaBoy                   | peter.laboy@duke.edu
+ Shailen Parmar                | shailen.parmar@duke.edu
+ Ryan Sicard                   | ryan.sicard@duke.edu
+ Katerina Tiscornia            | katerina.tiscornia@duke.edu
+ Melody Ward                   | melody.ward@duke.edu
+ Rebekah Alvarenga             | rebekah.alvarenga@duke.edu
+ Carson Bard                   | carson.bard@duke.edu
+ Darcy Blaylock                | darcy.blaylock@duke.edu
+ Karina Chavez Santana         | karina.chavez.santana@duke.edu
+ Weyman Cohen                  | weyman.cohen@duke.edu
+ Justin Dodds                  | justin.dodds@duke.edu
+ Tykira Fisher                 | tykira.fisher@duke.edu
+ Savannah Herbek               | savannah.herbek@duke.edu
+ Andrew Hua                    | andrew.hua@duke.edu
+ Cameron Jarnot                | cameron.jarnot@duke.edu
+ Malorie Lipstein              | malorie.lipstein@duke.edu
+ Davis Lister                  | davis.lister@duke.edu
+ Margaret Lundberg             | margaret.lundberg@duke.edu
+ Kenneth Marenco               | kenneth.marenco@duke.edu
+ Emily Marun                   | emily.marun@duke.edu
+ Quentin McKenzie              | quentin.mckenzie@duke.edu
+ Elena Puccio                  | elena.puccio@duke.edu
+ Sophia Roth                   | sophia.roth@duke.edu
+ Jacqueline Vaquera            | jacqueline.vaquera@duke.edu
+ Erin Winslow                  | erin.winslow@duke.edu
+ Kelly Yang                    | kelly.yang@duke.edu
+ Christopher Azarloza          | christopher.azarloza@duke.edu
+ Ethan Bott                    | ethan.bott@duke.edu
+ Wyatt Bui                     | wyatt.bui@duke.edu
+ Andreas Ehrnrooth             | andreas.ehrnrooth@duke.edu
+ Jared Fenley                  | jared.fenley@duke.edu
+ Gabriela Fonseca              | gabriela.fonseca@duke.edu
+ Javier Franco                 | javier.franco@duke.edu
+ Astrid Giblin                 | astrid.giblin@duke.edu
+ Chloe Hubbe                   | chloe.hubbe@duke.edu
+ Nehal Jain                    | nehal.jain@duke.edu
+ Carmen Lessley                | carmen.lessley@duke.edu
+ Brandon Lindsey               | brandon.lindsey@duke.edu
+ Catherine Martinez            | catherine.martinez1@duke.edu
+ Keera McDonald                | keera.mcdonald@duke.edu
+ Kyle Melatti                  | kyle.melatti@duke.edu
+ Hieu Nguyen                   | hieu.t.nguyen@duke.edu
+ Neelesh Pandey                | neelesh.pandey@duke.edu
+ Matthew Ralph                 | matthew.ralph@duke.edu
+ Eleanore van Marwijk Ko       | eleanore.van.marwijk.kooy@duke.edu
+ Kaylin Woodward               | kaylin.woodward@duke.edu
+ Craig Chen                    | craig.chen@duke.edu
+ Benjamin Chin                 | ben.chin@duke.edu
+ Christian Cleaveland          | christian.cleaveland@duke.edu
+ Matthew Cone                  | matthew.cone@duke.edu
+ Praneeth Kandula              | praneeth.kandula@duke.edu
+ Arjun Lakhanpal               | arjun.lakhanpal@duke.edu
+ Franco Melo                   | franco.melo@duke.edu
+ Troy Minor                    | troy.minor@duke.edu
+ Thomas Schaefer               | thomas.schaefer@duke.edu
+ Faiz Sikaffy                  | faiz.sikaffy@duke.edu
+ Anisa Tapia                   | anisa.tapia@duke.edu
+ Karan Thadhani                | karan.thadhani@duke.edu
+ Hancheng Wu                   | hancheng.wu@duke.edu
+ Margot Armbruster             | margot.armbruster@duke.edu
+ Yasa Baig                     | yasa.baig@duke.edu
+ Bailey Bogle                  | bailey.bogle@duke.edu
+ Elizabeth Bond                | elizabeth.bond@duke.edu
+ Benjamin Burnette             | benjamin.burnette@duke.edu
+ Yume Choi                     | yume.choi@duke.edu
+ Marazzano Colon               | marazzano.colon@duke.edu
+ Cooper Edmunds                | cooper.edmunds@duke.edu
+ Hannah Genender               | hannah.genender@duke.edu
+ Leeloo Gilet                  | leeloo.gilet@duke.edu
+ Carlee Goldberg               | carlee.goldberg@duke.edu
+ Ritik Goyal                   | ritik.goyal@duke.edu
+ Aisha Greene                  | aisha.greene@duke.edu
+ Sarah Hubner                  | sarah.hubner@duke.edu
+ Thomas Huck                   | thomas.huck@duke.edu
+ Ebehiremhen Izokun            | ebehiremhen.izokun@duke.edu
+ Jacob Jeffries                | jacob.jeffries@duke.edu
+ Hae Joo                       | hae.joo@duke.edu
+ Ayanna Kimble                 | ayanna.kimble@duke.edu
+ Caroline Kincaid              | caroline.kincaid@duke.edu
+ Justin Koga                   | justin.koga@duke.edu
+ Mehdina Koleini               | mehdina.koleini@duke.edu
+ Nicole Lindbergh              | nicole.lindbergh@duke.edu
+ Isabella Miller               | isabella.miller@duke.edu
+ Nicole Moiseyev               | nicole.moiseyev@duke.edu
+ James Ndung'u                 | james.ndungu@duke.edu
+ Georgia Price                 | georgia.price@duke.edu
+ Andrew Raines                 | andrew.raines@duke.edu
+ Brianna Rochelle              | brianna.rochelle@duke.edu
+ Michelle Rodriguez            | michelle.rodriguez@duke.edu
+ Diana Sanchez                 | diana.s.sanchez@duke.edu
+ Tenley Seidel                 | tenley.seidel@duke.edu
+ Alexandria Smith              | alexandria.smith@duke.edu
+ Michael Tian                  | michael.q.tian@duke.edu
+ Gianna Affi                   | gianna.affi@duke.edu
+ Katharine Baynard             | katharine.baynard@duke.edu
+ Ryan Corrigan                 | ryan.corrigan@duke.edu
+ Augustus Dodd                 | augustus.dodd@duke.edu
+ Santiago Gonzalez-Bonet       | santiago.gonzalez.boneta@duke.edu
+ Davis Jones                   | davis.jones@duke.edu
+ Jaesung Kim                   | jaesung.kim@duke.edu
+ Sonia Lau                     | sonia.lau@duke.edu
+ Edward Rose                   | alex.rose@duke.edu
+ Mason Schilling               | mason.schilling@duke.edu
+ Jair Alleyne                  | jair.alleyne@duke.edu
+ Elizabeth Bartzokis           | elizabeth.bartzokis@duke.edu
+ Alexa Burnston                | alexa.burnston@duke.edu
+ Ibrahim Butt                  | ibrahim.butt@duke.edu
+ Stephanie Cutler              | stephanie.cutler@duke.edu
+ Miranda Gershoni              | miranda.gershoni@duke.edu
+ Eunsol Han                    | eunsol.han@duke.edu
+ Samantha Jackson              | samantha.jackson@duke.edu
+ Elizabeth Lee                 | elizabeth.h.lee@duke.edu
+ Samuel Osheroff               | samuel.osheroff@duke.edu
+ Lydia Paxton                  | lydia.paxton@duke.edu
+ Jose Rosario                  | jose.rosario@duke.edu
+ Nicholas Turecky              | nicholas.turecky@duke.edu
+ Miles Boxer                   | miles.boxer@duke.edu
+ Nicolas DeCapite              | nicolas.decapite@duke.edu
+ Jacob Didner                  | jacob.didner@duke.edu
+ Alex Epstein                  | alex.epstein@duke.edu
+ Isabel Friedman               | isabel.friedman@duke.edu
+ Vandita Garimella             | vandita.garimella@duke.edu
+ Ryan Gex                      | ryan.gex@duke.edu
+ Tyler Hart                    | tyler.hart@duke.edu
+ Madeline Johnston             | madeline.johnston@duke.edu
+ Taher Khambati                | taher.khambati@duke.edu
+ Philip Liu                    | philip.liu@duke.edu
+ Samuel Noyes                  | samuel.noyes@duke.edu
+ Joshua Pardo                  | joshua.pardo@duke.edu
+ Sophia Patterson              | sophia.patterson@duke.edu
+ Jack Rosenthal                | jack.rosenthal@duke.edu
+ Evan Seiden                   | evan.seiden@duke.edu
+ Steven Shaw                   | steve.shaw@duke.edu
+ Luisa Silva                   | luisa.silva@duke.edu
+ Emma Swill                    | emma.swill@duke.edu
+ Sarah Thomas                  | sarah.thomas638@duke.edu
+ Sarah Walker                  | sarah.walker1@duke.edu
+ Olivia Kramer                 | olivia.kramer@duke.edu
+ Leeloo Gilet                  | leeloo.gilet@duke.edu
+ Joseph Haston                 | joseph.haston@duke.edu
+ Madison McAuliffe             | madison.mcauliffe@duke.edu
+ Dayna Price                   | dayna.price@duke.edu
+ Jacob Sheridan                | jacob.sheridan@duke.edu
+ Julien Lewis                  | julien.lewis@duke.edu
+ Michelle Katemauswa           | michelle.katemauswa@duke.edu
+ Suzanna Larkin                | suzanna.larkin@duke.edu
+ Wyatt Jernigan                | wyatt.jernigan@duke.edu
+ Collins Abanda                | collins.abanda@duke.edu
+ Jaylyn Barbee                 | jaylyn.barbee@duke.edu
+ Michael Barreca               | michael.barreca@duke.edu
+ Christian Cleaveland          | christian.cleaveland@duke.edu
+ Nicholas Courtney             | nicholas.courtney@duke.edu
+ Akylah Cox                    | akylah.cox@duke.edu
+ Catherine Dana                | catherine.dana@duke.edu
+ Emma DeRose                   | emma.derose@duke.edu
+ Oluwafikemi Faleye            | oluwafikemi.faleye@duke.edu
+ Daisy Ferleger                | daisy.ferleger@duke.edu
+ Zachary Fine                  | zachary.fine@duke.edu
+ Mitchell Fleszar-Friedman     | mitchell.fleszar.friedman@duke.edu
+ Harold Frisch                 | harold.frisch@duke.edu
+ Ryan Gex                      | ryan.gex@duke.edu
+ Shreyas Gupta                 | shreyas.gupta@duke.edu
+ Joseph Heflin                 | joseph.heflin@duke.edu
+ Lavonne Hoang                 | lavonne.hoang@duke.edu
+ Peter Holmes                  | peter.holmes@duke.edu
+ Lenique Huggins               | lenique.huggins@duke.edu
+ Jacob Hurd                    | jacob.hurd@duke.edu
+ Matthew Jaynes                | matthew.jaynes@duke.edu
+ Marina Kennedy                | marina.kennedy@duke.edu
+ Kelsi King                    | kelsi.king@duke.edu
+ Kaila Lattimore               | kaila.lattimore@duke.edu
+ Rebecca Leggett               | rebecca.leggett@duke.edu
+ Brian Li                      | brian.i.li@duke.edu
+ Jerry Liu                     | zhengyu.liu@duke.edu
+ Robert Love                   | hugh.love@duke.edu
+ Christopher Lyon              | christopher.lyon@duke.edu
+ Lauren Mahoney                | lauren.mahoney@duke.edu
+ Alexandra Merz                | alexandra.merz@duke.edu
+ Mina Mortchev                 | mina.mortchev@duke.edu
+ Robert Murrah                 | robert.murrah@duke.edu
+ Lillian Needam                | lillian.needam@duke.edu
+ Brian Nieves                  | brian.nieves@duke.edu
+ Lindsey Noonan                | lindsey.noonan@duke.edu
+ Grace Novak                   | grace.novak@duke.edu
+ Emma Olivo                    | emma.olivo@duke.edu
+ Tanvi Pabby                   | tanvi.pabby@duke.edu
+ Charles Papandreou            | charles.papandreou@duke.edu
+ Nicole Patterson              | nicole.patterson@duke.edu
+ Madison Paulik                | madison.paulik@duke.edu
+ Victoria Priester             | victoria.priester@duke.edu
+ Angela Renne                  | angela.renne@duke.edu
+ Sophia Rhoads                 | sophia.rhoads@duke.edu
+ Caleb Rummel                  | caleb.rummel@duke.edu
+ Cary Shindell                 | cary.shindell@duke.edu
+ Jonqwerius Stanley            | jonqwerius.stanley@duke.edu
+ Anna Steltenkamp              | anna.steltenkamp@duke.edu
+ Alexa Tannebaum               | alexa.tannebaum@duke.edu
+ Hannah Taubenfeld             | hannah.taubenfeld@duke.edu
+ Ashlee Thomas                 | ashlee.thomas@duke.edu
+ Daniel Tsai                   | daniel.tsai@duke.edu
+ Susannah Watson               | susannah.watson@duke.edu
+ Cory Weinfeld                 | cory.weinfeld@duke.edu
+ Aubrey Whitney                | aubrey.whitney@duke.edu
+ Sydney Wilkerson              | sydney.wilkerson@duke.edu
+ Jamiee Williams               | jamiee.williams@duke.edu
+ Samantha Wind                 | samantha.wind@duke.edu
+ Susan Yun                     | susan.yun@duke.edu
+ Dylan Zumar                   | dylan.zumar@duke.edu
+ Ahmed Abualsaud               | ahmed.abualsaud@duke.edu
+ Arlene Arevalo                | arlene.arevalo@duke.edu
+ Itamar Barak                  | itamar.barak@duke.edu
+ Shane Beyer                   | shane.beyer@duke.edu
+ Samuel Billig                 | samuel.billig@duke.edu
+ Paola Casado Cocero           | paola.casado.cocero@duke.edu
+ Benjamin Case                 | ben.case@duke.edu
+ Matt Dillabough               | matt.dillabough@duke.edu
+ Nhu Do                        | nhu.do@duke.edu
+ Raksha Doddabele              | raksha.doddabele@duke.edu
+ Joseph Dougherty              | joseph.dougherty@duke.edu
+ Owen Johnson                  | owen.johnson@duke.edu
+ Cassidy Joseph                | cassidy.joseph@duke.edu
+ Matias Junghahn               | matias.junghahn@duke.edu
+ Nikolaos Korres               | nikolaos.korres@duke.edu
+ Daniel Landa                  | daniel.landa@duke.edu
+ Claire Matranga               | claire.matranga@duke.edu
+ Kyra McDonald                 | kyra.mcdonald@duke.edu
+ Elena McNiece                 | elena.mcniece@duke.edu
+ Smayan Mehra                  | smayan.mehra@duke.edu
+ Sydney Morrow                 | sydney.morrow@duke.edu
+ Trinity Morrow                | trinity.morrow@duke.edu
+ Elizabeth Nist                | elizabeth.nist@duke.edu
+ Ramon Novo Aragon             | ramon.novo.aragon@duke.edu
+ Olivia Odell                  | olivia.odell@duke.edu
+ Karolina Photiades            | karolina.photiades@duke.edu
+ Olivia Ratliff                | olivia.ratliff@duke.edu
+ Maria Paz Rios                | maria.paz.rios@duke.edu
+ Benjamin Ross                 | benjamin.ross@duke.edu
+ Christopher Roy               | christopher.roy@duke.edu
+ Kaan Sahingur                 | kaan.sahingur@duke.edu
+ Brock Salzman                 | brock.salzman@duke.edu
+ Zachary Samberg               | zack.samberg@duke.edu
+ Jeffrey Samit                 | jeffrey.samit@duke.edu
+ Kaya Scheman                  | kaya.scheman@duke.edu
+ Maxwell Schettewi             | maxwell.schettewi@duke.edu
+ John Simmons                  | john.m.simmons@duke.edu
+ Alexandra Singleton           | alexandra.singleton@duke.edu
+ Defne Turan                   | defne.turan@duke.edu
+ Katie Xu                      | katie.xu@duke.edu
+ Julius Yudelson               | julius.yudelson@duke.edu
+ Danielle Brown                | danielle.brown1@duke.edu
+ Rachel Radvany                | rachel.radvany@duke.edu
+ Aasha Henderson               | aasha.henderson@duke.edu
+ Sarah Watkins                 | sarah.watkins@duke.edu
+ Eritrea Temesghen             | eritrea.temesghen@duke.edu
+ Madison Alvarado              | madison.alvarado@duke.edu
+ Carter Teng                   | yunyu.teng@duke.edu
+ Shams Elbardissy              | shams.elbardissy@duke.edu
+ Aayush Goradia                | aayush.goradia@duke.edu
+ James Hong                    | seokgyu.hong@duke.edu
+ George Kramer                 | george.kramer@duke.edu
+ Hyunjae Lee                   | hyunjae.lee@duke.edu
+ Francesca Maglione            | francesca.maglione@duke.edu
+ Nathan Parikh                 | nathan.parikh@duke.edu
+ Mason Shields                 | mason.shields@duke.edu
+ Sofia Molina                  | sofia.molina@duke.edu
+ Lee Adi                       | lee.adi@duke.edu
+ Sharmi Amin                   | sharmi.amin@duke.edu
+ Emine Arcasoy                 | emine.arcasoy@duke.edu
+ Katharine Baynard             | katharine.baynard@duke.edu
+ Christopher Beck              | christopher.beck@duke.edu
+ Jordan Diamond                | jordan.diamond@duke.edu
+ Isabelle Doan                 | isabelle.doan@duke.edu
+ Nia El-Amin                   | nia.el.amin@duke.edu
+ Hannah Figueras               | hannah.figueras@duke.edu
+ Anna Fink                     | anna.fink@duke.edu
+ Grace Geib                    | grace.geib@duke.edu
+ Meghana Giri                  | meghana.giri@duke.edu
+ Alejandra Gomez               | alejandra.gomez@duke.edu
+ Elena Gray                    | elena.gray@duke.edu
+ Rachel Gropper                | rachel.gropper@duke.edu
+ Brennan Halkidis              | brennan.halkidis@duke.edu
+ Lyndsay Hastings              | lyndsay.hastings@duke.edu
+ Bailey Heit                   | bailey.heit@duke.edu
+ Alison Jacobs                 | alison.jacobs@duke.edu
+ Grace Jeffrey                 | grace.jeffrey@duke.edu
+ Bum Joon Kim                  | bum.joon.kim@duke.edu
+ Nini Lam                      | nini.lam@duke.edu
+ Janette Levin                 | janette.levin@duke.edu
+ Serena Lim-Strutt             | serena.lim.strutt@duke.edu
+ Kiera Little                  | kiera.little@duke.edu
+ Anne Littlewood               | anne.littlewood@duke.edu
+ Kathy Lu                      | kathy.lu@duke.edu
+ Rebecca Luner                 | rebecca.luner@duke.edu
+ Evan Mapes                    | evan.mapes@duke.edu
+ Margaret McKelvy              | margaret.mckelvy@duke.edu
+ Molly Monsour                 | molly.monsour@duke.edu
+ Eliza Paradise                | eliza.paradise@duke.edu
+ John Parkerson                | john.parkerson@duke.edu
+ Margaret Pickard              | margaret.pickard@duke.edu
+ Beatrice Rose                 | beatrice.rose@duke.edu
+ Eve Royal                     | eve.royal@duke.edu
+ Nicole Shoichet               | nicole.shoichet@duke.edu
+ Danielle Shulman              | danielle.shulman@duke.edu
+ Kathleen Waeldner             | kathleen.waeldner@duke.edu
+ Natalie Weinrauch             | natalie.weinrauch@duke.edu
+ Liya Wu                       | liya.wu@duke.edu
+ Michael Xie                   | michael.t.xie@duke.edu
+ Jessica Zhao                  | jessica.zhao@duke.edu
+ Ilke Arkan                    | ilke.arkan@duke.edu
+ Ansley Arnow                  | ansley.arnow@duke.edu
+ Joshua Coopersmith            | joshua.coopersmith@duke.edu
+ Delphine Glick                | delphine.glick@duke.edu
+ Yi Hui Hong                   | yihui.hong@duke.edu
+ Alexandra Johnson             | alexandra.c.johnson@duke.edu
+ Minjoo Kim                    | minjoo.kim@duke.edu
+ Arjun Lakhanpal               | arjun.lakhanpal@duke.edu
+ Andrew Orme                   | andrew.orme@duke.edu
+ Contessa Popeil               | contessa.popeil@duke.edu
+ Stephanie Saran               | lal.saran@duke.edu
+ James Schiffman               | james.schiffman@duke.edu
+ Lindsey Lovitt                | lindsey.lovitt@duke.edu
+ Chitra Balakrishnan           | chitra.balakrishnan@duke.edu
+ William Brodner               | william.brodner@duke.edu
+ Adamson Bryant                | adamson.bryant@duke.edu
+ Xinyi Hong                    | xinyi.hong@duke.edu
+ Mochen Ma                     | mochen.ma@duke.edu
+ Sydney McKinney               | sydney.mckinney@duke.edu
+ Daniel Rosen                  | daniel.rosen@duke.edu
+ Morgan Ruff                   | morgan.ruff@duke.edu
+ Gregory Sims                  | gregory.sims@duke.edu
+ Peter Wang                    | peter.wang@duke.edu
+ Rita Wang                     | rita.wang@duke.edu
+ Zachary Zhang                 | zachary.zhang@duke.edu
+ Maria Zurita Ontiveros        | maria.zurita.ontiveros@duke.edu
+ Christopher Hazen             | christopher.hazen@duke.edu
+ Mikayla Lerman                | mikayla.lerman@duke.edu
+ Aaron Slutkin                 | aaron.slutkin@duke.edu
+ Genevieve Beske               | genevieve.beske@duke.edu
+ Shannon Fang                  | shannon.fang@duke.edu
+ David Lees                    | david.lees@duke.edu
+ Julia Marshall                | julia.e.marshall@duke.edu
+ Avery Fulford                 | avery.fulford@duke.edu
+ Allan Beilin                  | allan.beilin@duke.edu
+ Benjamin Burnett              | benjamin.burnett@duke.edu
+ Dylan Carey                   | dylan.carey@duke.edu
+ Andrew Elcock                 | andrew.elcock@duke.edu
+ Geoffrey Gaugler              | geoffrey.gaugler@duke.edu
+ Levi Schulman                 | levi.schulman@duke.edu
+ Seth Tilliss                  | seth.tilliss@duke.edu
+ Duncan Trerotola              | duncan.trerotola@duke.edu
+ Stephanie Zhang               | stephanie.zhang@duke.edu
+ Amanda Stern                  | amanda.stern@duke.edu
+ Isabella DeCarlo              | isabella.decarlo@duke.edu
+ Lindsay Campbell              | lindsay.campbell@duke.edu
+ Jared Fenley                  | jared.fenley@duke.edu
+ Emma Garman                   | emma.garman@duke.edu
+ Angel Heredia                 | angel.heredia@duke.edu
+ Yiwen Jiang                   | yiwen.jiang@duke.edu
+ Karan Thadhani                | karan.thadhani@duke.edu
+ Daniel Cordray                | daniel.cordray@duke.edu
+ Andrew Raines                 | andrew.raines@duke.edu
+ Rachel Barra                  | rachel.barra@duke.edu
+ Margaret Child                | margaret.child@duke.edu
+ Cristina Dalton               | cristina.dalton@duke.edu
+ Cidian Edwards                | cidian.edwards@duke.edu
+ Margaret Esrey                | margaret.esrey@duke.edu
+ Barbara Euripides             | barbara.euripides@duke.edu
+ Courtney Frauen               | courtney.frauen@duke.edu
+ Chloe Grill                   | chloe.grill@duke.edu
+ Karina Heaton                 | karina.heaton@duke.edu
+ Abigail Kingsley              | abigail.kingsley@duke.edu
+ Alexander Lane                | alexander.lane@duke.edu
+ Jesse Lowey                   | jesse.lowey@duke.edu
+ Katherine Nicholas            | katherine.nicholas@duke.edu
+ Gabriella Rodriguez           | gaby.rodriguez@duke.edu
+ Matthew Rose                  | matt.rose@duke.edu
+ Rachel Rosenstein             | rachel.rosenstein@duke.edu
+ Evan Seiden                   | evan.seiden@duke.edu
+ Natalie Turner                | natalie.h.turner@duke.edu
+ Sawyer Uzzell                 | sawyer.uzzell@duke.edu
+ Addison Van Emon              | addison.van.emon@duke.edu
+ Emily Woodrow                 | emily.woodrow@duke.edu
+ Breanna Collins               | breanna.collins@duke.edu
+ Gi Shin                       | gi.shin@duke.edu
+ Gabrielle Athanasia           | gabrielle.athanasia@duke.edu
+ Matthew Chatzinoff            | matthew.chatzinoff@duke.edu
+ Cole Crissman                 | cole.crissman@duke.edu
+ Carmela Guaglianone           | carmela.guaglianone@duke.edu
+ Emily Guinee                  | emily.guinee@duke.edu
+ Griffin Malm                  | griffin.malm@duke.edu
+ Richard Nisbett               | richard.nisbett@duke.edu
+ Elizabeth Sack                | elizabeth.sack@duke.edu
+ Ethan Sansosti                | ethan.sansosti@duke.edu
+ Samuel Thomas                 | zack.thomas@duke.edu
+ Emily Falcon                  | emily.c.falcon@duke.edu
+ Hiroka Chen                   | hiroka.chen@duke.edu
+ Merle Nye                     | merle.nye@duke.edu
+ Christopher Hassel            | christopher.hassel@duke.edu
+ Emily Button                  | emily.button@duke.edu
+ Anna Klingensmith             | anna.klingensmith@duke.edu
+ Tymofii Sokolskyi             | tymofii.sokolskyi@duke.edu
+ Rebecca Supple                | rebecca.supple@duke.edu
+ Gia Cummings                  | gia.cummings@duke.edu
+ Mikayla Lyons                 | mikayla.lyons@duke.edu
+ Daniel Kingsbury              | daniel.kingsbury@duke.edu
+ Yuki Peters                   | yuki.peters@duke.edu
+ Jacob Rubin                   | jacob.rubin@duke.edu
+ Caitlin Carter                | caitlin.carter@duke.edu
+ Katherine Kelley              | katherine.kelley@duke.edu
+ Reed Margolis                 | reed.margolis@duke.edu
+ Arianna Rhue                  | arianna.rhue@duke.edu
+ Mabelle Zhang                 | mabelle.zhang@duke.edu
+ Cornelia Fraser               | cornelia.fraser@duke.edu
+ Madeleine Sparrow             | madeleine.sparrow@duke.edu
+ Anna Diemel                   | anna.diemel@duke.edu
+ Caroline Johnson              | caroline.m.johnson@duke.edu
+ Dryden Quigley                | dryden.quigley@duke.edu
+ Demi Yona                     | demi.yona@duke.edu
+ Zachary Berkman               | zachary.berkman@duke.edu
+ Daniel Giron                  | daniel.giron@duke.edu
+ Ryan Gomez                    | ryan.gomez@duke.edu
+ Jonah Lowey                   | jonah.lowey@duke.edu
+ Tiffany Ouyang                | tiffany.ouyang@duke.edu
+ Mason Sellig                  | mason.sellig@duke.edu
+ Rohan Singh                   | rohan.singh@duke.edu
+ Luke Sommer                   | luke.sommer@duke.edu
+ Amanda Stevens                | amanda.stevens@duke.edu
+ Anisa Tapia                   | anisa.tapia@duke.edu
+ Elif Tunaboylu                | elif.tunaboylu@duke.edu
+ Joshua Wasserman              | joshua.wasserman@duke.edu
+ Adam Wilck                    | adam.wilck@duke.edu
+ Vivian Yuan                   | vivian.yuan@duke.edu
+ Molly Apsel                   | molly.apsel@duke.edu
+ Akasha Barreto                | akasha.barreto@duke.edu
+ Sarah Bond                    | sarah.j.bond@duke.edu
+ Victor Cai                    | victor.cai@duke.edu
+ Christina Chen                | christina.y.chen@duke.edu
+ David Conlin                  | david.conlin@duke.edu
+ Katherine Connell             | katherine.connell@duke.edu
+ George Cook                   | george.e.cook@duke.edu
+ Henry Don                     | henry.don@duke.edu
+ Emma Fleishman                | emma.fleishman@duke.edu
+ Santiago Gonzalez-Bonet       | santiago.gonzalez.boneta@duke.edu
+ Nathan Heffernan              | nathan.heffernan@duke.edu
+ Sara Held                     | sara.held@duke.edu
+ Christopher Honeycutt         | christopher.honeycutt@duke.edu
+ Luke Jones                    | luke.jones@duke.edu
+ Mitra Kiciman                 | mitra.kiciman@duke.edu
+ Maya King                     | maya.king@duke.edu
+ Harry Liang                   | harry.liang@duke.edu
+ Olivia McAuliffe              | olivia.mcauliffe@duke.edu
+ Audrey McManemin              | audrey.mcmanemin@duke.edu
+ Theresa Nardone               | theresa.nardone@duke.edu
+ Dennis Nguyen                 | dennis.t.nguyen@duke.edu
+ Savannah Norman               | savannah.norman@duke.edu
+ Santiago Orozco               | santiago.orozco@duke.edu
+ Victoria Pinter               | victoria.pinter@duke.edu
+ Addyson Rowe                  | addyson.rowe@duke.edu
+ Diego Andre Salgado Bobadilla | diego.andre.salgado.bobadilla@duke.edu
+ Alexandra Scheuermann         | alexandra.scheuermann@duke.edu
+ Matthew Sclar                 | matthew.sclar@duke.edu
+ Ellen Scully                  | ellen.scully@duke.edu
+ Guadalupe Tarango-Garcia      | guadalupe.tarango.garcia@duke.edu
+ Charlotte Tellefsen           | charlotte.tellefsen@duke.edu
+ Luca Francesco Vallini        | lucafrancesco.vallini@duke.edu
+ Liliana Voltaggio             | liliana.voltaggio@duke.edu
+ Renee Weisz                   | renee.weisz@duke.edu
+ Laura Benzing                 | laura.benzing@duke.edu
+ Lauren Berman                 | lauren.berman@duke.edu
+ Shannon Bonney                | shannon.bonney@duke.edu
+ Allan Chen                    | allan.chen@duke.edu
+ Kianna Dao                    | kianna.dao@duke.edu
+ Camaren Dayton                | camaren.dayton@duke.edu
+ Megan Gendregske              | megan.gendregske@duke.edu
+ Katlyn Hurst                  | katlyn.hurst@duke.edu
+ Jordan McGilvery              | jordan.mcgilvery@duke.edu
+ Hannah Rubin                  | hannah.rubin@duke.edu
+ Allison Schwalb               | allison.schwalb@duke.edu
+ Mary Wang                     | mary.wang@duke.edu
+ Naman Agarwal                 | naman.agarwal1@duke.edu
+ Eric Chang                    | eric.t.chang@duke.edu
+ Kathleen Chen                 | kathleen.chen@duke.edu
+ Christopher Davis             | chris.j.davis@duke.edu
+ Canyon Duncan                 | canyon.duncan@duke.edu
+ Bryant Huang                  | bryant.huang@duke.edu
+ Ashley Lanzas                 | ashley.lanzas@duke.edu
+ Alejandro Meza                | alejandro.meza@duke.edu
+ Laura Munoz                   | laura.munoz@duke.edu
+ Jorge Raad                    | jorge.raad@duke.edu
+ Maxwell Rosenberg             | maxwell.rosenberg@duke.edu
+ Alyvia Schaad                 | alyvia.schaad@duke.edu
+ Casey Schneider               | casey.schneider@duke.edu
+ Faiz Sikaffy                  | faiz.sikaffy@duke.edu
+ Justin Spar                   | justin.spar@duke.edu
+ Elizabeth Thoren              | elizabeth.thoren@duke.edu
+ Robert Yale                   | robert.yale@duke.edu
+ Spencer Ganus                 | spencer.ganus@duke.edu
+ Sophia Mascarena              | sophia.mascarena@duke.edu
+ Angel Cueva Reyes             | angel.cueva.reyes@duke.edu
+ Nefer Batsuli                 | nefer.batsuli@duke.edu
+ Anna Go                       | anna.go@duke.edu
+ Louis Jensen                  | louis.jensen@duke.edu
+ Charlotte Sununu              | charlotte.sununu@duke.edu
+ Chongbin Zheng                | chongbin.zheng@duke.edu
+ Bryant Lewis                  | bryant.lewis@duke.edu
+ Isabel Nackley                | isabel.nackley@duke.edu
+ Katerina Tiscornia            | katerina.tiscornia@duke.edu
+ Isabella Jimenez              | isabella.jimenez@duke.edu
+ Qaiser Mahmood                | qaiser.mahmood@duke.edu
+ Jose Rosario                  | jose.rosario@duke.edu
+ Olivia Stohrer                | olivia.stohrer@duke.edu
+ Haley Hutchinson              | haley.hutchinson@duke.edu
+ Anthony Cardellini            | anthony.cardellini@duke.edu
+ Jason Grill                   | jason.grill@duke.edu
+ Jennifer Li                   | jennifer.li2@duke.edu
+ Noah McThenia                 | noah.mcthenia@duke.edu
+ Braelyn Parkman               | braelyn.parkman@duke.edu
+ Charles Todd                  | charles.todd@duke.edu
+ James Toscano                 | james.toscano@duke.edu
+ Chloe Meyers                  | chloe.meyers@duke.edu
+ Cameron Forbes                | cameron.forbes@duke.edu
+ Caroline Pace                 | caroline.pace@duke.edu
+ Urmi Pandya                   | urmi.pandya@duke.edu
+ Clarice Hu                    | clarice.hu@duke.edu
+ Andrew Zheng                  | andrew.d.zheng@duke.edu
+ Anjali Kunapaneni             | anjali.kunapaneni@duke.edu
+ Cecilia Cardelle              | cecilia.cardelle@duke.edu
+ Hsingchih Tang                | hsingchih.tang@duke.edu
+ Eric Andresen                 | eric.andresen@duke.edu
+ Avery Brown                   | avery.m.brown@duke.edu
+ Danielle Chipman              | danielle.chipman@duke.edu
+ Theodore Christakos           | theodore.christakos@duke.edu
+ Matthew Clayton               | matt.clayton@duke.edu
+ Olivia Jarrett                | olivia.jarrett@duke.edu
+ Bailey Knight                 | bailey.knight@duke.edu
+ Adam Krekorian                | adam.krekorian@duke.edu
+ Sonia Lau                     | sonia.lau@duke.edu
+ Maria Lulo Abinader           | maria.lulo.abinader@duke.edu
+ Nicolas Macri Badessich       | nicolas.macri.badessich@duke.edu
+ Anna Matthiasson              | anna.matthiasson@duke.edu
+ Grace O'Leary                 | grace.o.leary@duke.edu
+ Katherine Orlin               | katherine.orlin@duke.edu
+ Sabrina Pin                   | sabrina.pin@duke.edu
+ Lucy Pruzan                   | lucy.pruzan@duke.edu
+ Aneesha Raj                   | aneesha.raj@duke.edu
+ Arden Schraff                 | arden.schraff@duke.edu
+ Alec Waxman                   | alec.waxman@duke.edu
+ Miguel Yzaga                  | miguel.yzaga@duke.edu
+ Sara Tavakolian               | sara.tavakolian@duke.edu
+ Lily Goldsmith                | lily.goldsmith@duke.edu
+ Clifford Haley                | clifford.haley@duke.edu
+ Parsa Hoghooghi               | parsa.hoghooghi@duke.edu
+ Zhi Jia Hong                  | zhi.jia.hong@duke.edu
+ Emma Kirkpatrick              | emma.kirkpatrick@duke.edu
+ Elizabeth Lee                 | elizabeth.h.lee@duke.edu
+ Veronica Niamba               | veronica.niamba@duke.edu
+ Daniel Raftis                 | daniel.raftis@duke.edu
+ Pansy Tseng                   | pansy.tseng@duke.edu
+ Daniel Berlin                 | daniel.e.berlin@duke.edu
+ Noelia Boldizsar              | noelia.boldizsar@duke.edu
+ Julia Dworetzky               | julia.dworetzky@duke.edu
+ Sayle Evarts                  | sayle.evarts@duke.edu
+ Annika Hsu                    | annika.hsu@duke.edu
+ Timothy Kollar                | timothy.kollar@duke.edu
+ Samuel McDermott              | samuel.mcdermott@duke.edu
+ Tyler Meier                   | tyler.meier@duke.edu
+ Grace Patel                   | grace.patel@duke.edu
+ Connor Penny                  | connor.penny@duke.edu
+ Guadalupe Pulido              | guadalupe.pulido@duke.edu
+ Noah Schaffir                 | noah.schaffir@duke.edu
+ William Sheehan               | will.sheehan@duke.edu
+ Matthew Urke                  | matthew.urke@duke.edu
+ Justin Zwiebel                | justin.zwiebel@duke.edu
+ Katherine Edlein              | katherine.edlein@duke.edu
+ Kathryn Simmons               | kathryn.simmons@duke.edu
+ Teagan Smith                  | teagan.smith@duke.edu
+ Leland Ben                    | leland.ben@duke.edu
+ James Benjamin                | james.benjamin@duke.edu
+ Daniel Egitto                 | daniel.egitto@duke.edu
+ Maria Espinosa Arguello       | maria.espinosa.arguello@duke.edu
+ Winston Foreman               | winston.foreman@duke.edu
+ Jacob Kowalick-Allen          | jacob.kowalick.allen@duke.edu
+ Peter LaBoy                   | peter.laboy@duke.edu
+ Erin McDermott                | erin.mcdermott@duke.edu
+ Hannah Miao                   | hannah.miao@duke.edu
+ Daniela Schneider             | daniela.schneider@duke.edu
+ Samantha Steger               | samantha.steger@duke.edu
+ Alejandro White               | alejandro.white@duke.edu
+ Brennan Zook                  | brennan.zook@duke.edu
+ Tyler Johnson                 | tyler.m.johnson@duke.edu
+(2728 rows)
 
