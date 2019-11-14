@@ -23,9 +23,15 @@ def filter_reviews():
     return render_template('filter.html')
     # note, temporary render explore. change to render filter.html
 
-@app.route('/write-review')
+@app.route('/write-review', methods = ['GET'])
 def write_review():
-    return render_template('write-review.html')
+    courses = db.session.query(models.Course).all()
+    programs = db.session.query(models.Program).all()
+    return render_template('write-review.html', courses=courses, programs=programs)
+
+@app.route('/submitted')
+def submit_review():
+    return render_template('submitted.html')
 
 @app.route('/explore', methods=['GET'])
 def explore_courses():
