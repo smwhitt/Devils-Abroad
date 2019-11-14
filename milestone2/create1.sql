@@ -101,9 +101,6 @@ on Users (email, name);
 CREATE INDEX Get_Abroad_Users
 on AbroadUser (u_email, term, program_name);
 
-CREATE UNIQUE INDEX Get_Programs
-on Program (program_name);
-
 -- INSERTS
 
 INSERT INTO Users VALUES ('ddc27@duke.edu', 'david', 'Computer Science', 2021);
