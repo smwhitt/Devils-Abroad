@@ -40,3 +40,9 @@ class DrinkerEditFormFactory:
             default = bars_frequented[bar.name] if bar.name in bars_frequented else 0
             setattr(F, field_name, IntegerField(default=default))
         return F()
+
+# class FindCourseForm:
+#     @staticmethod
+#     def form(program):
+#         class F(FlaskForm):
+
