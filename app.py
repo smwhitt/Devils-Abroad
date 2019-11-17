@@ -27,7 +27,8 @@ def filter_reviews():
 def write_review():
     courses = db.session.query(models.Course).all()
     programs = db.session.query(models.Program).all()
-    return render_template('write-review.html', courses=courses, programs=programs)
+    countries = db.session.query(models.Program.country).distinct().all()
+    return render_template('write-review.html', courses=courses, programs=programs, countries=countries)
 
 @app.route('/submitted')
 def submit_review():

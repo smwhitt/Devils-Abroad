@@ -7,9 +7,9 @@
 
 <!-- location filter -->
 <label>Location: </label>
-<select name= programs method="GET" action="/">
-  {% for program in programs %}
-  <option value= {{program.country}} SELECTED>{{program.country}}</option>"
+<select name= countries method="GET" action="/">
+  {% for country in countries %}
+  <option value= {{country.country}} SELECTED>{{country.country}}</option>"
   {% endfor %}
 </select>
 
