@@ -10,6 +10,10 @@ db = SQLAlchemy(app, session_options={'autocommit': False})
 
 
 @app.route('/')
+def login():
+    return render_template('login.html')
+
+@app.route('/homepage', methods=['GET', 'POST'])
 def home_page():
     return render_template('home.html')
 
