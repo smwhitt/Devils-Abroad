@@ -41,7 +41,12 @@ class Review(db.Model):
     __bind_key__ = 'devils_abroad'
     __tablename__ = 'review'
     id = db.Column('id', db.Integer, primary_key=True)
-
+    location = db.Column('Location', db.String)
+    program = db.Column('Program', db.String)
+    course = db.Column('Course', db.String)
+    rating = db.Column('Rating', db.Integer)
+    difficulty = db.Column('Difficulty', db.Integer)
+    thoughts = db.Column('thoughts', db.String)
 
 # class Likes(db.Model):
 #     __bind_key__ = 'devils_abroad'

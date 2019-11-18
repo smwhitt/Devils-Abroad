@@ -9,7 +9,7 @@ class WriteReview(FlaskForm):
     rating = IntegerField('rating', validators=[DataRequired()])
     difficulty = IntegerField('difficulty', validators=[DataRequired()])
     thoughts = StringField('thoughts', validators=[DataRequired()])
-    submit = SubmitField('Submit your review!')
+
 
 
     
