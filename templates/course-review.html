@@ -1,0 +1,17 @@
+{% extends 'layout.html' %}
+{% block heading %}{{course.course_name}}{% endblock %}
+{% block content %}
+<h3>Program: {{course.program_name}}</h3>
+<h3>Duke Code: {{course.duke_code}}</h3>
+<hr/>
+<h3>Reviews:</h3>
+
+{% for review in reviews %}
+<p>rating: {{review.rating}}</p>
+<p>difficulty: {{review.difficulty}}</p>
+<p>{{review.content}}</p>
+<p>user email: {{review.u_email}}</p>
+<hr/>
+{% endfor %}
+
+{% endblock %}

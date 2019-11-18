@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
+from flask import request
 import models
 import forms
 from forms import WriteReview
@@ -9,6 +10,11 @@ app = Flask(__name__)
 app.secret_key = 's3cr3t'
 app.config.from_object('config')
 db = SQLAlchemy(app, session_options={'autocommit': False})
+
+@app.route('/all')
+def all_drinkers():
+    drinkers = db.session.query(models.Drinker).all()
+    return render_template('all-drinkers.html', drinkers=drinkers)
 
 @app.route('/review', methods=['GET', 'POST'])
 def review():
@@ -43,17 +49,6 @@ def review():
 #         # print("\nData received. Now redirecting ...")
 #         # return redirect(url_for('confused'))
 #     return render_template('trying-shit-out.html', form=form)
-    
-
-    
- 
-    
-
-
-
-
-
-
 
 @app.route('/')
 def login():
@@ -63,6 +58,17 @@ def login():
 def home_page():
     return render_template('home.html')
 
+# ----------- EXAMPLE -------------
+@app.route('/login-example', methods=["GET", "POST"])
+def login_example():
+    form = forms.EmailPasswordForm()
+    if form.validate_on_submit():
+        # return "email: {}, password: {}".format(form.email.data, form.password.data)
+        return render_template('submitted.html',
+            email=form.email.data, password=form.password.data)
+    return render_template('login-example.html', form=form)
+
+# ---------------------------------
 
 @app.route('/filter')
 def filter_reviews():
@@ -90,6 +96,14 @@ def explore_courses():
     programs = db.session.query(models.Program).all()
     return render_template('explore.html', courses=courses, programs=programs)
 
+@app.route('/course-review/<course_name>')
+def course_review(course_name):
+    course = db.session.query(models.Course)\
+        .filter(models.Course.course_name == course_name).one()
+    reviews = db.session.query(models.Review)\
+        .filter(models.Review.course_name == course_name)
+    return render_template('course-review.html', course=course, reviews=reviews)
+# fix filtering - use keys (multiple variables)
 
 @app.route('/drinker/<name>')
 def drinker(name):
