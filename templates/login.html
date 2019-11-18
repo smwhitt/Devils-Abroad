@@ -1,10 +1,24 @@
-{% extends "layout.html" %}
-{% block heading %}Login Page testing formsssss{% endblock %}
+
+{% extends 'layout.html' %}
+{% block heading %}Login{% endblock %}
 {% block content %}
-    <form action="{{ url_for('login')}}" method="POST">
-        {{form.email}}
-        {{form.password}}
-        <input type="submit" value="Go">
-        {{ form.csrf_token }}
-    </form>
+<form action="/homepage" method="post">
+  <!-- <div class="imgcontainer">
+    <img src="img_avatar2.png" alt="Avatar" class="avatar">
+  </div> -->
+
+  <div class="container">
+    <label for="uname"><b>Username</b></label>
+    <input type="text" placeholder="Enter Username" name="uname" required> <br>
+
+    <label for="psw"><b>Password</b></label>
+    <input type="password" placeholder="Enter Password" name="psw" required> <br>
+    <label>
+      <input type="checkbox" checked="checked" name="remember"> Remember me<br>
+    </label>
+    <button type="submit">Login</button>  
+    <span class="psw">Forgot <a href="#">password?</a></span>
+
+  </div>
+</form>
 {% endblock %}
