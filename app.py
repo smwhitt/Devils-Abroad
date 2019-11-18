@@ -1,21 +1,68 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 import models
 import forms
+from forms import WriteReview
+from models import *
 
 app = Flask(__name__)
 app.secret_key = 's3cr3t'
 app.config.from_object('config')
 db = SQLAlchemy(app, session_options={'autocommit': False})
 
-# @app.route('/')
-# def all_drinkers():
-#     drinkers = db.session.query(models.Drinker).all()
-#     return render_template('all-drinkers.html', drinkers=drinkers)
+@app.route('/review', methods=['GET', 'POST'])
+def review():
+    form = WriteReview()
+    if form.validate_on_submit():
+        return "location: {}, program: {}".format(form.location.data, form.program.data)
+    return render_template('trying-shit-out.html', form = form)
+
+# @app.route('/confused', methods=['GET', 'POST'])
+# def confused():
+#     form = WriteReview()
+#     if form.validate_on_submit():
+#         # review = Review()
+#         # form.populate_obj(review)
+#         # db.session.add(review)
+#         # db.session.commit()
+#         # location = form.location.data
+#         # program = form.program.data
+#         # course = form.course.data
+#         # rating = form.rating.data
+#         # difficulty = form.difficulty.data
+#         # thoughts = form.thoughts.data
+#         # print(location)
+#         # print(program)
+#         # print(course)
+#         # print(rating)
+#         # print(difficulty)
+#         # print(thoughts)
+#         flash('Login requested for user {}, remember_me={}'.format(
+#             form.username.data, form.remember_me.data))
+#         return redirect('/index')
+#         # print("\nData received. Now redirecting ...")
+#         # return redirect(url_for('confused'))
+#     return render_template('trying-shit-out.html', form=form)
+    
+
+    
+ 
+    
+
+
+
+
+
+
 
 @app.route('/')
+def login():
+    return render_template('login.html')
+
+@app.route('/homepage', methods=['GET', 'POST'])
 def home_page():
     return render_template('home.html')
+
 
 @app.route('/filter')
 def filter_reviews():
@@ -23,9 +70,19 @@ def filter_reviews():
     return render_template('filter.html')
     # note, temporary render explore. change to render filter.html
 
-@app.route('/write-review')
+
+@app.route('/write-review', methods=['GET'])
 def write_review():
-    return render_template('write-review.html')
+    courses = db.session.query(models.Course).all()
+    programs = db.session.query(models.Program).all()
+    countries = db.session.query(models.Program.country).distinct().all()
+    return render_template('write-review.html', courses=courses, programs=programs, countries=countries)
+
+
+@app.route('/submitted')
+def submit_review():
+    return render_template('submitted.html')
+
 
 @app.route('/explore', methods=['GET'])
 def explore_courses():
@@ -33,11 +90,13 @@ def explore_courses():
     programs = db.session.query(models.Program).all()
     return render_template('explore.html', courses=courses, programs=programs)
 
+
 @app.route('/drinker/<name>')
 def drinker(name):
-    drinker = db.session.query(models.Drinker)\
+    drinker = db.session.query(models.Drinker) \
         .filter(models.Drinker.name == name).one()
     return render_template('drinker.html', drinker=drinker)
+
 
 @app.route('/edit-drinker/<name>', methods=['GET', 'POST'])
 def edit_drinker(name):
@@ -57,9 +116,11 @@ def edit_drinker(name):
     else:
         return render_template('edit-drinker.html', drinker=drinker, form=form)
 
+
 @app.template_filter('pluralize')
 def pluralize(number, singular='', plural='s'):
     return singular if number in (0, 1) else plural
+
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
