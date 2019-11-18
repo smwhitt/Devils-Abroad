@@ -70,13 +70,6 @@ def login_example():
 
 # ---------------------------------
 
-@app.route('/filter')
-def filter_reviews():
-    courses = db.session.query(models.Course).all()
-    return render_template('filter.html')
-    # note, temporary render explore. change to render filter.html
-
-
 @app.route('/write-review', methods=['GET'])
 def write_review():
     courses = db.session.query(models.Course).all()
@@ -89,6 +82,18 @@ def write_review():
 def submit_review():
     return render_template('submitted.html')
 
+
+@app.route('/filter', methods=['GET', 'POST'])
+def filter_reviews():
+    courses = db.session.query(models.Course).all()
+    form = forms.FilterCourseForm()
+    form.program.choices = [(7, c.program_name) for c in courses]
+
+    if form.validate_on_submit():
+        return redirect(url_for(explore))
+    return render_template('filter.html', form=form)
+
+    # TODO: have "key" for list item be program.id instead of 7 lol
 
 @app.route('/explore', methods=['GET'])
 def explore_courses():

@@ -1,5 +1,6 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, IntegerField, PasswordField, SubmitField
+from wtforms import StringField, BooleanField, IntegerField, \
+    SelectField, PasswordField, SubmitField
 from wtforms.validators import DataRequired
 
 class EmailPasswordForm(FlaskForm):
@@ -10,8 +11,17 @@ class EmailPasswordForm(FlaskForm):
 #     @staticmethod
 #     def form():
 
-class MyForm(FlaskForm):
-    name = StringField('name', validators=[DataRequired()])
+class FilterCourseForm(FlaskForm):
+    # example of static choices for SelectField
+    language = SelectField(
+        'Programming Language',
+        choices=[('cpp', 'C++'), ('py', 'Python'), ('text', 'Plain Text')],
+        default='default string'
+    )
+    # example of dynamic choices for SelectField - choices list needs to be assigned in app.py
+    program = SelectField(u'Programs', coerce=int, default='Choose a program')
+    # note sure why the default string isn't working
+    # might be better to change to SelectMultipleField so user can select more than one choice
 
 class WriteReview(FlaskForm):
     location = StringField('location', validators=[DataRequired()])
