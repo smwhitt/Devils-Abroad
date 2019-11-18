@@ -1,6 +1,17 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, IntegerField
+from wtforms import StringField, BooleanField, IntegerField, PasswordField
 from wtforms.validators import DataRequired
+
+class EmailPasswordForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+
+# class WriteReviewFormFactory:
+#     @staticmethod
+#     def form():
+
+class MyForm(FlaskForm):
+    name = StringField('name', validators=[DataRequired()])
 
 class DrinkerEditFormFactory:
     @staticmethod

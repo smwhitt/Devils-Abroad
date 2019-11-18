@@ -1,5 +1,6 @@
 from flask import Flask, render_template, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from flask import request
 import models
 import forms
 
@@ -8,14 +9,26 @@ app.secret_key = 's3cr3t'
 app.config.from_object('config')
 db = SQLAlchemy(app, session_options={'autocommit': False})
 
-# @app.route('/')
-# def all_drinkers():
-#     drinkers = db.session.query(models.Drinker).all()
-#     return render_template('all-drinkers.html', drinkers=drinkers)
+@app.route('/all')
+def all_drinkers():
+    drinkers = db.session.query(models.Drinker).all()
+    return render_template('all-drinkers.html', drinkers=drinkers)
 
 @app.route('/')
 def home_page():
     return render_template('home.html')
+
+# ----------- EXAMPLE -------------
+@app.route('/login', methods=["GET", "POST"])
+def login():
+    form = forms.EmailPasswordForm()
+    if form.validate_on_submit():
+        # return "email: {}, password: {}".format(form.email.data, form.password.data)
+        return render_template('submitted.html',
+            email=form.email.data, password=form.password.data)
+    return render_template('login.html', form=form)
+
+# ---------------------------------
 
 @app.route('/filter')
 def filter_reviews():
