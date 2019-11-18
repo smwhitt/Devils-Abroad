@@ -1,6 +1,19 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, IntegerField
+from wtforms import StringField, BooleanField, IntegerField, SubmitField
 from wtforms.validators import DataRequired
+
+class WriteReview(FlaskForm):
+    location = StringField('location', validators=[DataRequired()])
+    program = StringField('program', validators=[DataRequired()])
+    course = StringField('course', validators=[DataRequired()])
+    rating = IntegerField('rating', validators=[DataRequired()])
+    difficulty = IntegerField('difficulty', validators=[DataRequired()])
+    thoughts = StringField('thoughts', validators=[DataRequired()])
+    submit = SubmitField('Submit your review!')
+
+
+    
+
 
 class DrinkerEditFormFactory:
     @staticmethod
@@ -41,8 +54,4 @@ class DrinkerEditFormFactory:
             setattr(F, field_name, IntegerField(default=default))
         return F()
 
-# class FindCourseForm:
-#     @staticmethod
-#     def form(program):
-#         class F(FlaskForm):
 

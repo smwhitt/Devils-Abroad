@@ -1,12 +1,24 @@
-from flask import Flask, render_template, redirect, url_for
+from flask import Flask, render_template, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 import models
 import forms
+from forms import WriteReview
+
 
 app = Flask(__name__)
 app.secret_key = 's3cr3t'
 app.config.from_object('config')
 db = SQLAlchemy(app, session_options={'autocommit': False})
+
+@app.route('/confused', methods=['GET', 'POST'])
+def confused():
+    form = WriteReview()
+    if form.validate_on_submit():
+        flash('Login requested for user {}, remember_me={}'.format(
+            form.username.data, form.remember_me.data))
+        return redirect('/index')
+    return render_template('submitted.html')
+
 
 
 @app.route('/')
