@@ -2,13 +2,20 @@ from sqlalchemy import sql, orm
 from app import db
 
 
-class User(db.Model):
+class Users(db.Model):
     __bind_key__ = 'devils_abroad'
     __tablename__ = 'users'
     email = db.Column('email', db.String(100), primary_key=True)
     name = db.Column('name', db.String(100))
     major = db.Column('major', db.String(50))
     grad_year = db.Column('grad_year', db.Integer())
+    username = db.Column('username', db.String())
+    password = db.Column('password', db.String())
+
+    # method to check if the user is authenticated
+    #def is_authenticated(self):
+
+
     # user = orm.relationship('User')
 
 
