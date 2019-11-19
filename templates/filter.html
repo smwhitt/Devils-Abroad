@@ -1,5 +1,12 @@
 {% extends 'layout.html' %}
 {% block heading %}Explore DevilsAbroad experiences{% endblock %}
 {% block content %}
-<p><a href="/explore">Explore courses</a></p>
+
+<form action="{{ url_for('filter_reviews')}}" method="POST">
+    {{ form.csrf_token }}
+
+    <p>{{form.program.label}}: {{form.program}}</p>
+    <input type="submit" value="Go">
+</form>
+
 {% endblock %}

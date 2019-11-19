@@ -1,0 +1,10 @@
+{% extends 'layout.html' %}
+{% block heading %}submit form test{% endblock %}
+{% block content %}
+<form method="POST" action="">
+    {{ form.csrf_token }}
+    {{ form.name.label }} {{ form.name(size=20) }}
+    <!-- <input type="text" name="inputname">
+    <input type="submit" value="Go"> -->
+</form>
+{% endblock %}
