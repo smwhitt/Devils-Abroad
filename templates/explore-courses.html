@@ -3,20 +3,20 @@
 {% block content %}
 
 <!-- location filter -->
-<label>Location: </label>
+<!-- <label>Location: </label>
 <select name= programs method="GET" action="/">
   {% for program in programs %}
   <option value= {{program.country}} SELECTED>{{program.country}}</option>"
   {% endfor %}
-</select>
+</select> -->
 
 <!-- program filter -->
-<label>Program Name: </label>
+<!-- <label>Program Name: </label>
 <select name= programs method="GET" action="/">
   {% for program in programs %}
   <option value= {{program.program_name}} SELECTED>{{program.program_name}}</option>"
   {% endfor %}
-</select>
+</select> -->
 
 <!-- major filter -->
 <!-- <label>Major: </label>
@@ -43,7 +43,5 @@
 </ul>
 
 <hr/>
-<p>{{courses|length}} course{{courses|length|pluralize}}
-  found in the database.</p>
 
 {% endblock %}

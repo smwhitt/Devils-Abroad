@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, flash
 from flask_sqlalchemy import SQLAlchemy
 from flask import request
+from flask_wtf import FlaskForm
 import models
 import forms
 from forms import WriteReview
@@ -70,13 +71,6 @@ def login_example():
 
 # ---------------------------------
 
-@app.route('/filter')
-def filter_reviews():
-    courses = db.session.query(models.Course).all()
-    return render_template('filter.html')
-    # note, temporary render explore. change to render filter.html
-
-
 @app.route('/write-review', methods=['GET'])
 def write_review():
     courses = db.session.query(models.Course).all()
@@ -90,11 +84,30 @@ def submit_review():
     return render_template('submitted.html')
 
 
-@app.route('/explore', methods=['GET'])
-def explore_courses():
-    courses = db.session.query(models.Course).all()
+@app.route('/filter', methods=['GET', 'POST'])
+def filter_reviews():
     programs = db.session.query(models.Program).all()
-    return render_template('explore.html', courses=courses, programs=programs)
+    form = forms.FilterCourseForm()
+    form.program.choices = [(p.program_name, p.program_name) for p in programs]
+
+    if form.is_submitted():
+        if not form.validate():
+            for fieldName, errorMessages in form.errors.items():
+                print("field: {}, errormsg: {}".format(fieldName," ".join(errorMessages)))
+                return form.program.data
+
+    if form.validate_on_submit():
+        return redirect(url_for('explore_courses', program=form.program.data))
+    return render_template('filter.html', form=form)
+
+
+@app.route('/explore-courses/<program>', methods=['GET'])
+def explore_courses(program):
+    courses = db.session.query(models.Course) \
+            .filter(models.Course.program_name == program)
+    programs = db.session.query(models.Program).all()
+    return render_template('explore-courses.html', courses=courses, programs=programs)
+
 
 @app.route('/course-review/<course_name>')
 def course_review(course_name):
@@ -104,6 +117,7 @@ def course_review(course_name):
         .filter(models.Review.course_name == course_name)
     return render_template('course-review.html', course=course, reviews=reviews)
 # fix filtering - use keys (multiple variables)
+
 
 @app.route('/drinker/<name>')
 def drinker(name):
