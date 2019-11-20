@@ -41,17 +41,17 @@ def login():
         uname = request.form['username']
         password = request.form['password']
         error = None
-        user = db.session.query(models.Users).all()
+        user = db.session.query(models.Users).filter(models.Users.username == uname)
 
         if user is None:
             error = 'Incorrect username.'
-        elif not check_password_hash(user['password'], password):
+        elif not check_password_hash(user.password, password):
             error = 'Incorrect password.'
 
         if error is None:
             session.clear()
-            session['user_email'] = user['email']
-            return redirect(url_for('index'))
+            session.user_email = user.email
+            return redirect(url_for('home_page'))
 
         flash(error)
 
