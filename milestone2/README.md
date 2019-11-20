@@ -1,8 +1,12 @@
 # Generating the Production Data Set
 
-11/05/2019: I have converted a semi-comprehensive list of 2775 people who have previously gone abroad to an Excel file (Past_Abroad_Students.xlsl) and to 3 .csv files which you are free to insert into our databse.
+I have converted a semi-comprehensive list of 2775 people who have previously gone abroad to an Excel file (Past_Abroad_Students.xlsl) and to 3 .csv files which you are free to insert into our databse.
 
-To populate the database with those files, first build it and then access the database via psql devils_abroad and type (replace /home/davidchen1337/devils_abroad with your own directory obviously):
+To populate the database with those files, first build it:
+
+dropdb devils_abroad; createdb devils_abroad; psql devils_abroad -af create.sql
+
+Then access the database (psql devils_abroad) and type (replace /home/davidchen1337/devils_abroad with your own directory):
 
 COPY Users(email,name,major,grad_year) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Populate Users.csv' DELIMITER ',' CSV HEADER;
 

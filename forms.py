@@ -1,6 +1,36 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, IntegerField
+from wtforms import StringField, BooleanField, IntegerField, \
+    SelectField, PasswordField, SubmitField
 from wtforms.validators import DataRequired
+
+class EmailPasswordForm(FlaskForm):
+    email = StringField('Email', validators=[DataRequired()])
+    password = PasswordField('Password', validators=[DataRequired()])
+
+# class WriteReviewFormFactory:
+#     @staticmethod
+#     def form():
+
+class FilterCourseForm(FlaskForm):
+    # example of static choices for SelectField
+    # language = SelectField(
+    #     'Programming Language',
+    #     choices=[('cpp', 'C++'), ('py', 'Python'), ('text', 'Plain Text')],
+    #     default='default string'
+    # )
+    # example of dynamic choices for SelectField - choices list needs to be assigned in app.py
+    program = SelectField(u'Programs')
+
+    # not sure why the default string isn't working
+    # might be better to change to SelectMultipleField so user can select more than one choice
+
+class WriteReview(FlaskForm):
+    location = StringField('location', validators=[DataRequired()])
+    program = StringField('program', validators=[DataRequired()])
+    course = StringField('course', validators=[DataRequired()])
+    rating = IntegerField('rating', validators=[DataRequired()])
+    difficulty = IntegerField('difficulty', validators=[DataRequired()])
+    thoughts = StringField('thoughts', validators=[DataRequired()])
 
 class DrinkerEditFormFactory:
     @staticmethod
@@ -40,3 +70,5 @@ class DrinkerEditFormFactory:
             default = bars_frequented[bar.name] if bar.name in bars_frequented else 0
             setattr(F, field_name, IntegerField(default=default))
         return F()
+
+

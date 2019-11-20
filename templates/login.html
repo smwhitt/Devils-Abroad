@@ -1,0 +1,23 @@
+
+{% extends 'layout.html' %}
+{% block heading %}Login{% endblock %}
+
+
+  <!-- <div class="imgcontainer">
+    <img src="img_avatar2.png" alt="Avatar" class="avatar">
+  </div> -->
+{% block content %}
+    <form method="post">
+  <div class="container">
+        <label for="username"><b>Username</b></label>
+        <input type="text" placeholder="Enter Username" name="uname" required> <br>
+        <label for="pasword"><b>Password</b></label>
+        <input type="password" placeholder="Enter Password" name="psw" required> <br>
+        <label>
+          <input type="checkbox" checked="checked" name="remember"> Remember me<br>
+        </label>
+        <button type="submit">Login</button>
+        <span class="psw">Forgot <a href="#">password?</a></span>
+  </div>
+    </form>
+{% endblock %}
