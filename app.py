@@ -4,12 +4,15 @@ from flask import request
 from flask_wtf import FlaskForm
 import models
 import forms
+import auth
 from forms import WriteReview
 from models import *
+from auth import *
 
 app = Flask(__name__)
 app.secret_key = 's3cr3t'
 app.config.from_object('config')
+app.register_blueprint(auth.bp)
 db = SQLAlchemy(app, session_options={'autocommit': False})
 
 @app.route('/all')
@@ -52,8 +55,11 @@ def review():
 #     return render_template('trying-shit-out.html', form=form)
 
 @app.route('/')
-def login():
-    return render_template('login.html')
+def
+
+#@app.route('/login')
+#def login():
+#    return render_template('login.html')
 
 @app.route('/homepage', methods=['GET', 'POST'])
 def home_page():
