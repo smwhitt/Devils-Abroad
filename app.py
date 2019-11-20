@@ -17,6 +17,7 @@ def all_drinkers():
     drinkers = db.session.query(models.Drinker).all()
     return render_template('all-drinkers.html', drinkers=drinkers)
 
+
 @app.route('/review', methods=['GET', 'POST'])
 def review():
     form = WriteReview()
@@ -24,40 +25,16 @@ def review():
         return "location: {}, program: {}".format(form.location.data, form.program.data)
     return render_template('trying-shit-out.html', form = form)
 
-# @app.route('/confused', methods=['GET', 'POST'])
-# def confused():
-#     form = WriteReview()
-#     if form.validate_on_submit():
-#         # review = Review()
-#         # form.populate_obj(review)
-#         # db.session.add(review)
-#         # db.session.commit()
-#         # location = form.location.data
-#         # program = form.program.data
-#         # course = form.course.data
-#         # rating = form.rating.data
-#         # difficulty = form.difficulty.data
-#         # thoughts = form.thoughts.data
-#         # print(location)
-#         # print(program)
-#         # print(course)
-#         # print(rating)
-#         # print(difficulty)
-#         # print(thoughts)
-#         flash('Login requested for user {}, remember_me={}'.format(
-#             form.username.data, form.remember_me.data))
-#         return redirect('/index')
-#         # print("\nData received. Now redirecting ...")
-#         # return redirect(url_for('confused'))
-#     return render_template('trying-shit-out.html', form=form)
 
 @app.route('/')
 def login():
     return render_template('login.html')
 
+
 @app.route('/homepage', methods=['GET', 'POST'])
 def home_page():
     return render_template('home.html')
+
 
 # ----------- EXAMPLE -------------
 @app.route('/login-example', methods=["GET", "POST"])
@@ -87,8 +64,10 @@ def submit_review():
 @app.route('/filter', methods=['GET', 'POST'])
 def filter_reviews():
     programs = db.session.query(models.Program).all()
+    countries = db.session.query(models.Country).all()
     form = forms.FilterCourseForm()
     form.program.choices = [(p.program_name, p.program_name) for p in programs]
+    form.country.choices = [(c.id, c.country_name) for c in countries]
 
     if form.is_submitted():
         if not form.validate():

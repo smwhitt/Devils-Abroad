@@ -44,6 +44,11 @@ PRIMARY KEY (u_email, review_id),
 FOREIGN KEY (u_email) REFERENCES Users(email),
 FOREIGN KEY (review_id) REFERENCES Review(id) ON DELETE CASCADE);
 
+CREATE TABLE Country
+(id VARCHAR(2) NOT NULL,
+country_name VARCHAR(50) NOT NULL,
+PRIMARY KEY(id));
+
 -- TRIGGERS
 
 CREATE TRIGGER Update_User
@@ -113,6 +118,7 @@ INSERT INTO Users VALUES('aq18@duke.edu', 'alex', 'Electrical Computer Engineeri
 INSERT INTO Program VALUES('Duke in Berlin', 'Germany');
 INSERT INTO Program VALUES('Duke in Madrid', 'Spain');
 INSERT INTO Program VALUES('University of New South Wales', 'Australia');
+INSERT INTO Program VALUES('University of Sydney', 'Australia');
 
 INSERT INTO Course VALUES('CS 330', 'Design and Analysis of Algorithms', 'Duke in Berlin');
 INSERT INTO Course VALUES('CS 300', 'Analysis of Big Data', 'Duke in Madrid');

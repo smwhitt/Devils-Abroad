@@ -53,6 +53,13 @@ class Review(db.Model):
 #     __tablename__ = 'likes'
 #     u_email = db.Column('u_email', db.String(100), db.ForeignKey(User.email), primary_key=True)
 
+
+class Country(db.Model):
+    __bind_key__ = 'devils_abroad'
+    __tablename__ = 'country'
+    id = db.Column('id',db.String(3), primary_key=True)
+    country_name = db.Column('country_name', db.String(50))
+
 class Drinker(db.Model):
     __tablename__ = 'drinker'
     name = db.Column('name', db.String(20), primary_key=True)
