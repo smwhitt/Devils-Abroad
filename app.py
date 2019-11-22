@@ -13,9 +13,6 @@ import auth
 from forms import WriteReview
 from models import *
 from auth import *
-
-
-
 app.register_blueprint(auth.bp)
 
 @app.route('/all')
@@ -60,18 +57,6 @@ def review():
 @app.route('/', methods=['GET', 'POST'])
 def home_page():
     return render_template('home.html')
-
-# ----------- EXAMPLE -------------
-@app.route('/login-example', methods=["GET", "POST"])
-def login_example():
-    form = forms.EmailPasswordForm()
-    if form.validate_on_submit():
-        # return "email: {}, password: {}".format(form.email.data, form.password.data)
-        return render_template('submitted.html',
-            email=form.email.data, password=form.password.data)
-    return render_template('login-example.html', form=form)
-
-# ---------------------------------
 
 @app.route('/write-review', methods=['GET'])
 def write_review():
