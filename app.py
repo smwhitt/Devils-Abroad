@@ -2,15 +2,18 @@ from flask import Flask, render_template, redirect, url_for, flash, Blueprint, g
 from flask_sqlalchemy import SQLAlchemy
 from flask import request
 from flask_wtf import FlaskForm
-import models
-import forms
-from forms import WriteReview
-from models import *
-
 app = Flask(__name__)
 app.secret_key = 's3cr3t'
 app.config.from_object('config')
+app.register_blueprint(auth.bp)
 db = SQLAlchemy(app, session_options={'autocommit': False})
+import models
+import forms
+import auth
+from forms import WriteReview
+from models import *
+from auth import *
+app.register_blueprint(auth.bp)
 
 
 @app.route('/all')
@@ -67,25 +70,9 @@ def review():
 #         # return redirect(url_for('confused'))
 #     return render_template('trying-shit-out.html', form=form)
 
-@app.route('/')
-def login():
-    return render_template('login.html')
-
-@app.route('/homepage', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def home_page():
     return render_template('home.html')
-
-# ----------- EXAMPLE -------------
-@app.route('/login-example', methods=["GET", "POST"])
-def login_example():
-    form = forms.EmailPasswordForm()
-    if form.validate_on_submit():
-        # return "email: {}, password: {}".format(form.email.data, form.password.data)
-        return render_template('submitted.html',
-            email=form.email.data, password=form.password.data)
-    return render_template('login-example.html', form=form)
-
-# ---------------------------------
 
 @app.route('/write-review', methods=['GET'])
 def write_review():
