@@ -12,17 +12,33 @@ app.secret_key = 's3cr3t'
 app.config.from_object('config')
 db = SQLAlchemy(app, session_options={'autocommit': False})
 
+
 @app.route('/all')
 def all_drinkers():
     drinkers = db.session.query(models.Drinker).all()
     return render_template('all-drinkers.html', drinkers=drinkers)
 
+def country_choices():
+    return db.session.query(models.Program.country).distinct().all()
+
 @app.route('/review', methods=['GET', 'POST'])
 def review():
-    form = WriteReview()
+    courses = db.session.query(models.Course).all()
+    programs = db.session.query(models.Program).all()
+    countries = db.session.query(models.Program.country).distinct().all()
+    form = forms.WriteReview()
+    form.program.choices = [(p.program_name, p.program_name) for p in programs]
+    form.country.choices = [(country, country) for country in countries]
+    form.courseCode.choices = [(c.duke_code, c.duke_code) for c in courses]
+    form.course.choices = [(c.course_name, c.course_name) for c in courses]
+    if form.is_submitted():
+        if not form.validate():
+            for fieldName, errorMessages in form.errors.items():
+                return("field: {}, errormsg: {}".format(fieldName," ".join(errorMessages)))
+
     if form.validate_on_submit():
-        return "location: {}, program: {}".format(form.location.data, form.program.data)
-    return render_template('trying-shit-out.html', form = form)
+        return render_template('submitted.html', form=form)
+    return render_template('review.html', form=form)
 
 # @app.route('/confused', methods=['GET', 'POST'])
 # def confused():

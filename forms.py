@@ -1,7 +1,10 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, BooleanField, IntegerField, \
-    SelectField, PasswordField, SubmitField
+from wtforms import StringField, BooleanField, IntegerField, SelectField, PasswordField, SubmitField
 from wtforms.validators import DataRequired
+from wtforms.ext.sqlalchemy.fields import QuerySelectField
+
+
+
 
 class EmailPasswordForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired()])
@@ -25,12 +28,15 @@ class FilterCourseForm(FlaskForm):
     # might be better to change to SelectMultipleField so user can select more than one choice
 
 class WriteReview(FlaskForm):
-    location = StringField('location', validators=[DataRequired()])
-    program = StringField('program', validators=[DataRequired()])
-    course = StringField('course', validators=[DataRequired()])
-    rating = IntegerField('rating', validators=[DataRequired()])
-    difficulty = IntegerField('difficulty', validators=[DataRequired()])
+    
+    country = SelectField('country', choices = [], coerce = str, validators=[DataRequired()])
+    program = SelectField('program', choices = [], coerce = str, validators=[DataRequired()])
+    courseCode = SelectField('Duke Code', choices = [], coerce = str, validators=[DataRequired()])
+    course = SelectField('course', choices = [], coerce = str, validators=[DataRequired()])
+    rating = SelectField('rating', choices = [(1,1), (2,2), (3,3), (4,4), (5,5)], coerce = int, validators=[DataRequired()])
+    difficulty = SelectField('difficulty', choices = [(1,1), (2,2), (3,3), (4,4), (5,5)], coerce = int,  validators=[DataRequired()])
     thoughts = StringField('thoughts', validators=[DataRequired()])
+    
 
 class DrinkerEditFormFactory:
     @staticmethod
