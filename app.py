@@ -2,6 +2,11 @@ from flask import Flask, render_template, redirect, url_for, flash, Blueprint, g
 from flask_sqlalchemy import SQLAlchemy
 from flask import request
 from flask_wtf import FlaskForm
+app = Flask(__name__)
+app.secret_key = 's3cr3t'
+app.config.from_object('config')
+app.register_blueprint(auth.bp)
+db = SQLAlchemy(app, session_options={'autocommit': False})
 import models
 import forms
 import auth
@@ -9,11 +14,9 @@ from forms import WriteReview
 from models import *
 from auth import *
 
-app = Flask(__name__)
-app.secret_key = 's3cr3t'
-app.config.from_object('config')
+
+
 app.register_blueprint(auth.bp)
-db = SQLAlchemy(app, session_options={'autocommit': False})
 
 @app.route('/all')
 def all_drinkers():
@@ -54,14 +57,7 @@ def review():
 #         # return redirect(url_for('confused'))
 #     return render_template('trying-shit-out.html', form=form)
 
-@app.route('/')
-def
-
-#@app.route('/login')
-#def login():
-#    return render_template('login.html')
-
-@app.route('/homepage', methods=['GET', 'POST'])
+@app.route('/', methods=['GET', 'POST'])
 def home_page():
     return render_template('home.html')
 
