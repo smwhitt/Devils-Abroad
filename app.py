@@ -5,7 +5,6 @@ from flask_wtf import FlaskForm
 app = Flask(__name__)
 app.secret_key = 's3cr3t'
 app.config.from_object('config')
-app.register_blueprint(auth.bp)
 db = SQLAlchemy(app, session_options={'autocommit': False})
 import models
 import forms
