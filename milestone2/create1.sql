@@ -4,7 +4,9 @@ CREATE TABLE Users
 (email VARCHAR(100) NOT NULL PRIMARY KEY,
 name VARCHAR(100) NOT NULL,
 major VARCHAR(50) NOT NULL,
-grad_year INTEGER);
+grad_year INTEGER,
+username TEXT UNIQUE NOT NULL,
+password TEXT NOT NULL);
 
 CREATE TABLE Program
 (program_name VARCHAR(100) NOT NULL PRIMARY KEY,
@@ -35,6 +37,7 @@ u_email VARCHAR(100) NOT NULL,
 content VARCHAR(1000) NOT NULL,
 rating FLOAT NOT NULL CHECK (rating >= 0 AND rating <= 5.0),
 difficulty FLOAT NOT NULL CHECK (difficulty >= 0 AND difficulty <= 5.0),
+created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 UNIQUE(u_email, program_name, duke_code, course_name));
 
 CREATE TABLE Likes
@@ -50,11 +53,6 @@ country_name VARCHAR(50) NOT NULL,
 PRIMARY KEY(id));
 
 -- TRIGGERS
-
-CREATE TRIGGER Update_User
-	BEFORE INSERT ON Users
-	FOR EACH ROW
-	EXCECUTE PROCEDURE TS_Update_Users();
 
 CREATE FUNCTION TS_No_edit_own_review() RETURNS TRIGGER AS $$ 
 BEGIN
@@ -100,20 +98,20 @@ CREATE TRIGGER TS_No_fake_reviews
 
 -- Indexes
 
-CREATE INDEX Get_Users
+CREATE INDEX Get_User
 on Users (email, name);
 
-CREATE INDEX Get_Abroad_Users
+CREATE INDEX Get_Abroad_User
 on AbroadUser (u_email, term, program_name);
 
 -- INSERTS
 
-INSERT INTO Users VALUES ('ddc27@duke.edu', 'david', 'Computer Science', 2021);
-INSERT INTO Users VALUES('mr328@duke.edu', 'malavi',  'Statistics', 2019);
-INSERT INTO Users VALUES('smw81@duke.edu', 'samantha', 'Electrical Computer Engineering', 2020);
-INSERT INTO Users VALUES('al343@duke.edu', 'annie', 'Computer Science', 2021);
-INSERT INTO Users VALUES('aaz10@duke.edu', 'abby', 'Computer Science', 2020);
-INSERT INTO Users VALUES('aq18@duke.edu', 'alex', 'Electrical Computer Engineering', 2019);
+INSERT INTO Users VALUES ('ddc27@duke.edu', 'david', 'Computer Science', 2021, 'ddc27', '123');
+INSERT INTO Users VALUES('mr328@duke.edu', 'malavi',  'Statistics', 2019, 'mr328', '123');
+INSERT INTO Users VALUES('smw81@duke.edu', 'samantha', 'Electrical Computer Engineering', 2020, 'smw81', '123');
+INSERT INTO Users VALUES('al343@duke.edu', 'annie', 'Computer Science', 2021, 'al343', '123');
+INSERT INTO Users VALUES('aaz10@duke.edu', 'abby', 'Computer Science', 2020, 'aaz10', '123');
+INSERT INTO Users VALUES('aq18@duke.edu', 'alex', 'Electrical Computer Engineering', 2019, 'aq18', '123');
 
 INSERT INTO Program VALUES('Duke in Berlin', 'Germany');
 INSERT INTO Program VALUES('Duke in Madrid', 'Spain');

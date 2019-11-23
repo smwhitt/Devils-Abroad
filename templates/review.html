@@ -1,0 +1,47 @@
+{% extends 'layout.html' %}
+{% block heading %}Review my experience{% endblock %}
+{% block content %}
+
+<form action="{{ url_for('review')}}" method="POST">
+    <p>
+        {{ form.country.label }}<br>
+        {{ form.country }}
+    </p> 
+
+    
+    <p>
+        {{ form.program.label }}<br>
+        {{ form.program }}
+    </p> 
+
+    <p>
+        {{ form.courseCode.label }}<br>
+        {{ form.courseCode }}
+    </p>
+
+    <p>
+        {{ form.course.label }}<br>
+        {{ form.course }}
+    </p>
+
+
+    <p>
+        {{ form.rating.label }}<br>
+        {{ form.rating }}
+    </p>
+
+    <p>
+        {{ form.difficulty.label }}<br>
+        {{ form.difficulty }}
+    </p>
+
+    <p>
+        {{ form.thoughts.label }}<br>
+        {{ form.thoughts }}
+    </p>
+    
+
+    <input type = "submit" value = "Go">
+    {{ form.csrf_token}}
+</form>
+{% endblock %}
