@@ -1,7 +1,7 @@
 SQLALCHEMY_DATABASE_URI = 'postgresql://qiaoa98:1122@localhost/beers'
 
 SQLALCHEMY_BINDS = {
-    'devils_abroad': 'postgresql://qiaoa98:1122@localhost/devils_abroad'
+    'devils_abroad': 'postgresql://vagrant:dbpasswd@localhost/devils_abroad'
 
 }
 
