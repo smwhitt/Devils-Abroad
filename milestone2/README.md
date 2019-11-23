@@ -14,6 +14,8 @@ COPY Program(program_name,country) FROM '/home/davidchen1337/devils_abroad/Devil
 
 COPY AbroadUser(u_email,term,program_name) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Populate AbroadUsers.csv' DELIMITER ',' CSV HEADER;
 
+COPY Country(country_name,id) FROM '.../Countries.csv' DELIMITER ',' CSV HEADER;
+
 http://www.postgresqltutorial.com/import-csv-file-into-posgresql-table/
 
 The columns of the .csv file has to exactly match the order of whatever Table you're trying to insert, but not all attributes of a Table have to be filled out

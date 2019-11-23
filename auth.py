@@ -17,15 +17,19 @@ def register():
         grad_year = request.form['grad_year']
         uname = request.form['username']
         pwd = request.form['password']
+        confpwd = request.form['confirmpassword']
         error = None
 
         if not uname:
             error = 'Username is required.'
         elif not pwd:
             error = 'Password is required.'
+        elif not confpwd:
+            error = 'Confirm your password'
         elif db.session.query(models.Users).filter(models.Users.username.like(uname)).first() is not None:
             error = 'User {} is already registered.'.format(uname)
-
+        elif pwd != confpwd:
+            error = 'Password mis-matched'
         if error is None:
             hashed_pwd = generate_password_hash(pwd)
             new_account = models.Users(email=email, name=name, major=major, grad_year=grad_year, username=uname, password=hashed_pwd)
