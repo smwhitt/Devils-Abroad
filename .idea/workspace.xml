@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="177583b3-e2f4-4e6d-a46b-bbf3bd81e2c4" name="Default Changelist" comment="" />
+    <list default="true" id="177583b3-e2f4-4e6d-a46b-bbf3bd81e2c4" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/milestone2/create1.sql" beforeDir="false" afterPath="$PROJECT_DIR$/milestone2/create1.sql" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -95,7 +97,7 @@
       <workItem from="1574380661830" duration="660000" />
       <workItem from="1574381364341" duration="189000" />
       <workItem from="1574391045554" duration="658000" />
-      <workItem from="1574528313461" duration="3683000" />
+      <workItem from="1574528313461" duration="4357000" />
     </task>
     <servers />
   </component>
