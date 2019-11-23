@@ -1,0 +1,17 @@
+# Default ignored files
+.idea/workspace.xml
+*.idea/workspace.xml
+/workspace.xml
+.idea/
+.idea/*
+*.idea/*
+*.log
+*.pot
+*.pyc
+*/__pycache__/
+*/*/__pycache__/
+*/*/*/__pycache__/
+__pycache__/
+config.py
+*.config.py
+.gitignore
