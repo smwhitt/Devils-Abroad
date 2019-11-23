@@ -23,7 +23,7 @@ def register():
             error = 'Username is required.'
         elif not pwd:
             error = 'Password is required.'
-        elif db.session.query(models.Users).filter(models.Users.username == uname).first() is not None:
+        elif db.session.query(models.Users).filter(models.Users.username.like(uname)).first() is not None:
             error = 'User {} is already registered.'.format(uname)
 
         if error is None:
@@ -44,7 +44,7 @@ def login():
         uname = request.form['username']
         password = request.form['password']
         error = None
-        user = db.session.query(models.Users).filter(models.Users.username == uname).first()
+        user = db.session.query(models.Users).filter(models.Users.username.like(uname)).first()
 
         if user is None:
             error = 'Incorrect username.'
@@ -67,7 +67,7 @@ def load_logged_in_user():
     if user_email is None:
         g.user = None
     else:
-        g.user = db.session.query(models.Users).filter(models.Users.email == user_email).first()
+        g.user = db.session.query(models.Users).filter(models.Users.email.like(user_email)).first()
 
 @bp.route('/logout')
 def logout():

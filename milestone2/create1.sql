@@ -30,6 +30,7 @@ FOREIGN KEY (program_name) REFERENCES Program(program_name));
 
 CREATE TABLE Review
 (id INTEGER NOT NULL PRIMARY KEY,
+country VARCHAR(100) NOT NULL, --fix later, doesn't reference countries!
 program_name VARCHAR(100) NOT NULL REFERENCES Program(program_name),
 duke_code VARCHAR(100) NOT NULL,
 course_name VARCHAR(100) NOT NULL,
@@ -122,9 +123,9 @@ INSERT INTO AbroadUser VALUES ('mr328@duke.edu', 'Fall 2019', 'Duke in Madrid');
 INSERT INTO AbroadUser VALUES ('smw81@duke.edu', 'Spring 2020', 'University of New South Wales');
 INSERT INTO AbroadUser VALUES ('aq18@duke.edu', 'Spring 2020', 'University of New South Wales');
 
-INSERT INTO Review VALUES (1, 'Duke in Berlin', 'CS 330', 'Design and Analysis of Algorithms' , 'ddc27@duke.edu', 'I think this class is amazing!', 4.5, 2.0);
-INSERT INTO Review VALUES (2, 'Duke in Madrid', 'CS 300', 'Networks', 'mr328@duke.edu', 'I think this class SUCKS!', 1, 5);
-INSERT INTO Review VALUES (3, 'University of New South Wales', 'CS 250', 'Computer Architecture', 'smw81@duke.edu', 'I think this rocks hehe!', 5, 1);
+INSERT INTO Review VALUES (1, 'Germany', 'Duke in Berlin', 'CS 330', 'Design and Analysis of Algorithms' , 'ddc27@duke.edu', 'I think this class is amazing!', 4.5, 2.0);
+INSERT INTO Review VALUES (2, 'Spain', 'Duke in Madrid', 'CS 300', 'Networks', 'mr328@duke.edu', 'I think this class SUCKS!', 1, 5);
+INSERT INTO Review VALUES (3, 'Australia','University of New South Wales', 'CS 250', 'Computer Architecture', 'smw81@duke.edu', 'I think this rocks hehe!', 5, 1);
 
 INSERT INTO Likes VALUES ('aaz10@duke.edu', 1);
 INSERT INTO Likes Values ('al343@duke.edu', 3);
