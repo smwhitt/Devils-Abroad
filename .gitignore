@@ -1,4 +1,6 @@
 # Default ignored files
+.idea/workspace.xml
+*.idea/workspace.xml
 /workspace.xml
 .idea/
 .idea/*
