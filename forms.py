@@ -30,6 +30,7 @@ class FilterCourseForm(FlaskForm):
 class WriteReview(FlaskForm):
     
     country = SelectField('country', choices = [], coerce = str, validators=[DataRequired()])
+    userEmail = StringField('User Email',  validators=[DataRequired()])
     program = SelectField('program', choices = [], coerce = str, validators=[DataRequired()])
     courseCode = SelectField('Duke Code', choices = [], coerce = str, validators=[DataRequired()])
     course = SelectField('course', choices = [], coerce = str, validators=[DataRequired()])

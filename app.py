@@ -30,17 +30,40 @@ def review():
     countries = db.session.query(models.Program.country).distinct().all()
     form = forms.WriteReview()
     form.program.choices = [(p.program_name, p.program_name) for p in programs]
-    form.country.choices = [(country, country) for country in countries]
+    form.country.choices = [(country.country, country.country) for country in countries]
     form.courseCode.choices = [(c.duke_code, c.duke_code) for c in courses]
     form.course.choices = [(c.course_name, c.course_name) for c in courses]
-    if form.is_submitted():
-        if not form.validate():
-            for fieldName, errorMessages in form.errors.items():
-                return("field: {}, errormsg: {}".format(fieldName," ".join(errorMessages)))
-
     if form.validate_on_submit():
+        # m = Review()
+        id = 456 #set later
+        country = form.country.data
+        program_name = form.program.data
+        duke_code = form.courseCode.data
+        u_email = form.userEmail.data
+        course_name = form.course.data
+        rating = form.rating.data
+        difficulty = form.difficulty.data
+        content = form.thoughts.data
+        new_review = models.Review(id = id, country = country, program_name = program_name, duke_code = duke_code, u_email = u_email, course_name = course_name, rating = rating, difficulty = difficulty, content = content)
+        db.session.add(new_review)
+        db.session.flush()
+        db.session.commit()
+        flash('New entry was successfully posted')
         return render_template('submitted.html', form=form)
     return render_template('review.html', form=form)
+
+
+
+    # try:
+    #         form.errors.pop('database', None)
+    #         models.Drinker.edit(name, form.name.data, form.address.data,
+    #                             form.get_beers_liked(), form.get_bars_frequented())
+    #         return redirect(url_for('drinker', name=form.name.data))
+    #     except BaseException as e:
+    #         form.errors['database'] = str(e)
+    #         return render_template('edit-drinker.html', drinker=drinker, form=form)
+    # else:
+    #     return render_template('edit-drinker.html', drinker=drinker, form=form)
 
 # @app.route('/confused', methods=['GET', 'POST'])
 # def confused():
