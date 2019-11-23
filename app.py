@@ -90,7 +90,9 @@ def submit_review():
 def filter_reviews():
     programs = db.session.query(models.Program).all()
     form = forms.FilterCourseForm()
-    form.program.choices = [(p.program_name, p.program_name) for p in programs]
+    program_choices = [(p.program_name, p.program_name) for p in programs]
+    program_choices.insert(0,("NA", "--"))
+    form.program.choices = program_choices
 
     if form.is_submitted():
         if not form.validate():
@@ -105,8 +107,11 @@ def filter_reviews():
 
 @app.route('/explore-courses/<program>', methods=['GET'])
 def explore_courses(program):
-    courses = db.session.query(models.Course) \
+    if (program != "NA") :
+        courses = db.session.query(models.Course) \
             .filter(models.Course.program_name == program)
+    else :
+        courses = db.session.query(models.Course)
     programs = db.session.query(models.Program).all()
     return render_template('explore-courses.html', courses=courses, programs=programs)
 
