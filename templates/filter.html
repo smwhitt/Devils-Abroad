@@ -5,9 +5,23 @@
 <form action="{{ url_for('filter_reviews')}}" method="POST">
     {{ form.csrf_token }}
 
-    <p>{{form.program.label}}: {{form.program}}</p>
-    <p>{{form.country.label}}: {{form.country}}</p>
+    <p>{{form.program.label}}: {{ form.program (onchange = "filter_country()") }}</p>
+    <p>{{form.country.label}}: {{ form.country }}</p>
     <input type="submit" value="Go">
 </form>
+
+<script>
+    function filter_country() {
+        let program_select = document.getElementById('program')
+        let country_select = document.getElementById('country')
+        program = program_select.value;
+
+        // fetch('/filter/' + program).then(function(response) {
+        //     response.json().then(function(data) {
+        //         alert("here")
+        //     });
+        // });
+    }
+</script>
 
 {% endblock %}

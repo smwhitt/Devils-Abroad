@@ -143,6 +143,10 @@ def filter_reviews():
         return redirect(url_for('explore_courses', program=form.program.data))
     return render_template('filter.html', form=form)
 
+@app.route('/filter/<program>')
+def filter_country(program):
+    countries = db.session.query(models.Country).filter(models.Program.program_name == program).all()
+    return countries
 
 @app.route('/explore-courses/<program>', methods=['GET'])
 def explore_courses(program):
