@@ -2,6 +2,7 @@
 /workspace.xml
 .idea/
 .idea/*
+*.idea/*
 *.log
 *.pot
 *.pyc
