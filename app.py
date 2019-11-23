@@ -5,7 +5,6 @@ from flask_wtf import FlaskForm
 app = Flask(__name__)
 app.secret_key = 's3cr3t'
 app.config.from_object('config')
-app.register_blueprint(auth.bp)
 db = SQLAlchemy(app, session_options={'autocommit': False})
 import models
 import forms
@@ -31,17 +30,38 @@ def review():
     countries = db.session.query(models.Program.country).distinct().all()
     form = forms.WriteReview()
     form.program.choices = [(p.program_name, p.program_name) for p in programs]
-    form.country.choices = [(country, country) for country in countries]
+    form.country.choices = [(country.country, country.country) for country in countries]
     form.courseCode.choices = [(c.duke_code, c.duke_code) for c in courses]
     form.course.choices = [(c.course_name, c.course_name) for c in courses]
-    if form.is_submitted():
-        if not form.validate():
-            for fieldName, errorMessages in form.errors.items():
-                return("field: {}, errormsg: {}".format(fieldName," ".join(errorMessages)))
-
     if form.validate_on_submit():
+        # m = Review()
+        id = 456 #set later
+        country = form.country.data
+        program_name = form.program.data
+        duke_code = form.courseCode.data
+        u_email = form.userEmail.data
+        course_name = form.course.data
+        rating = form.rating.data
+        difficulty = form.difficulty.data
+        content = form.thoughts.data
+        new_review = models.Review(id = id, country = country, program_name = program_name, duke_code = duke_code, u_email = u_email, course_name = course_name, rating = rating, difficulty = difficulty, content = content)
+        db.session.add(new_review)
+        db.session.flush()
+        db.session.commit()
+        flash('New entry was successfully posted')
         return render_template('submitted.html', form=form)
     return render_template('review.html', form=form)
+
+    # try:
+    #         form.errors.pop('database', None)
+    #         models.Drinker.edit(name, form.name.data, form.address.data,
+    #                             form.get_beers_liked(), form.get_bars_frequented())
+    #         return redirect(url_for('drinker', name=form.name.data))
+    #     except BaseException as e:
+    #         form.errors['database'] = str(e)
+    #         return render_template('edit-drinker.html', drinker=drinker, form=form)
+    # else:
+    #     return render_template('edit-drinker.html', drinker=drinker, form=form)
 
 # @app.route('/confused', methods=['GET', 'POST'])
 # def confused():
@@ -70,6 +90,18 @@ def review():
 #         # return redirect(url_for('confused'))
 #     return render_template('trying-shit-out.html', form=form)
 
+# ----------- EXAMPLE -------------
+@app.route('/login-example', methods=["GET", "POST"])
+def login_example():
+    form = forms.EmailPasswordForm()
+    if form.validate_on_submit():
+        # return "email: {}, password: {}".format(form.email.data, form.password.data)
+        return render_template('submitted.html',
+            email=form.email.data, password=form.password.data)
+    return render_template('login-example.html', form=form)
+
+# ---------------------------------
+
 @app.route('/', methods=['GET', 'POST'])
 def home_page():
     return render_template('home.html')
@@ -90,8 +122,16 @@ def submit_review():
 @app.route('/filter', methods=['GET', 'POST'])
 def filter_reviews():
     programs = db.session.query(models.Program).all()
+    countries = db.session.query(models.Country).all()
     form = forms.FilterCourseForm()
-    form.program.choices = [(p.program_name, p.program_name) for p in programs]
+
+    program_choices = [(p.program_name, p.program_name) for p in programs]
+    program_choices.insert(0,("NA", "--"))
+    form.program.choices = program_choices
+
+    country_choices = [(c.id, c.country_name) for c in countries]
+    country_choices.insert(0,(("NA","--")))
+    form.country.choices = country_choices
 
     if form.is_submitted():
         if not form.validate():
@@ -106,8 +146,11 @@ def filter_reviews():
 
 @app.route('/explore-courses/<program>', methods=['GET'])
 def explore_courses(program):
-    courses = db.session.query(models.Course) \
+    if (program != "NA") :
+        courses = db.session.query(models.Course) \
             .filter(models.Course.program_name == program)
+    else :
+        courses = db.session.query(models.Course)
     programs = db.session.query(models.Program).all()
     return render_template('explore-courses.html', courses=courses, programs=programs)
 

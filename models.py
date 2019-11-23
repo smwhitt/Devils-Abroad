@@ -48,17 +48,27 @@ class Review(db.Model):
     __bind_key__ = 'devils_abroad'
     __tablename__ = 'review'
     id = db.Column('id', db.Integer, primary_key=True)
-    location = db.Column('Location', db.String)
-    program = db.Column('Program', db.String)
-    course = db.Column('Course', db.String)
-    rating = db.Column('Rating', db.Integer)
-    difficulty = db.Column('Difficulty', db.Integer)
-    thoughts = db.Column('thoughts', db.String)
+    country = db.Column('country', db.String)
+    program_name = db.Column('program_name', db.String)
+    duke_code = db.Column('duke_code', db.String)
+    course_name = db.Column('course_name', db.String)
+    u_email = db.Column('u_email', db.String)
+    content = db.Column('content', db.String)
+    rating = db.Column('rating', db.Integer)
+    difficulty = db.Column('difficulty', db.Integer)
+
 
 # class Likes(db.Model):
 #     __bind_key__ = 'devils_abroad'
 #     __tablename__ = 'likes'
 #     u_email = db.Column('u_email', db.String(100), db.ForeignKey(User.email), primary_key=True)
+
+
+class Country(db.Model):
+    __bind_key__ = 'devils_abroad'
+    __tablename__ = 'country'
+    id = db.Column('id',db.String(3), primary_key=True)
+    country_name = db.Column('country_name', db.String(50))
 
 class Drinker(db.Model):
     __tablename__ = 'drinker'
