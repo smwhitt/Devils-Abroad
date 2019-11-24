@@ -48,6 +48,11 @@ PRIMARY KEY (u_email, review_id),
 FOREIGN KEY (u_email) REFERENCES Users(email),
 FOREIGN KEY (review_id) REFERENCES Review(id) ON DELETE CASCADE);
 
+CREATE TABLE Country
+(id VARCHAR(2) NOT NULL,
+country_name VARCHAR(50) NOT NULL,
+PRIMARY KEY(id));
+
 -- TRIGGERS
 
 CREATE FUNCTION TS_No_edit_own_review() RETURNS TRIGGER AS $$ 
@@ -102,16 +107,10 @@ on AbroadUser (u_email, term, program_name);
 
 -- INSERTS
 
-INSERT INTO Users VALUES ('ddc27@duke.edu', 'david', 'Computer Science', 2021, 'ddc27', '123');
-INSERT INTO Users VALUES('mr328@duke.edu', 'malavi',  'Statistics', 2019, 'mr328', '123');
-INSERT INTO Users VALUES('smw81@duke.edu', 'samantha', 'Electrical Computer Engineering', 2020, 'smw81', '123');
-INSERT INTO Users VALUES('al343@duke.edu', 'annie', 'Computer Science', 2021, 'al343', '123');
-INSERT INTO Users VALUES('aaz10@duke.edu', 'abby', 'Computer Science', 2020, 'aaz10', '123');
-INSERT INTO Users VALUES('aq18@duke.edu', 'alex', 'Electrical Computer Engineering', 2019, 'aq18', '123');
-
 INSERT INTO Program VALUES('Duke in Berlin', 'Germany');
 INSERT INTO Program VALUES('Duke in Madrid', 'Spain');
 INSERT INTO Program VALUES('University of New South Wales', 'Australia');
+INSERT INTO Program VALUES('University of Sydney', 'Australia');
 
 INSERT INTO Course VALUES('CS 330', 'Design and Analysis of Algorithms', 'Duke in Berlin');
 INSERT INTO Course VALUES('CS 300', 'Analysis of Big Data', 'Duke in Madrid');

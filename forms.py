@@ -23,9 +23,10 @@ class FilterCourseForm(FlaskForm):
     #     default='default string'
     # )
     # example of dynamic choices for SelectField - choices list needs to be assigned in app.py
-    program = SelectField(u'Programs')
+    program = SelectField(label='Program', default="Choose a program")
+    country = SelectField(label='Country', default="Choose a country")
 
-    # not sure why the default string isn't working
+    # note sure why the default string isn't working its so annoying aldfkjakjdfh
     # might be better to change to SelectMultipleField so user can select more than one choice
 
 class WriteReview(FlaskForm):
@@ -35,6 +36,7 @@ class WriteReview(FlaskForm):
     program = SelectField('program', choices = [], coerce = str, validators=[DataRequired()])
     courseCode = SelectField('Duke Code', choices = [], coerce = str, validators=[DataRequired()])
     course = SelectField('course', choices = [], coerce = str, validators=[DataRequired()])
+    other = StringField('enter the name of your ourse if it does not appear above',  validators=[DataRequired()])
     rating = SelectField('rating', choices = [(1,1), (2,2), (3,3), (4,4), (5,5)], coerce = int, validators=[DataRequired()])
     difficulty = SelectField('difficulty', choices = [(1,1), (2,2), (3,3), (4,4), (5,5)], coerce = int,  validators=[DataRequired()])
     thoughts = StringField('thoughts', validators=[DataRequired()])

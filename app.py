@@ -34,7 +34,7 @@ def review():
     form.program.choices = [(p.program_name, p.program_name) for p in programs]
     form.country.choices = [(country.country, country.country) for country in countries]
     form.courseCode.choices = [(c.duke_code, c.duke_code) for c in courses]
-    form.course.choices = [(c.course_name, c.course_name) for c in courses]
+    form.course.choices = [(c.course_name, c.course_name) for c in courses] + ["Other"]
     if form.validate_on_submit():
 
         dateTimeObj = datetime.now()
@@ -46,6 +46,8 @@ def review():
         duke_code = form.courseCode.data
         u_email = form.userEmail.data
         course_name = form.course.data
+        if course_name == "Other":
+            course_name = form.other.data
         rating = form.rating.data
         difficulty = form.difficulty.data
         content = form.thoughts.data
@@ -58,8 +60,6 @@ def review():
         flash('New entry was successfully posted')
         return render_template('submitted.html', form=form)
     return render_template('review.html', form=form)
-
-
 
     # try:
     #         form.errors.pop('database', None)
@@ -99,6 +99,18 @@ def review():
 #         # return redirect(url_for('confused'))
 #     return render_template('trying-shit-out.html', form=form)
 
+# ----------- EXAMPLE -------------
+@app.route('/login-example', methods=["GET", "POST"])
+def login_example():
+    form = forms.EmailPasswordForm()
+    if form.validate_on_submit():
+        # return "email: {}, password: {}".format(form.email.data, form.password.data)
+        return render_template('submitted.html',
+            email=form.email.data, password=form.password.data)
+    return render_template('login-example.html', form=form)
+
+# ---------------------------------
+
 @app.route('/', methods=['GET', 'POST'])
 def home_page():
     return render_template('home.html')
@@ -119,8 +131,16 @@ def submit_review():
 @app.route('/filter', methods=['GET', 'POST'])
 def filter_reviews():
     programs = db.session.query(models.Program).all()
+    countries = db.session.query(models.Country).all()
     form = forms.FilterCourseForm()
-    form.program.choices = [(p.program_name, p.program_name) for p in programs]
+
+    program_choices = [(p.program_name, p.program_name) for p in programs]
+    program_choices.insert(0,("NA", "--"))
+    form.program.choices = program_choices
+
+    country_choices = [(c.id, c.country_name) for c in countries]
+    country_choices.insert(0,(("NA","--")))
+    form.country.choices = country_choices
 
     if form.is_submitted():
         if not form.validate():
@@ -135,8 +155,11 @@ def filter_reviews():
 
 @app.route('/explore-courses/<program>', methods=['GET'])
 def explore_courses(program):
-    courses = db.session.query(models.Course) \
+    if (program != "NA") :
+        courses = db.session.query(models.Course) \
             .filter(models.Course.program_name == program)
+    else :
+        courses = db.session.query(models.Course)
     programs = db.session.query(models.Program).all()
     return render_template('explore-courses.html', courses=courses, programs=programs)
 
