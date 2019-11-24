@@ -6,6 +6,7 @@ from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
 
 
+
 class EmailPasswordForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])

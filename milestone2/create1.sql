@@ -29,7 +29,7 @@ FOREIGN KEY (u_email) REFERENCES Users(email),
 FOREIGN KEY (program_name) REFERENCES Program(program_name));
 
 CREATE TABLE Review
-(id INTEGER NOT NULL PRIMARY KEY,
+(id VARCHAR(100)  NOT NULL PRIMARY KEY,
 country VARCHAR(100) NOT NULL, --fix later, doesn't reference countries!
 program_name VARCHAR(100) NOT NULL REFERENCES Program(program_name),
 duke_code VARCHAR(100) NOT NULL,
@@ -38,12 +38,12 @@ u_email VARCHAR(100) NOT NULL,
 content VARCHAR(1000) NOT NULL,
 rating FLOAT NOT NULL CHECK (rating >= 0 AND rating <= 5.0),
 difficulty FLOAT NOT NULL CHECK (difficulty >= 0 AND difficulty <= 5.0),
-created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+-- created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
 UNIQUE(u_email, program_name, duke_code, course_name));
 
 CREATE TABLE Likes
 (u_email VARCHAR(100) NOT NULL,
-review_id INTEGER NOT NULL,
+review_id VARCHAR(100) NOT NULL,
 PRIMARY KEY (u_email, review_id),
 FOREIGN KEY (u_email) REFERENCES Users(email),
 FOREIGN KEY (review_id) REFERENCES Review(id) ON DELETE CASCADE);
@@ -123,13 +123,13 @@ INSERT INTO AbroadUser VALUES ('mr328@duke.edu', 'Fall 2019', 'Duke in Madrid');
 INSERT INTO AbroadUser VALUES ('smw81@duke.edu', 'Spring 2020', 'University of New South Wales');
 INSERT INTO AbroadUser VALUES ('aq18@duke.edu', 'Spring 2020', 'University of New South Wales');
 
-INSERT INTO Review VALUES (1, 'Germany', 'Duke in Berlin', 'CS 330', 'Design and Analysis of Algorithms' , 'ddc27@duke.edu', 'I think this class is amazing!', 4.5, 2.0);
-INSERT INTO Review VALUES (2, 'Spain', 'Duke in Madrid', 'CS 300', 'Networks', 'mr328@duke.edu', 'I think this class SUCKS!', 1, 5);
-INSERT INTO Review VALUES (3, 'Australia','University of New South Wales', 'CS 250', 'Computer Architecture', 'smw81@duke.edu', 'I think this rocks hehe!', 5, 1);
+INSERT INTO Review VALUES ("1", 'Germany', 'Duke in Berlin', 'CS 330', 'Design and Analysis of Algorithms' , 'ddc27@duke.edu', 'I think this class is amazing!', 4, 2);
+INSERT INTO Review VALUES ("2", 'Spain', 'Duke in Madrid', 'CS 300', 'Networks', 'mr328@duke.edu', 'I think this class SUCKS!', 1, 5);
+INSERT INTO Review VALUES ("3", 'Australia','University of New South Wales', 'CS 250', 'Computer Architecture', 'smw81@duke.edu', 'I think this rocks hehe!', 5, 1);
 
-INSERT INTO Likes VALUES ('aaz10@duke.edu', 1);
-INSERT INTO Likes Values ('al343@duke.edu', 3);
+INSERT INTO Likes VALUES ('aaz10@duke.edu', "1");
+INSERT INTO Likes Values ('al343@duke.edu', "3");
 
 -- TESTING TRIGGERS
 
-INSERT INTO Review VALUES (4, 'Duke in Madrid', 'CS 300', 'Networks' , 'ddc27@duke.edu', 'hahaha i didn’t even take this class!', 4.5, 2.0);
+INSERT INTO Review VALUES ("4", 'Duke in Madrid', 'CS 300', 'Networks' , 'ddc27@duke.edu', 'hahaha i didn’t even take this class!', 4.5, 2.0);

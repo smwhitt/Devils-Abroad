@@ -1,5 +1,6 @@
 from sqlalchemy import sql, orm
 from app import db
+import datetime
 
 
 class Users(db.Model):
@@ -45,9 +46,11 @@ class AbroadUser(db.Model):
 # note: shouldn't u_email be a foreign key?
 
 class Review(db.Model):
+
+
     __bind_key__ = 'devils_abroad'
     __tablename__ = 'review'
-    id = db.Column('id', db.Integer, primary_key=True)
+    id = db.Column('id', db.String, primary_key = True)
     country = db.Column('country', db.String)
     program_name = db.Column('program_name', db.String)
     duke_code = db.Column('duke_code', db.String)

@@ -13,6 +13,8 @@ from forms import WriteReview
 from models import *
 from auth import *
 app.register_blueprint(auth.bp)
+from datetime import datetime
+
 
 
 @app.route('/all')
@@ -34,8 +36,11 @@ def review():
     form.courseCode.choices = [(c.duke_code, c.duke_code) for c in courses]
     form.course.choices = [(c.course_name, c.course_name) for c in courses]
     if form.validate_on_submit():
-        # m = Review()
-        id = 456 #set later
+
+        dateTimeObj = datetime.now()
+        timestampStr = dateTimeObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
+        id = timestampStr
+        #id = 98
         country = form.country.data
         program_name = form.program.data
         duke_code = form.courseCode.data
@@ -45,7 +50,9 @@ def review():
         difficulty = form.difficulty.data
         content = form.thoughts.data
         new_review = models.Review(id = id, country = country, program_name = program_name, duke_code = duke_code, u_email = u_email, course_name = course_name, rating = rating, difficulty = difficulty, content = content)
+        new_course = models.Course(duke_code = duke_code, course_name = course_name, program_name = program_name)
         db.session.add(new_review)
+        db.session.add(new_course)
         db.session.flush()
         db.session.commit()
         flash('New entry was successfully posted')
