@@ -5,22 +5,39 @@
 <form action="{{ url_for('filter_reviews')}}" method="POST">
     {{ form.csrf_token }}
 
-    <p>{{form.program.label}}: {{ form.program (onchange = "filter_country()") }}</p>
-    <p>{{form.country.label}}: {{ form.country }}</p>
+    <p>{{form.country.label}}: {{ form.country (onchange = "filter_country()") }}</p>
+    <p>{{form.program.label}}: {{ form.program }}</p>
     <input type="submit" value="Go">
 </form>
 
 <script>
     function filter_country() {
-        let program_select = document.getElementById('program')
         let country_select = document.getElementById('country')
-        program = program_select.value;
+        let program_select = document.getElementById('program')
 
-        // fetch('/filter/' + program).then(function(response) {
-        //     response.json().then(function(data) {
-        //         alert("here")
-        //     });
-        // });
+// need to change tables in order for this to work
+        country = country_select.value;
+        console.log("please give me the name");
+        console.log($(document).val(country));
+
+        fetch('/filter/' + country, 
+            {  headers : { 
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+            }
+            }).then(function(response) {
+            response.json().then(function(data) {
+                console.log(data);
+                let optionHTML = '';
+                for (let program of data.programs) {
+                    optionHTML += '<option value= "' + program + '">' + program  + '</option>';
+                }
+
+                program_select.innerHTML = optionHTML;
+            }).catch(function(error) {
+                console.log("couldn't get a program based off the country");
+            });
+        });
     }
 </script>
 

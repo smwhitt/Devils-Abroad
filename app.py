@@ -1,6 +1,6 @@
-from flask import Flask, render_template, redirect, url_for, flash, Blueprint, g, request, session
+from flask import Flask, render_template, redirect, url_for, flash, Blueprint, g, session
 from flask_sqlalchemy import SQLAlchemy
-from flask import request
+from flask import request, jsonify, make_response
 from flask_wtf import FlaskForm
 app = Flask(__name__)
 app.secret_key = 's3cr3t'
@@ -121,17 +121,17 @@ def submit_review():
 
 @app.route('/filter', methods=['GET', 'POST'])
 def filter_reviews():
-    programs = db.session.query(models.Program).all()
     countries = db.session.query(models.Country).all()
+    programs = db.session.query(models.Program).all()
     form = forms.FilterCourseForm()
-
-    program_choices = [(p.program_name, p.program_name) for p in programs]
-    program_choices.insert(0,("NA", "--"))
-    form.program.choices = program_choices
 
     country_choices = [(c.id, c.country_name) for c in countries]
     country_choices.insert(0,(("NA","--")))
     form.country.choices = country_choices
+
+    program_choices = [(p.program_name, p.program_name) for p in programs]
+    program_choices.insert(0,("NA", "--"))
+    form.program.choices = program_choices
 
     if form.is_submitted():
         if not form.validate():
@@ -143,10 +143,18 @@ def filter_reviews():
         return redirect(url_for('explore_courses', program=form.program.data))
     return render_template('filter.html', form=form)
 
-@app.route('/filter/<program>')
-def filter_country(program):
-    countries = db.session.query(models.Country).filter(models.Program.program_name == program).all()
-    return countries
+@app.route('/filter/<country>')
+def filter_country(country):
+    print("?????????????????????????")
+    print(country)
+    programs = db.session.query(models.Program).filter(models.Program.country == country)
+    print("**********************************")
+    print(programs)
+    programArray = []
+    for program in programs:
+        programArray.append(programs.program_name)
+    
+    return jsonify({'programs': programArray})
 
 @app.route('/explore-courses/<program>', methods=['GET'])
 def explore_courses(program):
