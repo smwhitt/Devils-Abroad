@@ -122,10 +122,12 @@ def submit_review():
 @app.route('/filter', methods=['GET', 'POST'])
 def filter_reviews():
     countries = db.session.query(models.Country).all()
+    print("::::::::::::::::::::::::::")
+    print(countries)
     programs = db.session.query(models.Program).all()
     form = forms.FilterCourseForm()
 
-    country_choices = [(c.id, c.country_name) for c in countries]
+    country_choices = [(c.country_name, c.country_name) for c in countries]
     country_choices.insert(0,(("NA","--")))
     form.country.choices = country_choices
 
@@ -145,14 +147,10 @@ def filter_reviews():
 
 @app.route('/filter/<country>')
 def filter_country(country):
-    print("?????????????????????????")
-    print(country)
     programs = db.session.query(models.Program).filter(models.Program.country == country)
-    print("**********************************")
-    print(programs)
     programArray = []
     for program in programs:
-        programArray.append(programs.program_name)
+        programArray.append(program.program_name)
     
     return jsonify({'programs': programArray})
 

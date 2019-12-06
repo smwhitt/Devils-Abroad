@@ -14,11 +14,8 @@
     function filter_country() {
         let country_select = document.getElementById('country')
         let program_select = document.getElementById('program')
-
-// need to change tables in order for this to work
+        
         country = country_select.value;
-        console.log("please give me the name");
-        console.log($(document).val(country));
 
         fetch('/filter/' + country, 
             {  headers : { 
