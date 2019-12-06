@@ -49,9 +49,9 @@ FOREIGN KEY (u_email) REFERENCES Users(email),
 FOREIGN KEY (review_id) REFERENCES Review(id) ON DELETE CASCADE);
 
 CREATE TABLE Country
-(id VARCHAR(2) NOT NULL,
-country_name VARCHAR(50) NOT NULL,
-PRIMARY KEY(id));
+(country_name VARCHAR(50) NOT NULL,
+c_id VARCHAR(2) NOT NULL,
+PRIMARY KEY(country_name));
 
 -- TRIGGERS
 

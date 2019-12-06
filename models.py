@@ -70,8 +70,8 @@ class Review(db.Model):
 class Country(db.Model):
     __bind_key__ = 'devils_abroad'
     __tablename__ = 'country'
-    id = db.Column('id',db.String(3), primary_key=True)
-    country_name = db.Column('country_name', db.String(50))
+    country_name = db.Column('country_name', db.String(50), primary_key=True)
+    c_id = db.Column('c_id',db.String(3))
 
 class Drinker(db.Model):
     __tablename__ = 'drinker'
