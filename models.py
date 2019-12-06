@@ -53,6 +53,7 @@ class Review(db.Model):
     id = db.Column('id', db.String, primary_key = True)
     country = db.Column('country', db.String)
     program_name = db.Column('program_name', db.String)
+    duke_major_code = db.Column('duke_major_code', db.String)
     duke_code = db.Column('duke_code', db.String)
     course_name = db.Column('course_name', db.String)
     u_email = db.Column('u_email', db.String)
@@ -60,6 +61,11 @@ class Review(db.Model):
     rating = db.Column('rating', db.Integer)
     difficulty = db.Column('difficulty', db.Integer)
 
+
+class MajorCodes(db.Model):
+    __bind_key__ = 'devils_abroad'
+    __tablename__ = 'majorcodes'
+    duke_major_code = db.Column('duke_major_code', db.String(20), primary_key = True)
 
 # class Likes(db.Model):
 #     __bind_key__ = 'devils_abroad'

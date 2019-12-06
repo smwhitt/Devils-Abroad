@@ -29,31 +29,31 @@ def country_choices():
 @app.route('/review', methods=['GET', 'POST'])
 def review():
 
-    courses = db.session.query(models.Course).all()
+    majorCodes = db.session.query(models.MajorCodes).all()
     programs = db.session.query(models.Program).all()
     countries = db.session.query(models.Program.country).distinct().all()
         
     form = forms.WriteReview()
     form.program.choices = [(p.program_name, p.program_name) for p in programs]
     form.country.choices = [(country.country, country.country) for country in countries]
-    form.course.choices = [(course.course_name, course.course_name) for course in courses] + [("Other", "Other")]
-    form.courseCode.choices = [(c.duke_code, c.duke_code) for c in courses]
+    form.majorCode.choices = [(m.duke_major_code, m.duke_major_code) for m in majorCodes]
+    #form.course.choices = [(course.course_name, course.course_name) for course in courses] + [("Other", "Other")]
+    #form.courseCode.choices = [(c.duke_code, c.duke_code) for c in courses]
     if form.validate_on_submit():
-
         dateTimeObj = datetime.now()
         timestampStr = dateTimeObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
         id = timestampStr
         country = form.country.data
         program_name = form.program.data
-        duke_code = form.courseCode.data
+        duke_major_code = form.majorCode.data
+        #duke_code = form.courseCode.data
+        duke_code = str(duke_major_code) + " " + str(form.courseNumber.data)
         u_email = form.userEmail.data
         course_name = form.course.data
-        if course_name == "Other":
-            course_name = form.other.data
         rating = form.rating.data
         difficulty = form.difficulty.data
         content = form.thoughts.data
-        new_review = models.Review(id = id, country = country, program_name = program_name, duke_code = duke_code, u_email = u_email, course_name = course_name, rating = rating, difficulty = difficulty, content = content)
+        new_review = models.Review(id = id, country = country, program_name = program_name, duke_major_code = duke_major_code, duke_code = duke_code, u_email = u_email, course_name = course_name, rating = rating, difficulty = difficulty, content = content)
         new_course = models.Course(duke_code = duke_code, course_name = course_name, program_name = program_name)
         db.session.add(new_review)
         db.session.add(new_course)
