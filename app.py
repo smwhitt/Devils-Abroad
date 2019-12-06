@@ -24,23 +24,25 @@ def all_drinkers():
 
 def country_choices():
     return db.session.query(models.Program.country).distinct().all()
+   
 
 @app.route('/review', methods=['GET', 'POST'])
 def review():
+
     courses = db.session.query(models.Course).all()
     programs = db.session.query(models.Program).all()
     countries = db.session.query(models.Program.country).distinct().all()
+        
     form = forms.WriteReview()
     form.program.choices = [(p.program_name, p.program_name) for p in programs]
     form.country.choices = [(country.country, country.country) for country in countries]
+    form.course.choices = [(course.course_name, course.course_name) for course in courses] + [("Other", "Other")]
     form.courseCode.choices = [(c.duke_code, c.duke_code) for c in courses]
-    form.course.choices = [(c.course_name, c.course_name) for c in courses] + ["Other"]
     if form.validate_on_submit():
 
         dateTimeObj = datetime.now()
         timestampStr = dateTimeObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
         id = timestampStr
-        #id = 98
         country = form.country.data
         program_name = form.program.data
         duke_code = form.courseCode.data
@@ -61,44 +63,7 @@ def review():
         return render_template('submitted.html', form=form)
     return render_template('review.html', form=form)
 
-    # try:
-    #         form.errors.pop('database', None)
-    #         models.Drinker.edit(name, form.name.data, form.address.data,
-    #                             form.get_beers_liked(), form.get_bars_frequented())
-    #         return redirect(url_for('drinker', name=form.name.data))
-    #     except BaseException as e:
-    #         form.errors['database'] = str(e)
-    #         return render_template('edit-drinker.html', drinker=drinker, form=form)
-    # else:
-    #     return render_template('edit-drinker.html', drinker=drinker, form=form)
-
-# @app.route('/confused', methods=['GET', 'POST'])
-# def confused():
-#     form = WriteReview()
-#     if form.validate_on_submit():
-#         # review = Review()
-#         # form.populate_obj(review)
-#         # db.session.add(review)
-#         # db.session.commit()
-#         # location = form.location.data
-#         # program = form.program.data
-#         # course = form.course.data
-#         # rating = form.rating.data
-#         # difficulty = form.difficulty.data
-#         # thoughts = form.thoughts.data
-#         # print(location)
-#         # print(program)
-#         # print(course)
-#         # print(rating)
-#         # print(difficulty)
-#         # print(thoughts)
-#         flash('Login requested for user {}, remember_me={}'.format(
-#             form.username.data, form.remember_me.data))
-#         return redirect('/index')
-#         # print("\nData received. Now redirecting ...")
-#         # return redirect(url_for('confused'))
-#     return render_template('trying-shit-out.html', form=form)
-
+    
 # ----------- EXAMPLE -------------
 @app.route('/login-example', methods=["GET", "POST"])
 def login_example():

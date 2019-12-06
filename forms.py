@@ -36,11 +36,15 @@ class WriteReview(FlaskForm):
     program = SelectField('program', choices = [], coerce = str, validators=[DataRequired()])
     courseCode = SelectField('Duke Code', choices = [], coerce = str, validators=[DataRequired()])
     course = SelectField('course', choices = [], coerce = str, validators=[DataRequired()])
-    other = StringField('enter the name of your ourse if it does not appear above',  validators=[DataRequired()])
+    other = StringField('Enter the name of your course if you selected Other above')
     rating = SelectField('rating', choices = [(1,1), (2,2), (3,3), (4,4), (5,5)], coerce = int, validators=[DataRequired()])
     difficulty = SelectField('difficulty', choices = [(1,1), (2,2), (3,3), (4,4), (5,5)], coerce = int,  validators=[DataRequired()])
     thoughts = StringField('thoughts', validators=[DataRequired()])
     
+class CountryForReview(FlaskForm):
+    userEmail = StringField('User Email',  validators=[DataRequired()])
+    country = SelectField('country', choices = [], coerce = str, validators=[DataRequired()])
+
 
 class DrinkerEditFormFactory:
     @staticmethod
