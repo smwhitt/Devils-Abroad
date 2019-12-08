@@ -27,6 +27,7 @@ def country_choices():
    
 
 @app.route('/review', methods=['GET', 'POST'])
+@login_required
 def review():
 
     majorCodes = db.session.query(models.MajorCodes).all()
@@ -63,24 +64,12 @@ def review():
         return render_template('submitted.html', form=form)
     return render_template('review.html', form=form)
 
-    
-# ----------- EXAMPLE -------------
-@app.route('/login-example', methods=["GET", "POST"])
-def login_example():
-    form = forms.EmailPasswordForm()
-    if form.validate_on_submit():
-        # return "email: {}, password: {}".format(form.email.data, form.password.data)
-        return render_template('submitted.html',
-            email=form.email.data, password=form.password.data)
-    return render_template('login-example.html', form=form)
-
-# ---------------------------------
-
 @app.route('/', methods=['GET', 'POST'])
 def home_page():
     return render_template('home.html')
 
 @app.route('/write-review', methods=['GET'])
+@login_required
 def write_review():
     courses = db.session.query(models.Course).all()
     programs = db.session.query(models.Program).all()

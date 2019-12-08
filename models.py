@@ -9,7 +9,8 @@ class Users(db.Model):
     email = db.Column('email', db.String(100), primary_key=True)
     name = db.Column('name', db.String(100))
     major = db.Column('major', db.String(50))
-    grad_year = db.Column('grad_year', db.Integer())
+    term = db.Column('term', db.String(50))
+    program_name = db.Column('program_name', db.String(50))
     username = db.Column('username', db.String())
     password = db.Column('password', db.String())
 
@@ -36,18 +37,9 @@ class Course(db.Model):
     program_name = db.Column('program_name', db.String(100),
                              db.ForeignKey(Program.program_name), primary_key=True)
 
-
-class AbroadUser(db.Model):
-    __bind_key__ = 'devils_abroad'
-    __tablename__ = 'abroaduser'
-    u_email = db.Column('u_email', db.String(100), primary_key=True)
-
-
 # note: shouldn't u_email be a foreign key?
 
 class Review(db.Model):
-
-
     __bind_key__ = 'devils_abroad'
     __tablename__ = 'review'
     id = db.Column('id', db.String, primary_key = True)

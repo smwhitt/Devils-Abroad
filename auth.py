@@ -5,7 +5,6 @@ from flask import (
     Blueprint, flash, g, redirect, render_template, request, session, url_for
 )
 from app import db
-from flask_sqlalchemy import SQLAlchemy
 from werkzeug.security import check_password_hash, generate_password_hash
 bp = Blueprint('auth', __name__, url_prefix='/auth')
 @bp.route('/register', methods=('GET', 'POST'))
@@ -14,7 +13,8 @@ def register():
         email = request.form['email']
         name = request.form['name']
         major = request.form['major']
-        grad_year = request.form['grad_year']
+        term = request.form['term']
+        program_name = request.form['program_name']
         uname = request.form['username']
         pwd = request.form['password']
         confpwd = request.form['confirmpassword']
@@ -29,10 +29,10 @@ def register():
         elif db.session.query(models.Users).filter(models.Users.username.like(uname)).first() is not None:
             error = 'User {} is already registered.'.format(uname)
         elif pwd != confpwd:
-            error = 'Password mis-matched'
+            error = 'Passwords do not match'
         if error is None:
             hashed_pwd = generate_password_hash(pwd)
-            new_account = models.Users(email=email, name=name, major=major, grad_year=grad_year, username=uname, password=hashed_pwd)
+            new_account = models.Users(email=email, name=name, major=major, term=term, program_name=program_name, username=uname, password=hashed_pwd)
             db.session.add(new_account)
             db.session.flush()
             db.session.commit()
@@ -52,8 +52,8 @@ def login():
 
         if user is None:
             error = 'Incorrect username.'
-        elif not check_password_hash(user.password, password):
-           error = 'Incorrect password.'
+        elif not check_password_hash(user.password, password) and (user.password != password):
+            error = 'Incorrect password.'
 
         if error is None:
             session.clear()
