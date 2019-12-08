@@ -64,6 +64,10 @@ def login():
 
     return render_template('auth/login.html')
 
+@bp.route('/my_account', methods=('GET', 'POST'))
+def my_account():
+
+
 @bp.before_app_request
 def load_logged_in_user():
     user_email = session.get('user_email')

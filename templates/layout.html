@@ -14,7 +14,8 @@
           <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
           <li><a href="/">Home</a>
           {% if g.user %}
-              <p>Hello {{ g.user['username'] }}!</p>
+              <li>Hello {{ g.user['username'] }}!</li>
+              <li><a href="{{ url_for('auth.my_account') }}">My Account</a>
               <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
           {% else %}
               <li><a href="{{ url_for('auth.register') }}">Register</a>
