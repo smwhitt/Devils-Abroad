@@ -152,6 +152,8 @@ INSERT INTO Review VALUES ('3', 'Australia','University of New South Wales', 'CO
 INSERT INTO Likes VALUES ('ddc27@duke.edu', '2');
 INSERT INTO Likes Values ('aq18@duke.edu', '3');
 
+COPY Country(country_name,c_id) FROM 'Countries.csv' DELIMITER ',' CSV HEADER;
+
 -- TESTING TRIGGERS
 
 -- INSERT INTO Review VALUES ("4", 'Duke in Madrid', 'CS 300', 'Networks' , 'ddc27@duke.edu', 'hahaha i didn’t even take this class!', 4.5, 2.0);
