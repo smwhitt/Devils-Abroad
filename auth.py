@@ -7,8 +7,15 @@ from flask import (
 from app import db
 from werkzeug.security import check_password_hash, generate_password_hash
 bp = Blueprint('auth', __name__, url_prefix='/auth')
+
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
+    programs = db.session.query(models.Program).all()
+    programChoices = [(p.program_name, p.program_name) for p in programs]
+    programChoices.insert(0, ("--", "--"))
+    majorCodes = db.session.query(models.MajorCodes).distinct().all()
+    majorCodeChoices = [(m.duke_major_code, m.duke_major_code) for m in majorCodes]
+    majorCodeChoices.insert(0, ("--", "--"))
     if request.method == 'POST':
         email = request.form['email']
         name = request.form['name']
@@ -19,6 +26,11 @@ def register():
         pwd = request.form['password']
         confpwd = request.form['confirmpassword']
         error = None
+
+        if major == "--":
+            error = 'You must choose a major.'
+        if program_name == "--":
+            error = 'You must choose a program.'
 
         if not uname:
             error = 'Username is required.'
@@ -40,7 +52,7 @@ def register():
 
         flash(error)
 
-    return render_template('auth/register.html')
+    return render_template('auth/register.html', majors = majorCodeChoices, programs = programChoices)
 
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
