@@ -6,6 +6,7 @@ from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
 
 
+
 class EmailPasswordForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
@@ -29,16 +30,23 @@ class FilterCourseForm(FlaskForm):
     # might be better to change to SelectMultipleField so user can select more than one choice
 
 class WriteReview(FlaskForm):
-    
+
     country = SelectField('country', choices = [], coerce = str, validators=[DataRequired()])
-    userEmail = StringField('User Email',  validators=[DataRequired()])
     program = SelectField('program', choices = [], coerce = str, validators=[DataRequired()])
-    courseCode = SelectField('Duke Code', choices = [], coerce = str, validators=[DataRequired()])
-    course = SelectField('course', choices = [], coerce = str, validators=[DataRequired()])
+    majorCode = SelectField('Course Major', choices = [], coerce = str, validators=[DataRequired()])
+    courseNumber = IntegerField('Enter the Number of the course (as Duke would write it)', validators=[DataRequired()])
+    #courseCode = SelectField('Duke Code', choices = [], coerce = str, validators=[DataRequired()])
+    course = StringField('What is the name of the course?', validators=[DataRequired()])
+    userEmail = StringField('User Email',  validators=[DataRequired()])
+    #other = StringField('Enter the name of your course if you selected Other above')
     rating = SelectField('rating', choices = [(1,1), (2,2), (3,3), (4,4), (5,5)], coerce = int, validators=[DataRequired()])
     difficulty = SelectField('difficulty', choices = [(1,1), (2,2), (3,3), (4,4), (5,5)], coerce = int,  validators=[DataRequired()])
     thoughts = StringField('thoughts', validators=[DataRequired()])
     
+class CountryForReview(FlaskForm):
+    userEmail = StringField('User Email',  validators=[DataRequired()])
+    country = SelectField('country', choices = [], coerce = str, validators=[DataRequired()])
+
 
 class DrinkerEditFormFactory:
     @staticmethod
