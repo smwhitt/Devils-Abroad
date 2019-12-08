@@ -122,8 +122,6 @@ def submit_review():
 @app.route('/filter', methods=['GET', 'POST'])
 def filter_reviews():
     countries = db.session.query(models.Country).all()
-    print("::::::::::::::::::::::::::")
-    print(countries)
     programs = db.session.query(models.Program).all()
     form = forms.FilterCourseForm()
 
