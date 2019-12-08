@@ -14,7 +14,7 @@ COPY Program(program_name,country) FROM '/home/davidchen1337/devils_abroad/Devil
 
 COPY AbroadUser(u_email,term,program_name) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Populate AbroadUsers.csv' DELIMITER ',' CSV HEADER;
 
-COPY Country(country_name,c_id) FROM '.../Countries.csv' DELIMITER ',' CSV HEADER;
+COPY Country(country_name,c_id) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Countries.csv' DELIMITER ',' CSV HEADER;
 
 http://www.postgresqltutorial.com/import-csv-file-into-posgresql-table/
 

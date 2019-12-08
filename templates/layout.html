@@ -1,4 +1,5 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 <html xmlns="http://www.w3.org/1999/xhtml">
   <nav>
       <head>
@@ -11,9 +12,10 @@
           <meta http-equiv="Content-type" content="text/html;charset=UTF-8"/>
           <link rel="stylesheet" href="/static/css/style.css" type="text/css" media="screen"/>
           <script src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
-          <a href="/">Devils Abroad</a>
+          <li><a href="/">Home</a>
           {% if g.user %}
-              <p>Hello {{ g.user['username'] }}!</p>
+              <li>Hello {{ g.user['username'] }}!</li>
+              <li><a href="{{ url_for('auth.my_account') }}">My Account</a>
               <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
           {% else %}
               <li><a href="{{ url_for('auth.register') }}">Register</a>

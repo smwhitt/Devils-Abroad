@@ -13,6 +13,8 @@ from forms import WriteReview
 from models import *
 from auth import *
 app.register_blueprint(auth.bp)
+from datetime import datetime
+
 
 
 @app.route('/all')
@@ -22,91 +24,52 @@ def all_drinkers():
 
 def country_choices():
     return db.session.query(models.Program.country).distinct().all()
+   
 
 @app.route('/review', methods=['GET', 'POST'])
+@login_required
 def review():
-    courses = db.session.query(models.Course).all()
+
+    majorCodes = db.session.query(models.MajorCodes).all()
     programs = db.session.query(models.Program).all()
     countries = db.session.query(models.Program.country).distinct().all()
+        
     form = forms.WriteReview()
     form.program.choices = [(p.program_name, p.program_name) for p in programs]
     form.country.choices = [(country.country, country.country) for country in countries]
-    form.courseCode.choices = [(c.duke_code, c.duke_code) for c in courses]
-    form.course.choices = [(c.course_name, c.course_name) for c in courses]
+    form.majorCode.choices = [(m.duke_major_code, m.duke_major_code) for m in majorCodes]
+    #form.course.choices = [(course.course_name, course.course_name) for course in courses] + [("Other", "Other")]
+    #form.courseCode.choices = [(c.duke_code, c.duke_code) for c in courses]
     if form.validate_on_submit():
-        # m = Review()
-        id = 456 #set later
+        dateTimeObj = datetime.now()
+        timestampStr = dateTimeObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
+        id = timestampStr
         country = form.country.data
         program_name = form.program.data
-        duke_code = form.courseCode.data
+        duke_major_code = form.majorCode.data
+        #duke_code = form.courseCode.data
+        duke_code = str(duke_major_code) + " " + str(form.courseNumber.data)
         u_email = form.userEmail.data
         course_name = form.course.data
         rating = form.rating.data
         difficulty = form.difficulty.data
         content = form.thoughts.data
-        new_review = models.Review(id = id, country = country, program_name = program_name, duke_code = duke_code, u_email = u_email, course_name = course_name, rating = rating, difficulty = difficulty, content = content)
+        new_review = models.Review(id = id, country = country, program_name = program_name, duke_major_code = duke_major_code, duke_code = duke_code, u_email = u_email, course_name = course_name, rating = rating, difficulty = difficulty, content = content)
+        new_course = models.Course(duke_code = duke_code, course_name = course_name, program_name = program_name)
         db.session.add(new_review)
+        db.session.add(new_course)
         db.session.flush()
         db.session.commit()
         flash('New entry was successfully posted')
         return render_template('submitted.html', form=form)
     return render_template('review.html', form=form)
 
-    # try:
-    #         form.errors.pop('database', None)
-    #         models.Drinker.edit(name, form.name.data, form.address.data,
-    #                             form.get_beers_liked(), form.get_bars_frequented())
-    #         return redirect(url_for('drinker', name=form.name.data))
-    #     except BaseException as e:
-    #         form.errors['database'] = str(e)
-    #         return render_template('edit-drinker.html', drinker=drinker, form=form)
-    # else:
-    #     return render_template('edit-drinker.html', drinker=drinker, form=form)
-
-# @app.route('/confused', methods=['GET', 'POST'])
-# def confused():
-#     form = WriteReview()
-#     if form.validate_on_submit():
-#         # review = Review()
-#         # form.populate_obj(review)
-#         # db.session.add(review)
-#         # db.session.commit()
-#         # location = form.location.data
-#         # program = form.program.data
-#         # course = form.course.data
-#         # rating = form.rating.data
-#         # difficulty = form.difficulty.data
-#         # thoughts = form.thoughts.data
-#         # print(location)
-#         # print(program)
-#         # print(course)
-#         # print(rating)
-#         # print(difficulty)
-#         # print(thoughts)
-#         flash('Login requested for user {}, remember_me={}'.format(
-#             form.username.data, form.remember_me.data))
-#         return redirect('/index')
-#         # print("\nData received. Now redirecting ...")
-#         # return redirect(url_for('confused'))
-#     return render_template('trying-shit-out.html', form=form)
-
-# ----------- EXAMPLE -------------
-@app.route('/login-example', methods=["GET", "POST"])
-def login_example():
-    form = forms.EmailPasswordForm()
-    if form.validate_on_submit():
-        # return "email: {}, password: {}".format(form.email.data, form.password.data)
-        return render_template('submitted.html',
-            email=form.email.data, password=form.password.data)
-    return render_template('login-example.html', form=form)
-
-# ---------------------------------
-
 @app.route('/', methods=['GET', 'POST'])
 def home_page():
     return render_template('home.html')
 
 @app.route('/write-review', methods=['GET'])
+@login_required
 def write_review():
     courses = db.session.query(models.Course).all()
     programs = db.session.query(models.Program).all()
