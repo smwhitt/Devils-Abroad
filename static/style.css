@@ -10,6 +10,13 @@ body {
   background: white;
 }
 
+h1 {
+  font-size: large;
+  font-family: serif;
+  color: #377ba8;
+  margin: 1rem 0;
+}
+
 h1, h2, h3, h4, h5, h6 {
   font-family: serif;
   color: #377ba8;

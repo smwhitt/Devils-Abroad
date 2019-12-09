@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+{% block content %}
+<hr/>
+<h3>Past Duke Students Who Have Gone Abroad:</h3>
+
+{% for contact in contact_list %}
+    <p>Name: {{contact.name}}</p>
+    <p>Major: {{contact.major}}</p>
+    <p>Term: {{contact.term}}</p>
+    <p>Program: {{contact.program_name}}</p>
+    <p>User Email: {{contact.email}}</p>
+<hr/>
+{% endfor %}
+
+{% endblock %}
