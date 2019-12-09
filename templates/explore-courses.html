@@ -34,27 +34,10 @@
   
 </style>
 
-<script>
-  function myFunction(course) {
-    document.getElementById("course_card").onclick = function () {
-        var c_id = "{{course.uuid}}"
-        location.href = "{{url_for('course_review', course_uuid=c_id)}}";
-    };
-  }
-</script>
-
-<!-- <ul>
-  {% for course in courses %}
-  <li><a href="{{url_for('course_review', course_name=course.course_name)}}">
-    {{course.course_name}}
-  </a></li>
-  {% endfor %}
-</ul> -->
-
 {% for course in courses %}
-<div class="card" id="course_card" onclick="myFunction(course)">
+<div class="card" id="course_card">
   <div class="courseName">
-    {{course.course_name}}
+    <a href="{{url_for('course_review', course_uuid=course.uuid)}}">{{course.course_name}}</a>
   </div>
   <div class="dukeCode">
     {{course.duke_code}}
