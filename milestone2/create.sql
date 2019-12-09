@@ -62,7 +62,7 @@ content VARCHAR(1000) NOT NULL,
 rating FLOAT NOT NULL CHECK (rating >= 0 AND rating <= 5.0),
 difficulty FLOAT NOT NULL CHECK (difficulty >= 0 AND difficulty <= 5.0),
 -- created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-UNIQUE(u_email, program_name, course_name));
+UNIQUE(u_email, program_name, course_name, duke_code));
 
 CREATE TABLE Likes
 (u_email VARCHAR(100) NOT NULL,
