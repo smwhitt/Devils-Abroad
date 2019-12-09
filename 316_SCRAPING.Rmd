@@ -1,0 +1,170 @@
+---
+title: "WEBSCRAPING_316"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r}
+library(rvest)
+library(tidyverse)
+```
+
+```{r}
+courseNameAbroad <- html_nodes(url,' .views-field-title')
+courseNameAbroad
+html_text(courseNameAbroad, trim = TRUE)
+
+```
+
+```{r}
+removingUnnecessaryCharacters <- function(courseNames){
+  fixedCourses <- c()
+  i = 1
+  for (course in courseNames){
+    if (str_detect(course, ":")){
+      course =  strsplit(course,":")
+      course = (course[[1]][2])
+      fixedCourses[i] = trimws(course)
+    }
+    else {
+      fixedCourses[i] = course
+    }
+    
+    i = i + 1
+  }
+  return(fixedCourses)
+}
+```
+
+
+
+```{r}
+fixingCountryAndProgram <- function(programs){
+  fixedCountries <- c()
+  fixedPrograms <- c()
+  i = 1
+  for (program in programs){
+    fprogram =  strsplit(program, "[(]" )[[1]][1]
+    country = strsplit(program, "[(]")[[1]][2]
+    fcountry = strsplit(country, "[)]")[[1]][1]
+    fixedPrograms[i] = fprogram
+    fixedCountries[i] = fcountry
+    i = i + 1
+  }
+  return(list(fixedPrograms,fixedCountries))
+
+}
+```
+
+
+
+
+
+```{r}
+getMajor <- function(dukeCodes){
+  majorCode <- c()
+  i = 1
+  for (code in dukeCodes){
+    fcode = strsplit(code, " ")[[1]][1]
+    majorCode[i] = fcode
+    i = i + 1
+  }
+  return(majorCode)
+
+}
+```
+
+
+
+```{r}
+readingTable <- function(url) {
+   url <- read_html(url)
+   #getting course name
+   courseNameAbroad <- html_nodes(url,' .views-field-title')
+   courseNameAbroad <- html_text(courseNameAbroad, trim = TRUE)[2:length(courseNameAbroad)]
+   courseNameAbroad <- removingUnnecessaryCharacters(courseNameAbroad)
+   
+   #getting program and country
+   programAndCountry <- html_nodes(url,' .views-field-field-program')
+   programAndCountry <- html_text(programAndCountry, trim = TRUE)[2: length(programAndCountry)]
+   program <- fixingCountryAndProgram(programAndCountry)[[1]]
+   country <- fixingCountryAndProgram(programAndCountry)[[2]]
+   
+   #getting Duke course code and major
+   dukeCode <- html_nodes(url,' .views-field-field-duke-number')
+   dukeCode <- html_text(dukeCode, trim = TRUE)[2: length(dukeCode)]
+   dukeMajor <- getMajor(dukeCode)
+   
+   tableInfo = data.frame("duke_major" = dukeMajor, "duke_code"= dukeCode, "course_name" = courseNameAbroad, "program_name" = program, "country" = country)
+   return(tableInfo)
+  
+   
+}
+
+
+```
+
+
+```{r}
+firstPage <- readingTable("https://courses.globaled.duke.edu/courses")
+allInfo = firstPage
+```
+
+
+
+```{r}
+for (i in 1:225){
+  print(i)
+  url = sprintf("https://courses.globaled.duke.edu/courses?page=%s", i)
+  page_info = readingTable(url)
+  allInfo <- rbind(allInfo, page_info)
+}
+```
+
+
+```{r}
+allInfo
+```
+
+
+```{r}
+write.csv(allInfo,'programsAndCourses.csv')
+```
+
+```{r}
+programs <- allInfo %>%
+  select(program_name, country) %>%
+  distinct()
+```
+
+```{r}
+write.csv(programs,'populate_program_redo.csv')
+
+```
+
+
+```{r}
+countries <- allInfo %>%
+  select(country) %>%
+  distinct()
+```
+
+```{r}
+write.csv(countries,'countries.csv')
+
+```
+
+```{r}
+codes <- allInfo %>%
+  select(duke_major)%>%
+  distinct()
+  
+```
+
+```{r}
+write.csv(codes,'majorCodes.csv')
+```
+
