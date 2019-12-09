@@ -26,7 +26,7 @@ CREATE TABLE Contact
 name VARCHAR(100) NOT NULL,
 major VARCHAR(50) NOT NULL,
 term VARCHAR(100) NOT NULL,
-program VARCHAR(100) NOT NULL);
+program_name VARCHAR(100) NOT NULL);
 
 CREATE TABLE Course
 (duke_code VARCHAR(100) NOT NULL,
@@ -81,19 +81,19 @@ FOREIGN KEY (review_id) REFERENCES Review(id) ON DELETE CASCADE);
 
 -- TRIGGERS
 
-CREATE FUNCTION TS_No_edit_own_review() RETURNS TRIGGER AS $$ 
-BEGIN
-	IF (NEW.u_email <> Review.u_email) FROM Review THEN
-		RAISE EXCEPTION 'Cannot update or delete reviews that you didn’t write';
-	END IF;
-	RETURN NEW;
-END;
-$$ LANGUAGE plpgsql;
+--CREATE FUNCTION TS_No_edit_own_review() RETURNS TRIGGER AS $$ 
+--BEGIN
+--	IF (NEW.u_email <> Review.u_email) FROM Review THEN
+--		RAISE EXCEPTION 'Cannot update or delete reviews that you didn’t write';
+--	END IF;
+--	RETURN NEW;
+--END;
+--$$ LANGUAGE plpgsql;
 
-CREATE TRIGGER Edit_Own_Review
-	BEFORE UPDATE OR DELETE ON Review
-	FOR EACH ROW
-	EXECUTE PROCEDURE TS_No_edit_own_review();
+--CREATE TRIGGER Edit_Own_Review
+--	BEFORE UPDATE OR DELETE ON Review
+--	FOR EACH ROW
+--	EXECUTE PROCEDURE TS_No_edit_own_review();
 
 CREATE FUNCTION TS_No_phantom() RETURNS TRIGGER AS $$
 BEGIN
@@ -133,7 +133,7 @@ on Users (email, name);
 -- Copying the .csv files into the database:::
 COPY Country(country_name,c_id) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Countries.csv' DELIMITER ',' CSV HEADER;
 COPY Program(program_name,country) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Populate Program.csv' DELIMITER ',' CSV HEADER;
-COPY Contact(email,name,major,term,program) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Populate Contact.csv' DELIMITER ',' CSV HEADER;
+COPY Contact(email,name,major,term,program_name) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Populate Contact.csv' DELIMITER ',' CSV HEADER;
 COPY MajorCodes(duke_major_code) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Populate MajorCodes.csv' DELIMITER ',' CSV HEADER;
 
 INSERT INTO Users VALUES('smw81@duke.edu', 'Samantha Whitt', 'Computer Science', 'Spring 2020', 'University of New South Wales', 'smwhitt99', '1234');

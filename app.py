@@ -33,21 +33,21 @@ def review():
     majorCodes = db.session.query(models.MajorCodes).all()
     programs = db.session.query(models.Program).all()
     allUsers = db.session.query(models.Users).all()
-    #countries = db.session.query(models.Program.country).distinct().all()
+    # countries = db.session.query(models.Program.country).distinct().all()
     form = forms.WriteReview()
-    #form.program.choices = [(p.program_name, p.program_name) for p in programs]
-    #form.country.choices = [(country.country, country.country) for country in countries]
+    # form.program.choices = [(p.program_name, p.program_name) for p in programs]
+    # form.country.choices = [(country.country, country.country) for country in countries]
     form.majorCode.choices = [(m.duke_major_code, m.duke_major_code) for m in majorCodes]
-    #form.course.choices = [(course.course_name, course.course_name) for course in courses] + [("Other", "Other")]
-    #form.courseCode.choices = [(c.duke_code, c.duke_code) for c in courses]
+    # form.course.choices = [(course.course_name, course.course_name) for course in courses] + [("Other", "Other")]
+    # form.courseCode.choices = [(c.duke_code, c.duke_code) for c in courses]
         
     if form.validate_on_submit():
         
         dateTimeObj = datetime.now()
         timestampStr = dateTimeObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
         id = timestampStr
-        #country = form.country.data
-        #db.session.query(models.Users).filter(models.Users.username.like(uname)).first()
+        # country = form.country.data
+        # db.session.query(models.Users).filter(models.Users.username.like(uname)).first()
         u_email = session.get('user_email')
 
         program_name_full = db.session.query(models.Users).filter(Users.email == u_email).all()
@@ -60,9 +60,9 @@ def review():
             if p.program_name == program_name:
                 country = p.country 
         duke_major_code = form.majorCode.data
-        #duke_code = form.courseCode.data
+        # duke_code = form.courseCode.data
         duke_code = str(duke_major_code) + " " + str(form.courseNumber.data)
-        #u_email = form.userEmail.data
+        # u_email = form.userEmail.data
         course_name = form.course.data
 
         error = None
@@ -72,13 +72,11 @@ def review():
                 error = 'You have already written a review for this class.'
                 flash(error)
                 return redirect(url_for('review'))
-        
-    
         rating = form.rating.data
         difficulty = form.difficulty.data
         content = form.thoughts.data
-        new_review = models.Review(id = id, country = country, program_name = program_name, duke_major_code = duke_major_code, duke_code = duke_code, u_email = u_email, course_name = course_name, rating = rating, difficulty = difficulty, content = content)
-        new_course = models.Course(duke_code = duke_code, course_name = course_name, program_name = program_name)
+        new_review = models.Review(id=id, country=country, program_name=program_name, duke_major_code=duke_major_code, duke_code=duke_code, u_email=u_email, course_name=course_name, rating=rating, difficulty=difficulty, content=content)
+        new_course = models.Course(duke_code=duke_code, course_name=course_name, program_name=program_name)
         db.session.add(new_review)
         db.session.add(new_course)
         db.session.flush()
@@ -158,6 +156,10 @@ def course_review(course_name):
     return render_template('course-review.html', course=course, reviews=reviews)
 # fix filtering - use keys (multiple variables)
 
+@app.route('/contacts')
+def contacts():
+    contact_list = db.session.query(models.Contact).all()
+    return render_template('contacts.html', contact_list=contact_list)
 
 @app.route('/drinker/<name>')
 def drinker(name):

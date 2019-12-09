@@ -77,12 +77,6 @@ def login():
 
     return render_template('auth/login.html')
 
-@bp.route('/my_account', methods=('GET', 'POST'))
-def my_account():
-    #if request.method == 'POST':
-
-    return render_template('auth/my_account.html')
-
 @bp.before_app_request
 def load_logged_in_user():
     user_email = session.get('user_email')
@@ -90,7 +84,7 @@ def load_logged_in_user():
     if user_email is None:
         g.user = None
     else:
-        #g.user = db.session.query(models.Users).filter(models.Users.email.like(user_email)).first()
+        #
         g.user = db.session.query(models.Users).filter(models.Users.email.contains(user_email, autoescape=True)).first()
 @bp.route('/logout')
 def logout():
@@ -106,3 +100,16 @@ def login_required(view):
         return view(**kwargs)
 
     return wrapped_view
+
+@bp.route('/my_account')
+def my_account():
+    user_email = session.get('user_email')
+    my_reviews = db.session.query(models.Review).filter(models.Review.u_email.like(user_email)).all()
+    return render_template('auth/my_account.html', my_reviews=my_reviews)
+
+@bp.route('/delete_review/<review_id>', methods=('POST',))
+def delete_review(review_id):
+    review = db.session.query(models.Review).filter(models.Review.id.like(review_id)).one()
+    db.session.delete(review)
+    db.session.commit()
+    return render_template('auth/my_account.html')

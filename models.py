@@ -20,6 +20,14 @@ class Users(db.Model):
 
     # user = orm.relationship('User')
 
+class Contact(db.Model):
+    __bind_key__ = 'devils_abroad'
+    __tablename__ = 'contact'
+    email = db.Column('email', db.String(100), primary_key=True)
+    name = db.Column('name', db.String(100))
+    major = db.Column('major', db.String(50))
+    term = db.Column('term', db.String(50))
+    program_name = db.Column('program_name', db.String(50))
 
 class Program(db.Model):
     __bind_key__ = 'devils_abroad'
