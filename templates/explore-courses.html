@@ -35,8 +35,11 @@
 </style>
 
 <script>
-  function myFunction() {
-    document.getElementById("demo").style.color = "red";
+  function myFunction(course) {
+    document.getElementById("course_card").onclick = function () {
+        var c_id = "{{course.uuid}}"
+        location.href = "{{url_for('course_review', course_uuid=c_id)}}";
+    };
   }
 </script>
 
@@ -49,7 +52,7 @@
 </ul> -->
 
 {% for course in courses %}
-<div class="card" onclick="myFunction()">
+<div class="card" id="course_card" onclick="myFunction(course)">
   <div class="courseName">
     {{course.course_name}}
   </div>
