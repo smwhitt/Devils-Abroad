@@ -8,13 +8,10 @@ dropdb devils_abroad; createdb devils_abroad; psql devils_abroad -af create.sql
 
 Then access the database (psql devils_abroad) and type (replace /home/davidchen1337/devils_abroad with your own directory):
 
-COPY Users(email,name,major,grad_year) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Populate Users.csv' DELIMITER ',' CSV HEADER;
-
-COPY Program(program_name,country) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Populate Program.csv' DELIMITER ',' CSV HEADER;
-
-COPY AbroadUser(u_email,term,program_name) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Populate AbroadUsers.csv' DELIMITER ',' CSV HEADER;
-
 COPY Country(country_name,c_id) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Countries.csv' DELIMITER ',' CSV HEADER;
+COPY Program(program_name,country) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Populate Program.csv' DELIMITER ',' CSV HEADER;
+COPY Contact(email,name,major,term,program) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Populate Contact.csv' DELIMITER ',' CSV HEADER;
+COPY MajorCodes(duke_major_code) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Populate MajorCodes.csv' DELIMITER ',' CSV HEADER;
 
 http://www.postgresqltutorial.com/import-csv-file-into-posgresql-table/
 

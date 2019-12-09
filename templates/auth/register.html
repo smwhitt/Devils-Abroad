@@ -14,13 +14,25 @@
       <input name="name" id="name" required> <br>
 
       <label for="major">Primary Major</label>
-      <input name="major" id="major" required> <br>
+      <select name="major" id="major" required> <br>
+        {% for major in majors %}
+          <option value= "{{major[0]}}" SELECTED>{{major[1]}}</option >
+        {% endfor %}
+        </select>
+
+
+
+
 
       <label for="term">Term you went abroad (e.g. Spring 2019)</label>
       <input name="term" id="term" required> <br>
 
       <label for="program_name">Program Name (e.g. Duke in Berlin)</label>
-      <input name="program_name" id="program_name" required> <br>
+      <select name="program_name" id="program_name" required> <br>
+          {% for program in programs %}
+            <option value= "{{program[0]}}" SELECTED>{{program[1]}}</option >
+          {% endfor %}
+          </select>
 
       <label for="username">Username</label>
       <input name="username" id="username" required> <br>

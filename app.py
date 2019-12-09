@@ -32,25 +32,48 @@ def review():
 
     majorCodes = db.session.query(models.MajorCodes).all()
     programs = db.session.query(models.Program).all()
-    countries = db.session.query(models.Program.country).distinct().all()
-        
+    allUsers = db.session.query(models.Users).all()
+    #countries = db.session.query(models.Program.country).distinct().all()
     form = forms.WriteReview()
-    form.program.choices = [(p.program_name, p.program_name) for p in programs]
-    form.country.choices = [(country.country, country.country) for country in countries]
+    #form.program.choices = [(p.program_name, p.program_name) for p in programs]
+    #form.country.choices = [(country.country, country.country) for country in countries]
     form.majorCode.choices = [(m.duke_major_code, m.duke_major_code) for m in majorCodes]
     #form.course.choices = [(course.course_name, course.course_name) for course in courses] + [("Other", "Other")]
     #form.courseCode.choices = [(c.duke_code, c.duke_code) for c in courses]
+        
     if form.validate_on_submit():
+        
         dateTimeObj = datetime.now()
         timestampStr = dateTimeObj.strftime("%d-%b-%Y (%H:%M:%S.%f)")
         id = timestampStr
-        country = form.country.data
-        program_name = form.program.data
+        #country = form.country.data
+        #db.session.query(models.Users).filter(models.Users.username.like(uname)).first()
+        u_email = session.get('user_email')
+
+        program_name_full = db.session.query(models.Users).filter(Users.email == u_email).all()
+        program_name = program_name_full[0].program_name
+
+        # for p in allUsers:
+        #     if p.email == u_email:
+        #         program_name = p.program_name
+        for p in programs:
+            if p.program_name == program_name:
+                country = p.country 
         duke_major_code = form.majorCode.data
         #duke_code = form.courseCode.data
         duke_code = str(duke_major_code) + " " + str(form.courseNumber.data)
-        u_email = form.userEmail.data
+        #u_email = form.userEmail.data
         course_name = form.course.data
+
+        error = None
+        if request.method == 'POST':
+            specifcUserReviews = db.session.query(models.Review).filter(Review.u_email == u_email).filter(Review.course_name == course_name).all()
+            if len(specifcUserReviews) != 0:
+                error = 'You have already written a review for this class.'
+                flash(error)
+                return redirect(url_for('review'))
+        
+    
         rating = form.rating.data
         difficulty = form.difficulty.data
         content = form.thoughts.data
