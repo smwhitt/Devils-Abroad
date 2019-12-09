@@ -15,7 +15,7 @@
           <li><a href="/">Home</a>
           {% if g.user %}
               <li>Hello {{ g.user['username'] }}!</li>
-              <li><a href="{{ url_for('auth.my_account') }}">My Account</a>
+              <!-- <li><a href="{{ url_for('auth.my_account') }}">My Account</a> -->
               <li><a href="{{ url_for('auth.logout') }}">Log Out</a>
           {% else %}
               <li><a href="{{ url_for('auth.register') }}">Register</a>
@@ -24,9 +24,9 @@
       </ul>
   </nav>
   <section class="content">
-      <heading>
+      <h1>
         {% block heading %}{% endblock %}
-      </heading>
+      </h1>
       {% for message in get_flashed_messages() %}
         <div class="flash">{{ message }}</div>
       {% endfor %}

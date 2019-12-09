@@ -2,45 +2,54 @@
 {% block heading %}Explore DevilsAbroad experiences{% endblock %}
 {% block content %}
 
-<!-- location filter -->
-<!-- <label>Location: </label>
-<select name= programs method="GET" action="/">
-  {% for program in programs %}
-  <option value= {{program.country}} SELECTED>{{program.country}}</option>"
-  {% endfor %}
-</select> -->
+<style>
+  .card {
+    box-shadow: 0 2px 4px 0 rgba(0,0,0,0.2);
+    transition: 0.3s;
+    display: flex;
+    /* width: 90%; */
+    margin: 0.5rem 0;
+    padding: 0.5rem 0.5rem;
+  }
+  
+  .card:hover {
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  }
+  
+  .courseName {
+    width: 40%;
+    /* background-color: blue; */
+  }
+  .dukeCode {
+    width: 20%;
+    /* background-color: green; */
+  }
+  .programName {
+    width: 30%;
+    /* background-color: yellow; */
+  }
+  .rating {
+    width: 10%;
+  }
+  
+</style>
 
-<!-- program filter -->
-<!-- <label>Program Name: </label>
-<select name= programs method="GET" action="/">
-  {% for program in programs %}
-  <option value= {{program.program_name}} SELECTED>{{program.program_name}}</option>"
-  {% endfor %}
-</select> -->
-
-<!-- major filter -->
-<!-- <label>Major: </label>
-<select name= locations method="GET" action="/">
-  {% for program in locations %}
-  <option value= {{location}} SELECTED>{{location}}</option>"
-  {% endfor %}
-</select> -->
-
-<!-- keywords filter (very advanced) -->
-<!-- <label>Major: </label>
-<select name= locations method="GET" action="/">
-  {% for location in locations %}
-  <option value= {{location}} SELECTED>{{location}}</option>"
-  {% endfor %}
-</select> -->
-
-<ul>
-    {% for course in courses %}
-    <li><a href="{{url_for('course_review', course_name=course.course_name)}}">
-      {{course.course_name}}
-    </a></li>
-    {% endfor %}
-</ul>
+{% for course in courses %}
+<div class="card" id="course_card">
+  <div class="courseName">
+    <a href="{{url_for('course_review', course_uuid=course.uuid)}}">{{course.course_name}}</a>
+  </div>
+  <div class="dukeCode">
+    {{course.duke_code}}
+  </div>
+  <div class="programName">
+    {{course.program_name}}
+  </div>
+  <!-- <div class="rating">
+    {{course.duke_code}}
+  </div> -->
+</div>
+{% endfor %}
 
 <hr/>
 
