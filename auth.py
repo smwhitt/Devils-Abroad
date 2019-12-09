@@ -77,16 +77,8 @@ def login():
 
     return render_template('auth/login.html')
 
-<<<<<<< HEAD
 # @bp.route('/my_account', methods=('GET', 'POST'))
 # def my_account():
-=======
-@bp.route('/my_account', methods=('GET', 'POST'))
-def my_account():
-    #if request.method == 'POST':
-
-    return render_template('auth/my_account.html')
->>>>>>> 6caf3c804ea4bb9a9df770bdfb2387021446c62b
 
 @bp.before_app_request
 def load_logged_in_user():
