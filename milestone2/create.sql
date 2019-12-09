@@ -21,16 +21,14 @@ username TEXT UNIQUE NOT NULL,
 password TEXT NOT NULL,
 FOREIGN KEY (program_name) REFERENCES Program(program_name));
 
-<<<<<<< HEAD
 CREATE TABLE Contact
 (email VARCHAR(100) NOT NULL PRIMARY KEY,
 name VARCHAR(100) NOT NULL,
 major VARCHAR(50) NOT NULL,
 term VARCHAR(100) NOT NULL,
 program VARCHAR(100) NOT NULL);
-=======
+
 CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
->>>>>>> cf14a5e85bc1bda44f259cb49b715eb13beae39f
 
 CREATE TABLE Course
 (uuid UUID NOT NULL DEFAULT uuid_generate_v1() PRIMARY KEY,
@@ -58,13 +56,8 @@ u_email VARCHAR(100) NOT NULL,
 content VARCHAR(1000) NOT NULL,
 rating FLOAT NOT NULL CHECK (rating >= 0 AND rating <= 5.0),
 difficulty FLOAT NOT NULL CHECK (difficulty >= 0 AND difficulty <= 5.0),
-<<<<<<< HEAD
--- created TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-UNIQUE(u_email, program_name, course_name, duke_code));
-=======
 UNIQUE(u_email, course_uuid),
 FOREIGN KEY (course_uuid) REFERENCES Course(uuid));
->>>>>>> cf14a5e85bc1bda44f259cb49b715eb13beae39f
 
 -- CREATE TABLE Likes
 -- (u_email VARCHAR(100) NOT NULL,
@@ -136,23 +129,10 @@ INSERT INTO Users VALUES('ddc27@duke.edu', 'David Chen', 'Biology', 'Fall 2019',
 INSERT INTO Users VALUES('mr328@duke.edu', 'Malavi Ravindran', 'Computer Science', 'Spring 2018', 'Duke in Madrid', 'mr328', '1234');
 INSERT INTO Users VALUES('aq18@duke.edu', 'Alex Qiao', 'Computer Science', 'Spring 2020', 'University of New South Wales', 'aq18', '1234');
 
-<<<<<<< HEAD
-INSERT INTO Course VALUES('COMPSCI 330', 'Design and Analysis of Algorithms', 'Duke in Berlin');
-INSERT INTO Course VALUES('COMPSCI 300', 'Analysis of Big Data', 'Duke in Madrid');
-INSERT INTO Course VALUES('COMPSCI 250', 'Computer Architecture', 'University of New South Wales');
-INSERT INTO Course VALUES('COMPSCI 300', 'Networks', 'University of New South Wales');
-
-INSERT INTO Review VALUES('IDfake', 'Australia', 'University of New South Wales', 'COMPSCI', 'COMPSCI 300', 'Networks', 'smw81@duke.edu', 'amazing!', 5, 3);
-
-INSERT INTO Review VALUES ('1', 'Germany', 'Duke in Berlin', 'COMPSCI', 'CS 330', 'Design and Analysis of Algorithms' , 'ddc27@duke.edu', 'I think this class is amazing!', 4, 2);
-INSERT INTO Review VALUES ('2', 'Spain', 'Duke in Madrid', 'COMPSCI', 'CS 300', 'Networks', 'mr328@duke.edu', 'I think this class SUCKS!', 1, 5);
-INSERT INTO Review VALUES ('3', 'Australia','University of New South Wales', 'COMPSCI', 'CS 250', 'Computer Architecture', 'smw81@duke.edu', 'I think this rocks hehe!', 5, 1);
-=======
 INSERT INTO Course VALUES(uuid_generate_v1(), 'COMPSCI 330', 'Design and Analysis of Algorithms', 'Duke in Berlin');
 INSERT INTO Course VALUES(uuid_generate_v1(), 'COMPSCI 300', 'Analysis of Big Data', 'Duke in Madrid');
 INSERT INTO Course VALUES(uuid_generate_v1(), 'COMPSCI 250', 'Computer Architecture', 'University of New South Wales');
 INSERT INTO Course VALUES(uuid_generate_v1(), 'COMPSCI 300', 'Networks', 'University of New South Wales');
->>>>>>> cf14a5e85bc1bda44f259cb49b715eb13beae39f
 
 INSERT INTO Review VALUES ('1', 'Germany', 'COMPSCI', (SELECT uuid from Course WHERE duke_code='COMPSCI 330' and course_name='Design and Analysis of Algorithms' and program_name='Duke in Berlin'), 'ddc27@duke.edu', 'I think this class is amazing!', 4, 2);
 INSERT INTO Review VALUES ('2', 'Spain', 'COMPSCI', (SELECT uuid from Course WHERE duke_code='COMPSCI 300' and course_name='Analysis of Big Data' and program_name='Duke in Madrid'), 'mr328@duke.edu', 'I think this class SUCKS!', 1, 5);
