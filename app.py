@@ -149,12 +149,12 @@ def explore_courses(program):
     return render_template('explore-courses.html', courses=courses, programs=programs)
 
 
-@app.route('/course-review/<course_name>')
-def course_review(course_name):
+@app.route('/course-review/<course_uuid>')
+def course_review(course_uuid):
     course = db.session.query(models.Course)\
-        .filter(models.Course.course_name == course_name).one()
+        .filter(models.Course.uuid == course_uuid).one()
     reviews = db.session.query(models.Review)\
-        .filter(models.Review.course_name == course_name)
+        .filter(models.Review.course_uuid == course_uuid)
     return render_template('course-review.html', course=course, reviews=reviews)
 # fix filtering - use keys (multiple variables)
 

@@ -1,4 +1,5 @@
 from sqlalchemy import sql, orm
+from sqlalchemy.dialects.postgresql import UUID
 from app import db
 import datetime
 
@@ -32,10 +33,11 @@ class Program(db.Model):
 class Course(db.Model):
     __bind_key__ = 'devils_abroad'
     __tablename__ = 'course'
-    duke_code = db.Column('duke_code', db.String(100), primary_key=True)
-    course_name = db.Column('course_name', db.String(100), primary_key=True)
+    uuid = db.Column('uuid', UUID(as_uuid=True), unique=True, nullable=False, primary_key=True)
+    duke_code = db.Column('duke_code', db.String(100))
+    course_name = db.Column('course_name', db.String(100))
     program_name = db.Column('program_name', db.String(100),
-                             db.ForeignKey(Program.program_name), primary_key=True)
+                             db.ForeignKey(Program.program_name))
 
 # note: shouldn't u_email be a foreign key?
 
@@ -44,10 +46,11 @@ class Review(db.Model):
     __tablename__ = 'review'
     id = db.Column('id', db.String, primary_key = True)
     country = db.Column('country', db.String)
-    program_name = db.Column('program_name', db.String)
+    course_uuid = db.Column('course_uuid', UUID(as_uuid=True))
+    # program_name = db.Column('program_name', db.String)
     duke_major_code = db.Column('duke_major_code', db.String)
-    duke_code = db.Column('duke_code', db.String)
-    course_name = db.Column('course_name', db.String)
+    # duke_code = db.Column('duke_code', db.String)
+    # course_name = db.Column('course_name', db.String)
     u_email = db.Column('u_email', db.String)
     content = db.Column('content', db.String)
     rating = db.Column('rating', db.Integer)
