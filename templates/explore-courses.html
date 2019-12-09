@@ -17,9 +17,10 @@
   }
   
   .courseName {
-    width: 40%;
+    width: 30%;
     /* background-color: blue; */
   }
+
   .dukeCode {
     width: 20%;
     /* background-color: green; */
@@ -31,10 +32,31 @@
   .rating {
     width: 10%;
   }
+  .num {
+    width: 10%;
+  }
   
 </style>
 
 <a href="/filter"><input type="button" value="Search Again"></a>
+
+<div class="card" id="course_card" style="background-color: gray">
+  <div style="width: 30%">
+    {{"Course Name"}}
+  </div>
+  <div style="width: 20%">
+    {{"Duke Code"}}
+  </div>
+  <div style="width: 30%">
+    {{"Program"}}
+  </div>
+  <div style="width: 10%">
+    {{"Average Rating"}}
+  </div>
+  <div style="width: 10%">
+    {{"# of Reviews"}}
+  </div>
+</div>
 
 {% for course in courses %}
 <div class="card" id="course_card">
@@ -49,6 +71,9 @@
   </div>
   <div class="rating">
     {{ course[1] }}
+  </div>
+  <div class="num">
+    {{ course[2] }}
   </div>
 </div>
 {% endfor %}

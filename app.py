@@ -1,6 +1,7 @@
 from flask import Flask, render_template, redirect, url_for, flash, Blueprint, g, session
 from flask_sqlalchemy import SQLAlchemy
 from flask import request, jsonify, make_response
+from statistics import mean 
 from flask_wtf import FlaskForm
 from sqlalchemy import func
 app = Flask(__name__)
@@ -162,12 +163,13 @@ def explore_courses(program, majorChoice):
     course_with_ratings = []
     for course in courses:
         reviews = db.session.query(models.Review)\
-            .filter(models.Review.course_uuid == course.uuid).first()
-        # avg_rating = db.session.execute("SELECT avg(Review.rating) FROM Review WHERE Review.course_uuid == course.uuid")
-        avg_rating = db.session.query(func.avg(reviews.rating))
-        print("????????????????????????????")
-        print(avg_rating)
-        course_with_rating = (course, avg_rating)
+            .filter(models.Review.course_uuid == course.uuid)
+        ratings = []
+        for review in reviews:
+            ratings.append(review.rating)
+        avg_rating = mean(ratings)
+        num_reviews = len(ratings)
+        course_with_rating = (course, avg_rating, num_reviews)
         course_with_ratings.append(course_with_rating)
     return render_template('explore-courses.html', courses=course_with_ratings)
 
@@ -178,7 +180,6 @@ def course_review(course_uuid):
     reviews = db.session.query(models.Review)\
         .filter(models.Review.course_uuid == course_uuid)
     return render_template('course-review.html', course=course, reviews=reviews)
-# fix filtering - use keys (multiple variables)
 
 @app.route('/contacts')
 def contacts():

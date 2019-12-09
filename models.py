@@ -47,14 +47,6 @@ class Course(db.Model):
     course_name = db.Column('course_name', db.String(100))
     program_name = db.Column('program_name', db.String(100),
                              db.ForeignKey(Program.program_name))
-    # @aggregated('reviews', db.Column(db.Integer))
-    # def avg_rating(self):
-    #     return db.func.avg(Review.rating)
-    
-    # reviews = db.orm.relationship(
-    #     'Review'
-    #     # backref='course'
-    # )
 
 class Review(db.Model):
     __bind_key__ = 'devils_abroad'
@@ -70,8 +62,6 @@ class Review(db.Model):
     content = db.Column('content', db.String)
     rating = db.Column('rating', db.Integer)
     difficulty = db.Column('difficulty', db.Integer)
-
-
 
 class MajorCodes(db.Model):
     __bind_key__ = 'devils_abroad'
