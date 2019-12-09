@@ -99,16 +99,15 @@ def write_review():
     countries = db.session.query(models.Program.country).distinct().all()
     return render_template('write-review.html', courses=courses, programs=programs, countries=countries)
 
-
 @app.route('/submitted')
 def submit_review():
     return render_template('submitted.html')
-
 
 @app.route('/filter', methods=['GET', 'POST'])
 def filter_reviews():
     countries = db.session.query(models.Country).all()
     programs = db.session.query(models.Program).all()
+    majorCodes = db.session.query(models.MajorCodes).distinct().all()
     form = forms.FilterCourseForm()
 
     country_choices = [(c.country_name, c.country_name) for c in countries]
@@ -119,16 +118,27 @@ def filter_reviews():
     program_choices.insert(0,("NA", "--"))
     form.program.choices = program_choices
 
+    majorCodeChoices = [(m.duke_major_code, m.duke_major_code) for m in majorCodes]
+    majorCodeChoices.insert(0, ("NA", "--"))
+    form.majorCode.choices = majorCodeChoices
+
     if form.is_submitted():
         if not form.validate():
             for fieldName, errorMessages in form.errors.items():
                 print("field: {}, errormsg: {}".format(fieldName," ".join(errorMessages)))
                 return form.program.data
+    
+    error = None
+    if request.method == 'POST':
+        if form.program.data == "NA":
+            error = 'Please select a program'
+            flash(error)
+            return redirect(url_for('filter_reviews'))
 
     if form.validate_on_submit():
-        return redirect(url_for('explore_courses', program=form.program.data))
+        return redirect(url_for('explore_courses', majorChoice = form.majorCode.data, country = form.country.data, program=form.program.data, major = form.majorCode.data))
     return render_template('filter.html', form=form)
-
+   
 @app.route('/filter/<country>')
 def filter_country(country):
     programs = db.session.query(models.Program).filter(models.Program.country == country)
@@ -138,15 +148,18 @@ def filter_country(country):
     
     return jsonify({'programs': programArray})
 
-@app.route('/explore-courses/<program>', methods=['GET'])
-def explore_courses(program):
-    if (program != "NA") :
-        courses = db.session.query(models.Course) \
-            .filter(models.Course.program_name == program)
-    else :
-        courses = db.session.query(models.Course)
-    programs = db.session.query(models.Program).all()
-    return render_template('explore-courses.html', courses=courses, programs=programs)
+@app.route('/explore-courses/<program>/<majorChoice>', methods=['GET'])
+def explore_courses(program, majorChoice):
+    courses = db.session.query(models.Course)\
+            .filter(Course.program_name == program)
+    
+    if majorChoice != "NA":
+        coursesFixed = []
+        for course in courses:
+            if course.duke_code.split(" ")[0] == majorChoice:
+                coursesFixed.append(course)  
+        courses = coursesFixed
+    return render_template('explore-courses.html', courses=courses)
 
 
 @app.route('/course-review/<course_name>')
