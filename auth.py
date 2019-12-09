@@ -7,8 +7,15 @@ from flask import (
 from app import db
 from werkzeug.security import check_password_hash, generate_password_hash
 bp = Blueprint('auth', __name__, url_prefix='/auth')
+
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
+    programs = db.session.query(models.Program).all()
+    programChoices = [(p.program_name, p.program_name) for p in programs]
+    programChoices.insert(0, ("--", "--"))
+    majorCodes = db.session.query(models.MajorCodes).distinct().all()
+    majorCodeChoices = [(m.duke_major_code, m.duke_major_code) for m in majorCodes]
+    majorCodeChoices.insert(0, ("--", "--"))
     if request.method == 'POST':
         email = request.form['email']
         name = request.form['name']
@@ -20,13 +27,19 @@ def register():
         confpwd = request.form['confirmpassword']
         error = None
 
+        if major == "--":
+            error = 'You must choose a major.'
+        if program_name == "--":
+            error = 'You must choose a program.'
+
         if not uname:
             error = 'Username is required.'
         elif not pwd:
             error = 'Password is required.'
         elif not confpwd:
             error = 'Confirm your password'
-        elif db.session.query(models.Users).filter(models.Users.username.like(uname)).first() is not None:
+        elif db.session.query(models.Users).filter(models.Users.username.contains(uname, autoescape=True)).first() \
+                is not None:
             error = 'User {} is already registered.'.format(uname)
         elif pwd != confpwd:
             error = 'Passwords do not match'
@@ -40,7 +53,7 @@ def register():
 
         flash(error)
 
-    return render_template('auth/register.html')
+    return render_template('auth/register.html', majors = majorCodeChoices, programs = programChoices)
 
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
@@ -48,8 +61,8 @@ def login():
         uname = request.form['username']
         password = request.form['password']
         error = None
-        user = db.session.query(models.Users).filter(models.Users.username.like(uname)).first()
-
+        #user = db.session.query(models.Users).filter(models.Users.username.like(uname)).first()
+        user = db.session.query(models.Users).filter(models.Users.username.contains(uname, autoescape=True)).first()
         if user is None:
             error = 'Incorrect username.'
         elif not check_password_hash(user.password, password) and (user.password != password):
@@ -68,7 +81,6 @@ def login():
 def my_account():
     return render_template('auth/my_account.html')
 
-
 @bp.before_app_request
 def load_logged_in_user():
     user_email = session.get('user_email')
@@ -76,8 +88,8 @@ def load_logged_in_user():
     if user_email is None:
         g.user = None
     else:
-        g.user = db.session.query(models.Users).filter(models.Users.email.like(user_email)).first()
-
+        #g.user = db.session.query(models.Users).filter(models.Users.email.like(user_email)).first()
+        g.user = db.session.query(models.Users).filter(models.Users.email.contains(user_email, autoescape=True)).first()
 @bp.route('/logout')
 def logout():
     session.clear()

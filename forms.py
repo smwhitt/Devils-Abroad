@@ -5,6 +5,15 @@ from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
 
 
+# class RegistrationForm(FlaskForm):
+#     email = StringField(label = 'What is your email',  validators=[DataRequired()])
+#     name = StringField(label = 'What is your name',  validators=[DataRequired()])
+#     major = SelectField(label = 'What is your primary major?', choices = [], coerce = str, validators=[DataRequired()])
+#     term = StringField(label='What term did you go abroad? ', validators=[DataRequired()])
+#     program_name = SelectField(label='Program', choices = [], coerce = str, validators=[DataRequired()])
+#     uname = StringField(label='username', validators=[DataRequired()])
+#     pwd = PasswordField(label='password', validators=[DataRequired()])
+#     confpwd = PasswordField(label='password', validators=[DataRequired()])
 
 
 class EmailPasswordForm(FlaskForm):
@@ -31,13 +40,13 @@ class FilterCourseForm(FlaskForm):
 
 class WriteReview(FlaskForm):
 
-    country = SelectField('country', choices = [], coerce = str, validators=[DataRequired()])
-    program = SelectField('program', choices = [], coerce = str, validators=[DataRequired()])
+    #country = SelectField('country', choices = [], coerce = str, validators=[DataRequired()])
+    #program = SelectField('program', choices = [], coerce = str, validators=[DataRequired()])
     majorCode = SelectField('Course Major', choices = [], coerce = str, validators=[DataRequired()])
     courseNumber = IntegerField('Enter the Number of the course (as Duke would write it)', validators=[DataRequired()])
     #courseCode = SelectField('Duke Code', choices = [], coerce = str, validators=[DataRequired()])
     course = StringField('What is the name of the course?', validators=[DataRequired()])
-    userEmail = StringField('User Email',  validators=[DataRequired()])
+    #userEmail = StringField('User Email',  validators=[DataRequired()])
     #other = StringField('Enter the name of your course if you selected Other above')
     rating = SelectField('rating', choices = [(1,1), (2,2), (3,3), (4,4), (5,5)], coerce = int, validators=[DataRequired()])
     difficulty = SelectField('difficulty', choices = [(1,1), (2,2), (3,3), (4,4), (5,5)], coerce = int,  validators=[DataRequired()])
