@@ -1,5 +1,5 @@
 # Devils Abroad
-To populate the database with those files, first build it:
+To populate the database with those files, first build it in milestone2:
 
 dropdb devils_abroad; createdb devils_abroad; psql devils_abroad -af create.sql
 
