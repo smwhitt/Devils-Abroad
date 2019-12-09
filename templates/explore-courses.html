@@ -61,7 +61,7 @@
 {% for course in courses %}
 <div class="card" id="course_card">
   <div class="courseName">
-    <a href="{{url_for('course_review', course_uuid=course[0].uuid)}}">{{course[0].course_name}}</a>
+    <a href="{{url_for('course_review', course_id=course[0].id)}}">{{course[0].course_name}}</a>
   </div>
   <div class="dukeCode">
     {{course[0].duke_code}}

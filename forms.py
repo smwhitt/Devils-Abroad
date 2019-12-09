@@ -3,51 +3,21 @@ from wtforms import StringField, BooleanField, IntegerField, SelectField, Passwo
 from wtforms.validators import DataRequired
 from wtforms.ext.sqlalchemy.fields import QuerySelectField
 
-
-
-# class RegistrationForm(FlaskForm):
-#     email = StringField(label = 'What is your email',  validators=[DataRequired()])
-#     name = StringField(label = 'What is your name',  validators=[DataRequired()])
-#     major = SelectField(label = 'What is your primary major?', choices = [], coerce = str, validators=[DataRequired()])
-#     term = StringField(label='What term did you go abroad? ', validators=[DataRequired()])
-#     program_name = SelectField(label='Program', choices = [], coerce = str, validators=[DataRequired()])
-#     uname = StringField(label='username', validators=[DataRequired()])
-#     pwd = PasswordField(label='password', validators=[DataRequired()])
-#     confpwd = PasswordField(label='password', validators=[DataRequired()])
-
-
 class EmailPasswordForm(FlaskForm):
     email = StringField('Email', validators=[DataRequired()])
     password = PasswordField('Password', validators=[DataRequired()])
 
-# class WriteReviewFormFactory:
-#     @staticmethod
-#     def form():
-
 class FilterCourseForm(FlaskForm):
-    # example of static choices for SelectField
-    # language = SelectField(
-    #     'Programming Language',
-    #     choices=[('cpp', 'C++'), ('py', 'Python'), ('text', 'Plain Text')],
-    #     default='default string'
-    # )
     # example of dynamic choices for SelectField - choices list needs to be assigned in app.py
     program = SelectField(label='Program', default="Choose a program")
     country = SelectField(label='Country', default="Choose a country")
     majorCode = SelectField(label='Course Major', choices = [])
-    # note sure why the default string isn't working its so annoying aldfkjakjdfh
-    # might be better to change to SelectMultipleField so user can select more than one choice
 
 class WriteReview(FlaskForm):
-
-    #country = SelectField('country', choices = [], coerce = str, validators=[DataRequired()])
-    #program = SelectField('program', choices = [], coerce = str, validators=[DataRequired()])
     majorCode = SelectField('Course Major', choices = [], coerce = str, validators=[DataRequired()])
+    programs = SelectField(label='Program', choices = [])
     courseNumber = IntegerField('Enter the Number of the course (as Duke would write it)', validators=[DataRequired()])
-    #courseCode = SelectField('Duke Code', choices = [], coerce = str, validators=[DataRequired()])
     course = StringField('What is the name of the course?', validators=[DataRequired()])
-    #userEmail = StringField('User Email',  validators=[DataRequired()])
-    #other = StringField('Enter the name of your course if you selected Other above')
     rating = SelectField('rating', choices = [(1,1), (2,2), (3,3), (4,4), (5,5)], coerce = int, validators=[DataRequired()])
     difficulty = SelectField('difficulty', choices = [(1,1), (2,2), (3,3), (4,4), (5,5)], coerce = int,  validators=[DataRequired()])
     thoughts = StringField('thoughts', validators=[DataRequired()])
@@ -55,7 +25,6 @@ class WriteReview(FlaskForm):
 class CountryForReview(FlaskForm):
     userEmail = StringField('User Email',  validators=[DataRequired()])
     country = SelectField('country', choices = [], coerce = str, validators=[DataRequired()])
-
 
 class DrinkerEditFormFactory:
     @staticmethod

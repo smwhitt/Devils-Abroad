@@ -3,6 +3,7 @@ from sqlalchemy_utils import aggregated
 from sqlalchemy.dialects.postgresql import UUID
 from app import db
 import datetime
+import uuid
 
 
 class Users(db.Model):
@@ -15,12 +16,6 @@ class Users(db.Model):
     program_name = db.Column('program_name', db.String(50))
     username = db.Column('username', db.String())
     password = db.Column('password', db.String())
-
-    # method to check if the user is authenticated
-    #def is_authenticated(self):
-
-
-    # user = orm.relationship('User')
 
 class Contact(db.Model):
     __bind_key__ = 'devils_abroad'
@@ -42,7 +37,7 @@ class Program(db.Model):
 class Course(db.Model):
     __bind_key__ = 'devils_abroad'
     __tablename__ = 'course'
-    uuid = db.Column('uuid', UUID(as_uuid=True), unique=True, nullable=False, primary_key=True)
+    id = db.Column('id', UUID(as_uuid=True), unique=True, primary_key=True, nullable=False, default=uuid.uuid4())
     duke_code = db.Column('duke_code', db.String(100))
     course_name = db.Column('course_name', db.String(100))
     program_name = db.Column('program_name', db.String(100),
@@ -53,7 +48,7 @@ class Review(db.Model):
     __tablename__ = 'review'
     id = db.Column('id', db.String, primary_key = True)
     country = db.Column('country', db.String)
-    course_uuid = db.Column('course_uuid', UUID(as_uuid=True))
+    course_id = db.Column('course_id', UUID(as_uuid=True))
     # program_name = db.Column('program_name', db.String)
     duke_major_code = db.Column('duke_major_code', db.String)
     # duke_code = db.Column('duke_code', db.String)
@@ -67,12 +62,6 @@ class MajorCodes(db.Model):
     __bind_key__ = 'devils_abroad'
     __tablename__ = 'majorcodes'
     duke_major_code = db.Column('duke_major_code', db.String(20), primary_key = True)
-
-# class Likes(db.Model):
-#     __bind_key__ = 'devils_abroad'
-#     __tablename__ = 'likes'
-#     u_email = db.Column('u_email', db.String(100), db.ForeignKey(User.email), primary_key=True)
-
 
 class Country(db.Model):
     __bind_key__ = 'devils_abroad'

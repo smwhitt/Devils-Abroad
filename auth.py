@@ -61,7 +61,6 @@ def login():
         uname = request.form['username']
         password = request.form['password']
         error = None
-        #user = db.session.query(models.Users).filter(models.Users.username.like(uname)).first()
         user = db.session.query(models.Users).filter(models.Users.username.contains(uname, autoescape=True)).first()
         if user is None:
             error = 'Incorrect username.'
