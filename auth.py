@@ -66,6 +66,7 @@ def login():
 
 @bp.route('/my_account', methods=('GET', 'POST'))
 def my_account():
+    return render_template('auth/my_account.html')
 
 
 @bp.before_app_request
