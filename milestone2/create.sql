@@ -21,6 +21,13 @@ username TEXT UNIQUE NOT NULL,
 password TEXT NOT NULL,
 FOREIGN KEY (program_name) REFERENCES Program(program_name));
 
+CREATE TABLE Contact
+(email VARCHAR(100) NOT NULL PRIMARY KEY,
+name VARCHAR(100) NOT NULL,
+major VARCHAR(50) NOT NULL,
+term VARCHAR(100) NOT NULL,
+program VARCHAR(100) NOT NULL);
+
 CREATE TABLE Course
 (duke_code VARCHAR(100) NOT NULL,
 course_name VARCHAR(100) NOT NULL,
@@ -123,20 +130,16 @@ on Users (email, name);
 
 -- INSERTS
 --IMPORTANT NOTE: ORDER OF POPULATING DATABASE IS COUNTRY, PROGRAM, USERS, MAJOR CODE, COURSE, REVIEW
-
-INSERT INTO MajorCodes VALUES('COMPSCI');
-INSERT INTO Program VALUES('Duke in Berlin', 'Germany');
-INSERT INTO Program VALUES('Duke in Madrid', 'Spain');
-INSERT INTO Program VALUES('University of New South Wales', 'Australia');
-INSERT INTO Program VALUES('University of Sydney', 'Australia');
+-- Copying the .csv files into the database:::
+COPY Country(country_name,c_id) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Countries.csv' DELIMITER ',' CSV HEADER;
+COPY Program(program_name,country) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Populate Program.csv' DELIMITER ',' CSV HEADER;
+COPY Contact(email,name,major,term,program) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Populate Contact.csv' DELIMITER ',' CSV HEADER;
+COPY MajorCodes(duke_major_code) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Populate MajorCodes.csv' DELIMITER ',' CSV HEADER;
 
 INSERT INTO Users VALUES('smw81@duke.edu', 'Samantha Whitt', 'Computer Science', 'Spring 2020', 'University of New South Wales', 'smwhitt99', '1234');
 INSERT INTO Users VALUES('ddc27@duke.edu', 'David Chen', 'Biology', 'Fall 2019', 'Duke in Berlin', 'ddc27', '1234');
 INSERT INTO Users VALUES('mr328@duke.edu', 'Malavi Ravindran', 'Computer Science', 'Spring 2018', 'Duke in Madrid', 'mr328', '1234');
 INSERT INTO Users VALUES('aq18@duke.edu', 'Alex Qiao', 'Computer Science', 'Spring 2020', 'University of New South Wales', 'aq18', '1234');
-
---INSERT INTO Country VALUES('Australia', 'Au');
--- Inserting a bunch of countries with the Country.csv
 
 INSERT INTO Course VALUES('COMPSCI 330', 'Design and Analysis of Algorithms', 'Duke in Berlin');
 INSERT INTO Course VALUES('COMPSCI 300', 'Analysis of Big Data', 'Duke in Madrid');
