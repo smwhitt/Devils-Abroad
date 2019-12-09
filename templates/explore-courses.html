@@ -34,20 +34,22 @@
   
 </style>
 
+<a href="/filter"><input type="button" value="Search Again"></a>
+
 {% for course in courses %}
 <div class="card" id="course_card">
   <div class="courseName">
-    <a href="{{url_for('course_review', course_uuid=course.uuid)}}">{{course.course_name}}</a>
+    <a href="{{url_for('course_review', course_uuid=course[0].uuid)}}">{{course[0].course_name}}</a>
   </div>
   <div class="dukeCode">
-    {{course.duke_code}}
+    {{course[0].duke_code}}
   </div>
   <div class="programName">
-    {{course.program_name}}
+    {{course[0].program_name}}
   </div>
-  <!-- <div class="rating">
-    {{course.duke_code}}
-  </div> -->
+  <div class="rating">
+    {{ course[1] }}
+  </div>
 </div>
 {% endfor %}
 

@@ -2,6 +2,7 @@ from flask import Flask, render_template, redirect, url_for, flash, Blueprint, g
 from flask_sqlalchemy import SQLAlchemy
 from flask import request, jsonify, make_response
 from flask_wtf import FlaskForm
+from sqlalchemy import func
 app = Flask(__name__)
 app.secret_key = 's3cr3t'
 app.config.from_object('config')
@@ -134,7 +135,7 @@ def filter_reviews():
             return redirect(url_for('filter_reviews'))
 
     if form.validate_on_submit():
-        return redirect(url_for('explore_courses', majorChoice = form.majorCode.data, country = form.country.data, program=form.program.data, major = form.majorCode.data))
+        return redirect(url_for('explore_courses', majorChoice = form.majorCode.data, program=form.program.data))
     return render_template('filter.html', form=form)
    
 @app.route('/filter/<country>')
@@ -157,8 +158,18 @@ def explore_courses(program, majorChoice):
             if course.duke_code.split(" ")[0] == majorChoice:
                 coursesFixed.append(course)  
         courses = coursesFixed
-    return render_template('explore-courses.html', courses=courses)
 
+    course_with_ratings = []
+    for course in courses:
+        reviews = db.session.query(models.Review)\
+            .filter(models.Review.course_uuid == course.uuid).first()
+        # avg_rating = db.session.execute("SELECT avg(Review.rating) FROM Review WHERE Review.course_uuid == course.uuid")
+        avg_rating = db.session.query(func.avg(reviews.rating))
+        print("????????????????????????????")
+        print(avg_rating)
+        course_with_rating = (course, avg_rating)
+        course_with_ratings.append(course_with_rating)
+    return render_template('explore-courses.html', courses=course_with_ratings)
 
 @app.route('/course-review/<course_uuid>')
 def course_review(course_uuid):
@@ -179,7 +190,6 @@ def drinker(name):
     drinker = db.session.query(models.Drinker) \
         .filter(models.Drinker.name == name).one()
     return render_template('drinker.html', drinker=drinker)
-
 
 @app.route('/edit-drinker/<name>', methods=['GET', 'POST'])
 def edit_drinker(name):
