@@ -4,20 +4,22 @@ from flask import request, jsonify, make_response
 from statistics import mean 
 from flask_wtf import FlaskForm
 from sqlalchemy import func
+# from flask.ext.uuid import FlaskUUID
 app = Flask(__name__)
 app.secret_key = 's3cr3t'
 app.config.from_object('config')
 db = SQLAlchemy(app, session_options={'autocommit': False})
+# flask_uuid = FlaskUUID()
+# flask_uuid.init_app(app)
 import models
 import forms
 import auth
+import uuid
 from forms import WriteReview
 from models import *
 from auth import *
 app.register_blueprint(auth.bp)
 from datetime import datetime
-
-
 
 @app.route('/all')
 def all_drinkers():
@@ -66,21 +68,32 @@ def review():
         duke_code = str(duke_major_code) + " " + str(form.courseNumber.data)
         # u_email = form.userEmail.data
         course_name = form.course.data
+        course_ids = db.session.query(models.Course).filter(Course.course_name == course_name)\
+            .filter(Course.program_name == program_name).filter(Course.duke_code == duke_code).all()
 
         error = None
         if request.method == 'POST':
-            specifcUserReviews = db.session.query(models.Review).filter(Review.u_email == u_email).filter(Review.course_name == course_name).all()
+            specifcUserReviews = db.session.query(models.Review).filter(Review.u_email == u_email)\
+                .join(models.Course, Course.uuid == Review.course_uuid).filter(Course.course_name == course_name).all()
             if len(specifcUserReviews) != 0:
                 error = 'You have already written a review for this class.'
                 flash(error)
                 return redirect(url_for('review'))
+
         rating = form.rating.data
         difficulty = form.difficulty.data
         content = form.thoughts.data
-        new_review = models.Review(id=id, country=country, program_name=program_name, duke_major_code=duke_major_code, duke_code=duke_code, u_email=u_email, course_name=course_name, rating=rating, difficulty=difficulty, content=content)
-        new_course = models.Course(duke_code=duke_code, course_name=course_name, program_name=program_name)
-        db.session.add(new_review)
+
+        # if len(course_ids) <= 0:
+        course_id = uuid.uuid1()
+        #     new_course = models.Course(duke_code=duke_code, uuid=course_id, course_name=course_name, program_name=program_name)
+        #     db.session.add(new_course)
+        # else:
+        #     course_id = course_ids[0].uuid
+        new_course = models.Course(duke_code=duke_code, uuid=course_id, course_name=course_name, program_name=program_name)
+        new_review = models.Review(id=id, country=country, duke_major_code=duke_major_code, u_email=u_email, course_uuid=course_id , rating=rating, difficulty=difficulty, content=content)
         db.session.add(new_course)
+        db.session.add(new_review)
         db.session.flush()
         db.session.commit()
         flash('New entry was successfully posted')
@@ -167,8 +180,11 @@ def explore_courses(program, majorChoice):
         ratings = []
         for review in reviews:
             ratings.append(review.rating)
-        avg_rating = mean(ratings)
         num_reviews = len(ratings)
+        if len(num_reviews <= 0):
+            avg_rating = 0
+        else: 
+            avg_rating = mean(ratings)
         course_with_rating = (course, avg_rating, num_reviews)
         course_with_ratings.append(course_with_rating)
     return render_template('explore-courses.html', courses=course_with_ratings)

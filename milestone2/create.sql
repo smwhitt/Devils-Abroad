@@ -46,8 +46,7 @@ u_email VARCHAR(100) NOT NULL,
 content VARCHAR(1000) NOT NULL,
 rating FLOAT NOT NULL CHECK (rating >= 0 AND rating <= 5.0),
 difficulty FLOAT NOT NULL CHECK (difficulty >= 0 AND difficulty <= 5.0),
-UNIQUE(u_email, course_uuid),
-FOREIGN KEY (course_uuid) REFERENCES Course(uuid));
+UNIQUE(u_email, course_uuid));
 
 -- TRIGGERS
 -- Removed many of the triggers from previous versions of the app in favor of testing for error violations on the backend
