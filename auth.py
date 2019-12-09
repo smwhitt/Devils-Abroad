@@ -26,7 +26,8 @@ def register():
             error = 'Password is required.'
         elif not confpwd:
             error = 'Confirm your password'
-        elif db.session.query(models.Users).filter(models.Users.username.like(uname)).first() is not None:
+        elif db.session.query(models.Users).filter(models.Users.username.contains(uname, autoescape=True)).first() \
+                is not None:
             error = 'User {} is already registered.'.format(uname)
         elif pwd != confpwd:
             error = 'Passwords do not match'
@@ -48,8 +49,8 @@ def login():
         uname = request.form['username']
         password = request.form['password']
         error = None
-        user = db.session.query(models.Users).filter(models.Users.username.like(uname)).first()
-
+        #user = db.session.query(models.Users).filter(models.Users.username.like(uname)).first()
+        user = db.session.query(models.Users).filter(models.Users.username.contains(uname, autoescape=True)).first()
         if user is None:
             error = 'Incorrect username.'
         elif not check_password_hash(user.password, password) and (user.password != password):
@@ -66,7 +67,7 @@ def login():
 
 @bp.route('/my_account', methods=('GET', 'POST'))
 def my_account():
-
+    return render_template('auth/my_account.html')
 
 @bp.before_app_request
 def load_logged_in_user():
@@ -75,8 +76,8 @@ def load_logged_in_user():
     if user_email is None:
         g.user = None
     else:
-        g.user = db.session.query(models.Users).filter(models.Users.email.like(user_email)).first()
-
+        #g.user = db.session.query(models.Users).filter(models.Users.email.like(user_email)).first()
+        g.user = db.session.query(models.Users).filter(models.Users.email.contains(user_email, autoescape=True)).first()
 @bp.route('/logout')
 def logout():
     session.clear()
