@@ -13,10 +13,10 @@ bp = Blueprint('auth', __name__, url_prefix='/auth')
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
     programs = db.session.query(models.Program).all()
-    programChoices = [(p.program_name, p.program_name) for p in programs]
+    programChoices = sorted([(p.program_name, p.program_name) for p in programs])
     programChoices.insert(0, ("--", "--"))
     majorCodes = db.session.query(models.MajorCodes).distinct().all()
-    majorCodeChoices = [(m.duke_major_code, m.duke_major_code) for m in majorCodes]
+    majorCodeChoices = sorted([(m.duke_major_code, m.duke_major_code) for m in majorCodes])
     majorCodeChoices.insert(0, ("--", "--"))
     if request.method == 'POST':
         email = request.form['email']
