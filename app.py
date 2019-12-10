@@ -22,10 +22,6 @@ def all_drinkers():
     drinkers = db.session.query(models.Drinker).all()
     return render_template('all-drinkers.html', drinkers=drinkers)
 
-def country_choices():
-    return db.session.query(models.Program.country).distinct().all()
-   
-
 @app.route('/review', methods=['GET', 'POST'])
 @login_required
 def review():
@@ -195,11 +191,9 @@ def contacts():
     contact_list = db.session.query(models.Contact).all()
     return render_template('contacts.html', contact_list=contact_list)
 
-
 @app.template_filter('pluralize')
 def pluralize(number, singular='', plural='s'):
     return singular if number in (0, 1) else plural
-
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
