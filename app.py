@@ -36,8 +36,7 @@ def review():
     form = forms.WriteReview()
 
     # setting up the form
-    form.majorCode.choices = [(m.duke_major_code, m.duke_major_code) for m in majorCodes]
-    form.programs.choices = [(p.program_name, p.program_name) for p in programs]
+    form.majorCode.choices = sorted([(m.duke_major_code, m.duke_major_code) for m in majorCodes])
     
     if form.validate_on_submit():
         
@@ -48,16 +47,19 @@ def review():
 
         # get form responses 
         duke_major_code = form.majorCode.data
-        program_name = form.programs.data
         duke_code = str(duke_major_code) + " " + str(form.courseNumber.data)
         course_name = form.course.data
         rating = form.rating.data
         difficulty = form.difficulty.data
         content = form.thoughts.data
 
+        user = db.session.query(models.Users).filter(Users.email == u_email).one()
+        program_name = user.program_name
+
         for p in programs:
             if p.program_name == program_name:
                 country = p.country
+                break
 
         # check for errors
         if request.method == 'POST':
@@ -67,9 +69,6 @@ def review():
                 .join(models.Course, Course.id == Review.course_id).filter(Course.course_name == course_name).all()
             if len(specifcUserReviews) != 0:
                 error = 'You have already written a review for this class.'
-            elif user.program_name != program_name:
-                error = 'You cannot write a review for a program that you did not attend.'
-            if error is not None:
                 flash(error)
                 return redirect(url_for('review'))
 
@@ -77,13 +76,13 @@ def review():
         courses = db.session.query(models.Course).filter(Course.course_name == course_name)\
             .filter(Course.program_name == program_name).filter(Course.duke_code == duke_code).all()
 
-        course_id = 0
+        course_id = None
         for course in courses:
-            if course.course_name == course_name:
+            if course.course_name == course_name and course.program_name == program_name and course.duke_code == duke_code:
                 course_id = course.id
                 break
 
-        if course_id != 0:
+        if course_id == None:
             new_course = models.Course(duke_code=duke_code, course_name=course_name, program_name=program_name)
             db.session.add(new_course)
             db.session.flush()
@@ -101,15 +100,6 @@ def review():
 @app.route('/', methods=['GET', 'POST'])
 def home_page():
     return render_template('home.html')
-
-@app.route('/write-review', methods=['GET'])
-@login_required
-def write_review():
-    courses = db.session.query(models.Course).all()
-    programs = db.session.query(models.Program).all()
-    countries = db.session.query(models.Program.country).distinct().all()
-    db.session.close()
-    return render_template('write-review.html', courses=courses, programs=programs, countries=countries)
 
 @app.route('/submitted')
 def submit_review():

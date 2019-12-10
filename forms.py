@@ -15,12 +15,11 @@ class FilterCourseForm(FlaskForm):
 
 class WriteReview(FlaskForm):
     majorCode = SelectField('Course Major', choices = [], coerce = str, validators=[DataRequired()])
-    programs = SelectField(label='Program', choices = [])
     courseNumber = IntegerField('Enter the Number of the course (as Duke would write it)', validators=[DataRequired()])
     course = StringField('What is the name of the course?', validators=[DataRequired()])
-    rating = SelectField('rating', choices = [(1,1), (2,2), (3,3), (4,4), (5,5)], coerce = int, validators=[DataRequired()])
-    difficulty = SelectField('difficulty', choices = [(1,1), (2,2), (3,3), (4,4), (5,5)], coerce = int,  validators=[DataRequired()])
-    thoughts = StringField('thoughts', validators=[DataRequired()])
+    rating = SelectField('Rating (1 being the worst, 5 being the best)', choices = [(1,1), (2,2), (3,3), (4,4), (5,5)], coerce = int, validators=[DataRequired()])
+    difficulty = SelectField('Difficulty (1 being the easiest, 5 being the hardest)', choices = [(1,1), (2,2), (3,3), (4,4), (5,5)], coerce = int,  validators=[DataRequired()])
+    thoughts = StringField('Thoughts?', validators=[DataRequired()])
     
 class CountryForReview(FlaskForm):
     userEmail = StringField('User Email',  validators=[DataRequired()])

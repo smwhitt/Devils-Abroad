@@ -3,16 +3,9 @@
 {% block content %}
 
 <form action="{{ url_for('review')}}" method="POST">
-
-
     <p>
         {{ form.majorCode.label }}<br>
         {{ form.majorCode }}
-    </p>
-
-    <p>
-        {{ form.programs.label }}<br>
-        {{ form.programs }}
     </p>
 
     <p>
