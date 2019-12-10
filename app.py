@@ -32,6 +32,7 @@ def review():
     majorCodes = db.session.query(models.MajorCodes).all()
     programs = db.session.query(models.Program).all()
     allUsers = db.session.query(models.Users).all()
+    db.session.close()
     form = forms.WriteReview()
 
     # setting up the form
@@ -56,7 +57,7 @@ def review():
 
         for p in programs:
             if p.program_name == program_name:
-                country = p.country 
+                country = p.country
 
         # check for errors
         if request.method == 'POST':
@@ -107,6 +108,7 @@ def write_review():
     courses = db.session.query(models.Course).all()
     programs = db.session.query(models.Program).all()
     countries = db.session.query(models.Program.country).distinct().all()
+    db.session.close()
     return render_template('write-review.html', courses=courses, programs=programs, countries=countries)
 
 @app.route('/submitted')
@@ -118,6 +120,7 @@ def filter_reviews():
     countries = db.session.query(models.Country).all()
     programs = db.session.query(models.Program).all()
     majorCodes = db.session.query(models.MajorCodes).distinct().all()
+    db.session.close()
     form = forms.FilterCourseForm()
 
     country_choices = [(c.country_name, c.country_name) for c in countries]
@@ -152,6 +155,7 @@ def filter_reviews():
 @app.route('/filter/<country>')
 def filter_country(country):
     programs = db.session.query(models.Program).filter(models.Program.country == country)
+    db.session.close()
     programArray = []
     for program in programs:
         programArray.append(program.program_name)
@@ -162,6 +166,7 @@ def filter_country(country):
 def explore_courses(program, majorChoice):
     courses = db.session.query(models.Course)\
             .filter(Course.program_name == program)
+    db.session.close()
     
     if majorChoice != "NA":
         coursesFixed = []
@@ -192,6 +197,7 @@ def course_review(course_id):
         .filter(models.Course.id == course_id).one()
     reviews = db.session.query(models.Review)\
         .filter(models.Review.course_id == course_id)
+    db.session.close()
     return render_template('course-review.html', course=course, reviews=reviews)
 
 @app.route('/contacts')

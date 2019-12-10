@@ -75,10 +75,10 @@ on Users (email, name);
 -- INSERTS
 --IMPORTANT NOTE: ORDER OF POPULATING DATABASE IS COUNTRY, PROGRAM, USERS, MAJOR CODE, COURSE, REVIEW
 -- Copying the .csv files into the database:::
-COPY Country(country_name,c_id) FROM '/home/vagrant/shared/Devils-Abroad/milestone2/Countries.csv' DELIMITER ',' CSV HEADER;
-COPY Program(program_name,country) FROM '/home/vagrant/shared/Devils-Abroad/milestone2/Populate Program.csv' DELIMITER ',' CSV HEADER;
-COPY Contact(email,name,major,term,program_name) FROM '/home/vagrant/shared/Devils-Abroad/milestone2/Populate Contact.csv' DELIMITER ',' CSV HEADER;
-COPY MajorCodes(duke_major_code) FROM '/home/vagrant/shared/Devils-Abroad/milestone2/Populate MajorCodes.csv' DELIMITER ',' CSV HEADER;
+COPY Country(country_name,c_id) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Countries.csv' DELIMITER ',' CSV HEADER;
+COPY Program(program_name,country) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Populate Program.csv' DELIMITER ',' CSV HEADER;
+COPY Contact(email,name,major,term,program_name) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Populate Contact.csv' DELIMITER ',' CSV HEADER;
+COPY MajorCodes(duke_major_code) FROM '/home/davidchen1337/devils_abroad/Devils-Abroad/milestone2/Populate MajorCodes.csv' DELIMITER ',' CSV HEADER;
 
 INSERT INTO Users VALUES('smw81@duke.edu', 'Samantha Whitt', 'Computer Science', 'Spring 2020', 'University of New South Wales', 'smw81', '1234');
 INSERT INTO Users VALUES('ddc27@duke.edu', 'David Chen', 'Biology', 'Fall 2019', 'Duke in Berlin', 'ddc27', '1234');

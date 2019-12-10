@@ -6,7 +6,9 @@ from flask import (
 )
 from app import db
 from werkzeug.security import check_password_hash, generate_password_hash
+from sqlalchemy.orm import aliased
 bp = Blueprint('auth', __name__, url_prefix='/auth')
+
 
 @bp.route('/register', methods=('GET', 'POST'))
 def register():
@@ -55,6 +57,7 @@ def register():
 
     return render_template('auth/register.html', majors = majorCodeChoices, programs = programChoices)
 
+
 @bp.route('/login', methods=('GET', 'POST'))
 def login():
     if request.method == 'POST':
@@ -76,6 +79,7 @@ def login():
 
     return render_template('auth/login.html')
 
+
 @bp.before_app_request
 def load_logged_in_user():
     user_email = session.get('user_email')
@@ -83,8 +87,10 @@ def load_logged_in_user():
     if user_email is None:
         g.user = None
     else:
-        #
         g.user = db.session.query(models.Users).filter(models.Users.email.contains(user_email, autoescape=True)).first()
+        db.session.close()
+
+
 @bp.route('/logout')
 def logout():
     session.clear()
@@ -100,11 +106,17 @@ def login_required(view):
 
     return wrapped_view
 
+
 @bp.route('/my_account')
 def my_account():
     user_email = session.get('user_email')
-    my_reviews = db.session.query(models.Review).filter(models.Review.u_email.like(user_email)).all()
-    return render_template('auth/my_account.html', my_reviews=my_reviews)
+    my_reviews = db.session.query(models.Review).filter(models.Review.u_email == user_email)\
+        .join(models.Course, models.Course.id == models.Review.course_id).all()
+    my_classes = db.session.query(models.Course).join(models.Review, models.Course.id == models.Review.course_id)\
+        .filter(models.Review.u_email == user_email)
+    db.session.close()
+    return render_template('auth/my_account.html', my_reviews=my_reviews, my_classes=my_classes)
+
 
 @bp.route('/delete_review/<review_id>', methods=('POST',))
 def delete_review(review_id):
