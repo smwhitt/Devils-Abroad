@@ -84,13 +84,17 @@ INSERT INTO Users VALUES('smw81@duke.edu', 'Samantha Whitt', 'Computer Science',
 INSERT INTO Users VALUES('ddc27@duke.edu', 'David Chen', 'Biology', 'Fall 2019', 'Duke in Berlin', 'ddc27', '1234');
 INSERT INTO Users VALUES('mr328@duke.edu', 'Malavi Ravindran', 'Computer Science', 'Spring 2018', 'Duke in Madrid', 'mr328', '1234');
 INSERT INTO Users VALUES('aq18@duke.edu', 'Alex Qiao', 'Computer Science', 'Spring 2020', 'University of New South Wales', 'aq18', '1234');
+INSERT INTO Users VALUES('al343@duke.edu', 'Annie Lu', 'Computer Science', 'Spring 2019', 'University of New South Wales', 'al343', '1234');
 
 INSERT INTO Course VALUES(DEFAULT, 'COMPSCI 330', 'Design and Analysis of Algorithms', 'Duke in Berlin');
 INSERT INTO Course VALUES(DEFAULT, 'COMPSCI 300', 'Analysis of Big Data', 'Duke in Madrid');
 INSERT INTO Course VALUES(DEFAULT, 'COMPSCI 250', 'Computer Architecture', 'University of New South Wales');
 INSERT INTO Course VALUES(DEFAULT, 'COMPSCI 300', 'Networks', 'University of New South Wales');
+INSERT INTO Course VALUES(DEFAULT, 'BIOLOGY 201', 'Molecular Biology', 'University of New South Wales');
 
 INSERT INTO Review VALUES('1', 'Germany', 'COMPSCI', (SELECT id from Course WHERE duke_code='COMPSCI 330' and course_name='Design and Analysis of Algorithms' and program_name='Duke in Berlin'), 'ddc27@duke.edu', 'I think this class is amazing!', 4, 2);
 INSERT INTO Review VALUES('2', 'Spain', 'COMPSCI', (SELECT id from Course WHERE duke_code='COMPSCI 300' and course_name='Analysis of Big Data' and program_name='Duke in Madrid'), 'mr328@duke.edu', 'I think this class SUCKS!', 1, 5);
 INSERT INTO Review VALUES('3', 'Australia','COMPSCI', (SELECT id from Course WHERE duke_code='COMPSCI 250' and course_name='Computer Architecture' and program_name='University of New South Wales'), 'smw81@duke.edu', 'I think this rocks hehe!', 4, 3);
 INSERT INTO Review VALUES('4', 'Australia','COMPSCI', (SELECT id from Course WHERE duke_code='COMPSCI 300' and course_name='Networks' and program_name='University of New South Wales'), 'smw81@duke.edu', 'amazing!', 5, 3);
+INSERT INTO Review VALUES('5', 'Australia','COMPSCI', (SELECT id from Course WHERE duke_code='COMPSCI 250' and course_name='Computer Architecture' and program_name='University of New South Wales'), 'al343@duke.edu', 'Maybe wait to take this at Duke', 5, 3);
+INSERT INTO Review VALUES('6', 'Australia','COMPSCI', (SELECT id from Course WHERE duke_code='BIOLOGY 201' and course_name='Molecular Biology' and program_name='University of New South Wales'), 'al343@duke.edu', 'I love mitochondria!', 5, 3);

@@ -29,12 +29,13 @@ def register():
         confpwd = request.form['confirmpassword']
         error = None
 
-        if major == "--":
+        if email[-9:] != "@duke.edu":
+            error = 'You must enter a valid Duke email'
+        elif major == "--":
             error = 'You must choose a major.'
-        if program_name == "--":
+        elif program_name == "--":
             error = 'You must choose a program.'
-
-        if not uname:
+        elif not uname:
             error = 'Username is required.'
         elif not pwd:
             error = 'Password is required.'
@@ -45,6 +46,7 @@ def register():
             error = 'User {} is already registered.'.format(uname)
         elif pwd != confpwd:
             error = 'Passwords do not match'
+        
         if error is None:
             hashed_pwd = generate_password_hash(pwd)
             new_account = models.Users(email=email, name=name, major=major, term=term, program_name=program_name, username=uname, password=hashed_pwd)
@@ -52,8 +54,8 @@ def register():
             db.session.flush()
             db.session.commit()
             return redirect(url_for('auth.login'))
-
-        flash(error)
+        else:
+            flash(error)
 
     return render_template('auth/register.html', majors = majorCodeChoices, programs = programChoices)
 
